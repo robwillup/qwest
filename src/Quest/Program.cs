@@ -40,7 +40,7 @@ namespace Quest
             {
                 ForegroundColor = ConsoleColor.Red;
                 WriteLine(@"When the 'new' command is used, the '--todo' flag must be provided, as well as its text.");
-                ForegroundColor = ConsoleColor.Gray;
+                ResetColor();
                 return 1;
             }
             else
@@ -67,7 +67,7 @@ namespace Quest
                 {
                     ForegroundColor = ConsoleColor.Red;
                     WriteLine("A text for the '--todo' flag must be provided.");
-                    ForegroundColor = ConsoleColor.Gray;
+                    ResetColor();
                     return 1;
                 }
 
