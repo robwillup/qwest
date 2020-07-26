@@ -23,6 +23,9 @@ namespace Quest
             {
                 switch (args[0])
                 {
+                    case "help":
+                        ExecuteHelp();
+                        break;
                     case "new":
                         ExecuteNew(args);
                         break;
@@ -31,6 +34,21 @@ namespace Quest
                         break;
                 }                
             }
+            return 0;
+        }
+
+        public static int ExecuteHelp()
+        {
+            WriteLine("Quest! The Developer To-Do App");
+            WriteLine();
+            WriteLine("USAGE:");
+            WriteLine("\tquest [COMMAND] [SUBCOMMAND]");
+            WriteLine();
+            WriteLine("COMMANDS:");
+            WriteLine("\tnew");
+            WriteLine("\tlist");
+            WriteLine("\thelp");
+            WriteLine();
             return 0;
         }
 
