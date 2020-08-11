@@ -76,9 +76,7 @@ namespace Quest
                     {
                         using (_ = File.Create(@$"{QuestTodosPath}\todos.txt")) {; }
                     }
-                    using (StreamWriter sw = File.AppendText($@"{QuestTodosPath}\todos.txt"))
-                        sw.WriteLine(TodoText);
-
+                    ToDoCreator.AddOne(TodoText, $@"{QuestTodosPath}\todos.txt");
                     return 0;
                 }
                 else
