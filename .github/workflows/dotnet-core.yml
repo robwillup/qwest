@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build src/Quest/ --configuration Release --no-restore
     - name: Test
-      run: dotnet test src/QuestTests --no-restore --verbosity normal
+      run: dotnet test src/QuestTests
