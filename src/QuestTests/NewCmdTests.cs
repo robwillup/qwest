@@ -12,7 +12,7 @@ namespace QuestTests
         {
             // Arrange
             string content = "create meaninful tests";
-            string expected = "* create meaninful tests\r\n";
+            string expected = "* create meaninful tests";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "test.md");
             using (FileStream fileStream = File.Create(filePath)) { };
 
@@ -21,7 +21,7 @@ namespace QuestTests
             string actualContent = File.ReadAllText(filePath);
 
             // Assert
-            Assert.Equal(expected, actualContent);
+            Assert.Contains(expected, actualContent);
 
             // Clean up
             File.Delete(filePath);
@@ -33,7 +33,7 @@ namespace QuestTests
             // Arrange
             string content = "t";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "test.md");
-            int maxValue = 4;            
+            int maxValue = 1;      
 
             // Act
             // Assert
