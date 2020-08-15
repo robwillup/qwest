@@ -5,7 +5,7 @@ using Xunit;
 
 namespace QuestTests
 {
-    public class NewCmdTests
+    public class DoCreatorTests
     {
         [Fact]
         public void AddOne_PassIfWritesToFile()
@@ -17,7 +17,7 @@ namespace QuestTests
             using (FileStream fileStream = File.Create(filePath)) { };
 
             // Act
-            ToDoCreator.AddOne(content, filePath);
+            DoCreator.AddOne(content, filePath);
             string actualContent = File.ReadAllText(filePath);
 
             // Assert
@@ -37,7 +37,7 @@ namespace QuestTests
 
             // Act
             // Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => ToDoCreator.AddOne(content, filePath, maxValue));
+            Assert.Throws<ArgumentOutOfRangeException>(() => DoCreator.AddOne(content, filePath, maxValue));
         }
 
         [Fact]
@@ -49,8 +49,8 @@ namespace QuestTests
 
             // Act
             // Assert
-            Assert.Throws<ArgumentNullException>(() => ToDoCreator.AddOne(nullTodo, "path"));
-            Assert.Throws<ArgumentNullException>(() => ToDoCreator.AddOne("test", nullPath));
+            Assert.Throws<ArgumentNullException>(() => DoCreator.AddOne(nullTodo, "path"));
+            Assert.Throws<ArgumentNullException>(() => DoCreator.AddOne("test", nullPath));
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace QuestTests
             string invalidPath = "";
             // Act
             // Assert
-            Assert.Throws<ArgumentException>(() => ToDoCreator.AddOne("test", invalidPath));
+            Assert.Throws<ArgumentException>(() => DoCreator.AddOne("test", invalidPath));
         }
     }
 }

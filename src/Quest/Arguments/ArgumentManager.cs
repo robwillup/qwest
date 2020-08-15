@@ -25,10 +25,10 @@ namespace Quest.Arguments
                     case "do":
                         string text = DoCommandHandler(args);
                         if (text != null)
-                            ToDo.Create(text, QuestTodosPath);
+                            DoRoutines.Create(text, QuestTodosPath);
                         break;
                     case "todo":
-                        ExecuteList();
+                        ToDosUi.ShowToDos(QuestTodosPath);
                         break;
                 }
             }
@@ -43,16 +43,6 @@ namespace Quest.Arguments
 
             NewCommandUi.WriteNewCommandError("A text for the 'do' command must be provided.");
             return null;            
-        }
-
-        public static int ExecuteList()
-        {
-            string[] lines = File.ReadAllLines(@$"{QuestTodosPath}\todos.txt");
-            foreach (string line in lines)
-            {
-                WriteLine(line);
-            }
-            return 0;
         }
     }
 }

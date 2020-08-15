@@ -2,13 +2,13 @@
 
 namespace Quest.Commands
 {
-    public static class ToDo
+    public static class DoRoutines
     {
         public static string TodoText { get; set; }        
         public static void Create(string text, string path)
         {
             PrepareToDoFile(path);
-            ToDoCreator.AddOne(text, $@"{path}\todos.txt");            
+            DoCreator.AddOne(text, $@"{path}\todos.txt");            
         }
 
         public static void PrepareToDoFile(string path) 

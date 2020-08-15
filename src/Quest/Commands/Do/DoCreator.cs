@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Quest
 {
-    public static class ToDoCreator
+    public static class DoCreator
     {
         public static void AddOne(string todo, string todoFilePath, int maxValue = 0)
         {
