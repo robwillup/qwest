@@ -7,7 +7,7 @@ namespace Quest.Console
     {
         public static void GetHelp(string command)
         {
-            WriteLine(HelpCommand.GetHelp("default"));
+            WriteLine(Help.GetHelp("default"));
         }
     }
 }

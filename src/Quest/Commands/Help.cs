@@ -1,6 +1,6 @@
 ﻿namespace Quest.Commands
 {
-    public static class HelpCommand
+    public static class Help
     {
         public static string GetHelp(string command)
         {
@@ -19,8 +19,12 @@ USAGE:
     quest [COMMAND] [SUBCOMMAND]
 
 COMMANDS:
-    new
-    list
+    do
+    done
+    todo
+    undo
+    redo
+    dont
     help
 ";
             return defaultHelpMessage;

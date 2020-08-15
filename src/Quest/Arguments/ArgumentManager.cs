@@ -10,7 +10,7 @@ namespace Quest.Arguments
     public static class ArgumentManager
     {
         public static string QuestTodosPath { get; set; }
-        public static int CheckArgs(string[] args)
+        public static int HandleArgs(string[] args)
         {
             QuestTodosPath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Quest";
             if (args.Length == 0)
@@ -22,12 +22,12 @@ namespace Quest.Arguments
                     case "help":
                         HelpCommandUi.GetHelp("default");
                         break;
-                    case "new":
-                        string text = NewCommandHandler(args);
+                    case "do":
+                        string text = DoCommandHandler(args);
                         if (text != null)
-                            NewToDo.Create(text, QuestTodosPath);
+                            ToDo.Create(text, QuestTodosPath);
                         break;
-                    case "list":
+                    case "todo":
                         ExecuteList();
                         break;
                 }
@@ -35,19 +35,13 @@ namespace Quest.Arguments
             return 0;
         }
 
-        private static string NewCommandHandler(string[] args)
+        private static string DoCommandHandler(string[] args)
         {
-            if (!args.Contains("todo"))
-            {
-                NewCommandUi.WriteNewCommandError(@"When the 'new' command is used, the 'todo' subcommand must be provided, as well as its text.");
-                return null;
-            }
+            int doIndex = args.ToList().IndexOf("do");
+            if (doIndex + 1 < args.Length && !string.IsNullOrEmpty(args[doIndex + 1]))
+                return args[doIndex + 1];
 
-            int todoIndex = args.ToList().IndexOf("todo");
-            if (todoIndex + 1 < args.Length && !string.IsNullOrEmpty(args[todoIndex + 1]))
-                return args[todoIndex + 1];
-
-            NewCommandUi.WriteNewCommandError("A text for the 'todo' subcommand must be provided.");
+            NewCommandUi.WriteNewCommandError("A text for the 'do' command must be provided.");
             return null;            
         }
 
