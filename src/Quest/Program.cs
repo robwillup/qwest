@@ -6,7 +6,7 @@ namespace Quest
     {   
         static int Main(string[] args)
         {
-            return ArgumentManager.HandleArgs(args);
+            return ArgumentHandler.HandleArgs(args);
         }
     }
 }

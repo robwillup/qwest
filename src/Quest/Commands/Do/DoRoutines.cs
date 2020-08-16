@@ -5,10 +5,10 @@ namespace Quest.Commands
     public static class DoRoutines
     {
         public static string TodoText { get; set; }        
-        public static void Create(string text, string path)
+        public static int Create(string text, string path)
         {
             PrepareToDoFile(path);
-            DoCreator.AddOne(text, $@"{path}\todos.txt");            
+            return DoCreator.AddOne(text, path);
         }
 
         public static void PrepareToDoFile(string path) 
@@ -16,10 +16,10 @@ namespace Quest.Commands
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
-                File.Create(@$"{path}\todos.txt");
+                File.Create(path);
             }
-            else if (!File.Exists(@$"{path}\todos.txt"))
-                File.Create(@$"{path}\todos.txt");
+            else if (!File.Exists(path))
+                File.Create(path);
         }
     }
 }
