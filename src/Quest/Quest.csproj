@@ -16,4 +16,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\UnDo\" />
+    <Folder Include="Commands\ReDo\" />
+  </ItemGroup>
+
 </Project>
