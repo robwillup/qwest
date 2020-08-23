@@ -1,4 +1,5 @@
 ﻿using Quest.Commands;
+using Quest.Commands.Feat;
 using Quest.Console;
 using Quest.Files;
 using System;
@@ -26,7 +27,8 @@ namespace Quest.Arguments
                         HelpCommandUi.GetHelp("default");
                         break;
                     case CommandNames.FEAT:
-                        // TODO
+                        FeatHandler.ValidateArgs(args);
+                        break;
                     case CommandNames.DO:
                         string text = DoHandler.DoCommandHandler(args);
                         if (text != null)
