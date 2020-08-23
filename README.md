@@ -51,7 +51,7 @@ The new *task* will be saved in your project's source code, in a path like this:
 
 The example above would be:
 
-      .quest/DownloadButton/todo.md
+      .src/docs/.quest/DownloadButton/todo.md
 
 
 
