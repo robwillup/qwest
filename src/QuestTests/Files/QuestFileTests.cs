@@ -70,20 +70,5 @@ namespace QuestTests
             // Assert
             Assert.Throws<ArgumentException>(() => quest.Delete(file));
         }
-
-        [Fact]
-        public void DeleteTest_PassIfThrowsIOException()
-        {
-            // Arrange
-            string file = "doesNotExist.txt";
-            using var fs = File.Create(file);
-            fs.Dispose();
-            IQuestFile quest = new QuestFile();
-
-            // Act
-            File.OpenWrite(file);
-            // Assert
-            Assert.Throws<IOException>(() => quest.Delete(file));
-        }
     }
 }
