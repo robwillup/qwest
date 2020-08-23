@@ -81,7 +81,7 @@ namespace QuestTests
             IQuestFile quest = new QuestFile();
 
             // Act
-            File.OpenRead(file);
+            File.OpenWrite(file);
             // Assert
             Assert.Throws<IOException>(() => quest.Delete(file));
         }
