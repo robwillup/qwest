@@ -22,18 +22,20 @@ namespace Quest.Arguments
             {
                 switch (args[0])
                 {
-                    case "help":
+                    case CommandNames.HELP:
                         HelpCommandUi.GetHelp("default");
                         break;
-                    case "do":
+                    case CommandNames.FEAT:
+                        // TODO
+                    case CommandNames.DO:
                         string text = DoHandler.DoCommandHandler(args);
                         if (text != null)
                             DoCreator.AddOne(text, QuestTodosPath);
                         break;
-                    case "todo":
+                    case CommandNames.TODO:
                         ToDosUi.ShowToDos(QuestTodosPath);
                         break;
-                    case "dont":
+                    case CommandNames.DONT:
                         DontHandler.DeleteTodo(args[1], QuestTodosPath);
                         break;
                 }
