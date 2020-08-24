@@ -29,6 +29,8 @@ namespace Quest.Arguments
                         break;
                     case CommandNames.FEAT:
                         Feature feature = FeatHandler.GetFeature(args);
+                        if (feature == null)
+                            return 1;
                         System.Console.WriteLine(feature.Name);
                         System.Console.WriteLine(feature.Path);
                         System.Console.WriteLine(feature.Description);
