@@ -11,7 +11,7 @@ namespace Quest.Arguments
             if (doIndex + 1 < args.Length && !string.IsNullOrEmpty(args[doIndex + 1]))
                 return args[doIndex + 1];
 
-            NewCommandUi.WriteNewCommandError("A text for the 'do' command must be provided.");
+            DoCommandUi.WriteNewCommandError("A text for the 'do' command must be provided.");
             return null;
         }
     }

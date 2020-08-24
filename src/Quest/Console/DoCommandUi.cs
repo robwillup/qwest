@@ -3,7 +3,7 @@ using static System.Console;
 
 namespace Quest.Console
 {
-    public static class NewCommandUi
+    public static class DoCommandUi
     {
         public static void WriteNewCommandError(string message)
         {

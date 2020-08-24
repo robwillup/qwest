@@ -2,6 +2,7 @@
 using Quest.Commands.Feat;
 using Quest.Console;
 using Quest.Files;
+using Quest.Models;
 using System;
 using System.IO;
 using static System.Console;
@@ -27,7 +28,10 @@ namespace Quest.Arguments
                         HelpCommandUi.GetHelp("default");
                         break;
                     case CommandNames.FEAT:
-                        FeatHandler.ValidateArgs(args);
+                        Feature feature = FeatHandler.GetFeature(args);
+                        System.Console.WriteLine(feature.Name);
+                        System.Console.WriteLine(feature.Path);
+                        System.Console.WriteLine(feature.Description);
                         break;
                     case CommandNames.DO:
                         string text = DoHandler.DoCommandHandler(args);
