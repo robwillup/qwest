@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Quest": {
+      "commandName": "Project",
+      "commandLineArgs": "feat create"
+    }
+  }
+}

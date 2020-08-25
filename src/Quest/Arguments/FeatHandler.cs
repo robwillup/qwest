@@ -2,6 +2,7 @@
 using Quest.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Quest.Arguments
@@ -12,7 +13,12 @@ namespace Quest.Arguments
         {
             try
             {
+                List<ValidationResult> re = new List<ValidationResult>();
                 Feature feature = new Feature();
+                feature.Name = "rob";
+                var vc = new ValidationContext(feature);
+                var valid = Validator.TryValidateObject(feature, vc, re, true);
+
                 List<string> argsList = args.ToList();
                 if (!args.Contains("create"))
                     throw new ArgumentException("A subcommand must be used with the command 'feat'");
