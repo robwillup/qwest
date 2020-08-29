@@ -7,6 +7,11 @@ namespace Quest.Arguments
     {
         public static string DoCommandHandler(string[] args)
         {
+            if (!args.Contains("--feat"))
+            {
+                DoCommandUi.WriteNewCommandError("The '--feat' flag must be specified.");
+                return null;
+            }
             int doIndex = args.ToList().IndexOf("do");
             if (doIndex + 1 < args.Length && !string.IsNullOrEmpty(args[doIndex + 1]))
                 return args[doIndex + 1];

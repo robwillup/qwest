@@ -13,12 +13,6 @@ namespace Quest.Arguments
         {
             try
             {
-                List<ValidationResult> re = new List<ValidationResult>();
-                Feature feature = new Feature();
-                feature.Name = "rob";
-                var vc = new ValidationContext(feature);
-                var valid = Validator.TryValidateObject(feature, vc, re, true);
-
                 List<string> argsList = args.ToList();
                 if (!args.Contains("create"))
                     throw new ArgumentException("A subcommand must be used with the command 'feat'");
@@ -35,6 +29,7 @@ namespace Quest.Arguments
                 int descIndex = argsList.IndexOf("--desc");
                 if (descIndex + 1 >= args.Length || string.IsNullOrEmpty(args[descIndex + 1]))
                     throw new ArgumentException("An argument must be provided for the '--desc' flag");
+                Feature feature = new Feature();
                 feature.Name = args[createIndex + 1];
                 feature.Description = args[descIndex + 1];
                 feature.Path = args[pathIndex + 1];

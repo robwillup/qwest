@@ -19,6 +19,8 @@ USAGE:
     quest [COMMAND] [SUBCOMMAND]
 
 COMMANDS:
+    init
+    feat
     do
     done
     todo

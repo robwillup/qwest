@@ -1,13 +1,14 @@
-﻿using Quest.Validators;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Quest.Models
 {
     public class Feature
     {
-        [Required, Name]
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string Path { get; set; }
     }
 }
