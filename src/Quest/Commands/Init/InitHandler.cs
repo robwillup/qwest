@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 
 namespace Quest.Commands.Init
 {
@@ -8,25 +7,15 @@ namespace Quest.Commands.Init
     {
         public static bool CreateQuestDirectory()
         {
-            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), ".quest"));
-            return true;
-        }
-        public static bool CheckQuest()
-        {
-            IEnumerable<string> directories = Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), ".quest", SearchOption.TopDirectoryOnly);
-            foreach (string dir in directories)
+            try
             {
-                IEnumerable<string> files = Directory.EnumerateFiles(dir, ".config", SearchOption.TopDirectoryOnly);
-                foreach (string file in files)
-                {
-                    foreach (string line in File.ReadLines(file))
-                    {
-                        if (line.Contains("quest_path"))
-                            return true;
-                    }
-                }
+                Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), ".quest"));
+                return true;
             }
-            return false;
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

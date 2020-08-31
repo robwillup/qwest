@@ -9,7 +9,7 @@ namespace Quest.Arguments
 {
     public static class FeatHandler
     {
-        public static Feature GetFeature(string[] args)
+        public static Feature HandleFeatArgs(string[] args)
         {
             try
             {
@@ -29,17 +29,23 @@ namespace Quest.Arguments
                 int descIndex = argsList.IndexOf("--desc");
                 if (descIndex + 1 >= args.Length || string.IsNullOrEmpty(args[descIndex + 1]))
                     throw new ArgumentException("An argument must be provided for the '--desc' flag");
-                Feature feature = new Feature();
-                feature.Name = args[createIndex + 1];
-                feature.Description = args[descIndex + 1];
-                feature.Path = args[pathIndex + 1];
-                return feature;
+                return CreateFeature(args[createIndex + 1], args[descIndex + 1], args[pathIndex + 1]);
             }
             catch (ArgumentException ex)
             {
                 FeatCommandUi.ShowError(ex.Message);
                 return null;
             }
+        }
+
+        private static Feature CreateFeature(string name, string desc, string path)
+        {
+            return new Feature()
+            {
+                Name = name,
+                Description = desc,
+                Path = path
+            };
         }
     }
 }

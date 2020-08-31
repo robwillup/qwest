@@ -13,7 +13,7 @@ namespace QuestTests.Arguments
             string[] args = new string[] { "feat", "create", "Button", "--path", ".", "--desc", "A button" };
 
             // Act
-            Feature feature = FeatHandler.GetFeature(args);
+            Feature feature = FeatHandler.HandleFeatArgs(args);
 
             // Assert
             Assert.NotNull(feature);
@@ -26,7 +26,7 @@ namespace QuestTests.Arguments
             string[] args = new string[] { "feat", "create", "Button" };
 
             // Act
-            Feature feature = FeatHandler.GetFeature(args);
+            Feature feature = FeatHandler.HandleFeatArgs(args);
 
             // Assert
             Assert.Null(feature);
