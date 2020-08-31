@@ -6,6 +6,11 @@ namespace Quest.Commands.Init
 {
     public static class InitHandler
     {
+        public static bool CreateQuestDirectory()
+        {
+            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), ".quest"));
+            return true;
+        }
         public static bool CheckQuest()
         {
             IEnumerable<string> directories = Directory.EnumerateDirectories(Directory.GetCurrentDirectory(), ".quest", SearchOption.TopDirectoryOnly);

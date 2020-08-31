@@ -10,4 +10,12 @@
         Help, // Displays available options
         Init  // Setup .quest dir in source code
     }
+
+    public static class EnumExtensions
+    {
+        public static string FormatCommandNames(this CommandNames commandName)
+        {
+            return commandName.ToString().ToLower();
+        }
+    }
 }
