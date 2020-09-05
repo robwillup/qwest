@@ -23,19 +23,11 @@ namespace Quest.Arguments
                 else
                 {
                     if (args[0] == CommandNames.Help.ToString().ToLower())
-                    {
                         HelpCommandUi.GetHelp("default");
-                    }
                     else if (args[0] == CommandNames.Init.ToString().ToLower())
-                    {
                         InitHandler.CreateQuestDirectory();
-                    }
                     else if (args[0] == CommandNames.Feat.ToString().ToLower())
-                    {
-                        Feature feature = FeatHandler.HandleFeatArgs(args);
-                        if (feature == null)
-                            return 1;
-                    }
+                        FeatHandler.HandleFeatArgs(args);
                     else if (args[0] == CommandNames.Do.ToString().ToLower())
                     {
                         string text = DoHandler.DoCommandHandler(args);
@@ -43,13 +35,9 @@ namespace Quest.Arguments
                             DoCreator.AddOne(text, QuestTodosPath);
                     }
                     else if (args[0] == CommandNames.ToDo.ToString().ToLower())
-                    {
                         ToDosUi.ShowToDos(QuestTodosPath);
-                    }
                     else if (args[0] == CommandNames.Dont.ToString().ToLower())
-                    {
                         DontHandler.DeleteTodo(args[1], QuestTodosPath);
-                    }
                 }
                 return 0;
             }
