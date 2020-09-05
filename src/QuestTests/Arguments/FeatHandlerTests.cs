@@ -1,5 +1,4 @@
 ﻿using Quest.Arguments;
-using Quest.Models;
 using Xunit;
 
 namespace QuestTests.Arguments
@@ -7,29 +6,14 @@ namespace QuestTests.Arguments
     public class FeatHandlerTests
     {
         [Fact]
-        public void GetFeature_PassIfReturnsFeature()
+        public void GetFeature_PassIfNoException()
         {
             // Arrange
-            string[] args = new string[] { "feat", "create", "Button", "--path", ".", "--desc", "A button" };
+            string[] args = new string[] { "feat", "create", "Button", "--desc", "A button" };
 
             // Act
-            Feature feature = FeatHandler.HandleFeatArgs(args);
-
             // Assert
-            Assert.NotNull(feature);
-        }
-
-        [Fact]
-        public void GetFeature_PassIfReturnsNull()
-        {
-            // Arrange
-            string[] args = new string[] { "feat", "create", "Button" };
-
-            // Act
-            Feature feature = FeatHandler.HandleFeatArgs(args);
-
-            // Assert
-            Assert.Null(feature);
+            FeatHandler.HandleFeatArgs(args);
         }
     }
 }
