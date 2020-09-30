@@ -1,12 +1,14 @@
-﻿using Quest.Arguments;
-
-namespace Quest
+﻿namespace Quest
 {
     class Program
     {   
-        static int Main(string[] args)
+        static void Main(string[] args)
         {
-            return ArgumentHandler.HandleArgs(args);
+            ToDoTests toDo = new ToDoTests();
+            if (args[0] == "do")
+                toDo.Add(args[1]);
+            else if (args[0] == "done")
+                toDo.Complete(args[1]);
         }
     }
 }
