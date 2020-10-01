@@ -15,7 +15,7 @@ namespace QuestTests
             toDo.Add(expected);
             var actual = File.ReadAllText(filePath);
             File.Delete(filePath);
-            Assert.Equal(expected, actual);            
+            Assert.Contains(expected, actual);            
         }
 
         [Fact]
@@ -23,13 +23,13 @@ namespace QuestTests
         {
             ToDoTests toDo = new ToDoTests();
             string todo = "do this";
-            string expected = "~~do this~~";
+            string expected = "~~* do this";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             toDo.Add(todo);
             toDo.Complete(todo);
             var actual = File.ReadAllText(filePath);
             File.Delete(filePath);
-            Assert.Equal(expected, actual);
+            Assert.Contains(expected, actual);
         }
     }
 }

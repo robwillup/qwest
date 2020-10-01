@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Quest
 {
@@ -6,16 +9,26 @@ namespace Quest
     {
         public void Add(string todoText)
         {
+            var guid = Guid.NewGuid();
             string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
-            File.WriteAllText(todoFilePath, todoText);
+            todoText = $"* {todoText} - ({guid})";
+            File.AppendAllLines(todoFilePath, new string[] { todoText });
         }
 
         public void Complete(string todoText)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
-            string content = File.ReadAllText(path);
-            content = content.Replace(todoText, $"~~{todoText}~~");
-            File.WriteAllText(path, content);
+            List<string> lines = File.ReadAllLines(path).ToList();
+            string line = lines.Find(t => t.Contains(todoText));            
+            lines.Remove(line);
+            lines.Add($"~~{line}~~");
+            File.WriteAllLines(path, lines);
+        }
+
+        public void List()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            Console.WriteLine(File.ReadAllText(path));
         }
     }
 }
