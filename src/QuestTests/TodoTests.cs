@@ -23,7 +23,7 @@ namespace QuestTests
         {
             ToDoTests toDo = new ToDoTests();
             string todo = "do this";
-            string expected = "~~* do this";
+            string expected = "* ~~do this";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             toDo.Add(todo);
             toDo.Complete(todo);

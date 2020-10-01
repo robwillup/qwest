@@ -21,7 +21,7 @@ namespace Quest
             List<string> lines = File.ReadAllLines(path).ToList();
             string line = lines.Find(t => t.Contains(todoText));            
             lines.Remove(line);
-            lines.Add($"~~{line}~~");
+            lines.Add($"{line.Replace("* ", "* ~~")}~~");
             File.WriteAllLines(path, lines);
         }
 
