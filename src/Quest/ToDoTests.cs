@@ -30,5 +30,14 @@ namespace Quest
             string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             Console.WriteLine(File.ReadAllText(path));
         }
+
+        public void Delete(string todo)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            List<string> lines = File.ReadAllLines(path).ToList();
+            string line = lines.Find(t => t.Contains(todo));
+            lines.Remove(line);
+            File.WriteAllLines(path, lines);
+        }
     }
 }
