@@ -9,7 +9,7 @@ namespace QuestTests
         [Fact]
         public void TestAdd_PassIfTodoIsAdded()
         {
-            ToDoTests toDo = new ToDoTests();
+            ToDo toDo = new ToDo();
             string expected = "do this";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             toDo.Add(expected);
@@ -21,7 +21,7 @@ namespace QuestTests
         [Fact]
         public void TestComplete_PassIfTodoHasStrikethrough()
         {
-            ToDoTests toDo = new ToDoTests();
+            ToDo toDo = new ToDo();
             string todo = "do this";
             string expected = "* ~~do this";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");

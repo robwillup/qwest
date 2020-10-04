@@ -33,7 +33,7 @@ namespace Quest
                 }
             }
             // Work with arguments
-            ToDoTests toDo = new ToDoTests();
+            ToDo toDo = new ToDo();
             if (args[0] == "do")
                 toDo.Add(args[1]);
             else if (args[0] == "done")

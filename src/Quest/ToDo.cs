@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace Quest
 {
-    public class ToDoTests
+    public class ToDo
     {
         public void Add(string todoText)
         {
