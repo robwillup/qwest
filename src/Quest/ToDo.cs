@@ -19,18 +19,30 @@ namespace Quest
 
         public void Complete(string todoText)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
-            List<string> lines = File.ReadAllLines(path).ToList();
+            string donePath = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
+            if (!File.Exists(donePath))
+                using (File.Create(donePath)) { };
+            string todoPath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            List<string> lines = File.ReadAllLines(todoPath).ToList();
             string line = lines.Find(t => t.Contains(todoText));            
             lines.Remove(line);
-            lines.Add($"{line.Replace("* ", "* ~~")}~~");
-            File.WriteAllLines(path, lines);
+            File.WriteAllLines(todoPath, lines);
+            File.AppendAllText(donePath, $"{line}");
         }
 
         public void List()
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");            
             Console.WriteLine(File.ReadAllText(path));
+        }
+
+        public void ListDone()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
+            if (File.Exists(path))
+                Console.WriteLine(File.ReadAllText(path));
+            else
+                Console.WriteLine("No completed task in the default path (current directory).");
         }
 
         public void Delete(string todo)

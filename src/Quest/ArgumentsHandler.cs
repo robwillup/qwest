@@ -19,7 +19,12 @@ namespace Quest
                     toDo.Add(args[1]);
             }
             else if (command == "done")
-                toDo.Complete(args[1]);
+            {
+                if (args.Length == 2)
+                    toDo.Complete(args[1]);
+                else
+                    toDo.ListDone();
+            }
             else if (args[0] == "todo")
                 toDo.List();
             else if (args[0] == "undo")
