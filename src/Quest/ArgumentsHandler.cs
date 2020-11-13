@@ -23,6 +23,8 @@ namespace Quest
                 toDo.Delete(args[1]);
             else if (args[0] == "version")
                 Console.WriteLine("1.0.0");
+            else
+                Console.WriteLine($"Command \"{args[0]}\" is undefined.");
 
             return true;
         }
