@@ -11,6 +11,8 @@ namespace Quest
         {
             var guid = Guid.NewGuid();
             string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            if (!File.Exists(todoFilePath))
+                using (File.Create(todoFilePath)) { } ;
             todoText = $"* {todoText} - ({guid})";
             File.AppendAllLines(todoFilePath, new string[] { todoText });
         }
@@ -27,7 +29,7 @@ namespace Quest
 
         public void List()
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");            
             Console.WriteLine(File.ReadAllText(path));
         }
 

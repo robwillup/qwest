@@ -14,7 +14,10 @@ namespace Quest
             ToDo toDo = new ToDo();
             string command = GetCommand(args);
             if (command == "do")
-                DoHandler.Handle(args);
+            {
+                if (!DoHandler.Handle(args))
+                    toDo.Add(args[1]);
+            }
             else if (command == "done")
                 toDo.Complete(args[1]);
             else if (args[0] == "todo")
@@ -50,24 +53,6 @@ namespace Quest
         public static int GetIndexOfFlag(string[] args, string flag)
         {            
             return args.ToList().IndexOf(flag);
-        }
-    }
-
-    public static class DoHandler
-    {
-        public static bool Handle(string[] args)
-        {            
-            int indexOfSource = 0;
-            if (ArgumentsHandler.HasFlag(args, "--source")) { 
-                indexOfSource = ArgumentsHandler.GetIndexOfFlag(args, "--source");}
-            else if (ArgumentsHandler.HasFlag(args, "-s"))
-                indexOfSource = ArgumentsHandler.GetIndexOfFlag(args, "-s");
-            else
-                return false;
-                        
-            string source = args[indexOfSource + 1];
-            // USE THIS SOURCE variable to get path
-            return true;
         }
     }
 }
