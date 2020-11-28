@@ -9,6 +9,11 @@ namespace Quest
     {
         public void Add(string todoText)
         {
+            if (string.IsNullOrEmpty(todoText) || string.IsNullOrWhiteSpace(todoText))
+            {
+                Console.WriteLine("The 'do' command must recieve at least one character.");
+                return;
+            }
             var guid = Guid.NewGuid();
             string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             if (!File.Exists(todoFilePath))
@@ -26,8 +31,8 @@ namespace Quest
             List<string> lines = File.ReadAllLines(todoPath).ToList();
             string line = lines.Find(t => t.Contains(todoText));            
             lines.Remove(line);
-            File.WriteAllLines(todoPath, lines);
-            File.AppendAllText(donePath, $"{line}");
+            File.WriteAllLines(todoPath, lines);            
+            File.AppendAllText(donePath, $"{line}\n");
         }
 
         public void List()

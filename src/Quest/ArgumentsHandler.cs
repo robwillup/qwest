@@ -14,10 +14,7 @@ namespace Quest
             ToDo toDo = new ToDo();
             string command = GetCommand(args);
             if (command == "do")
-            {
-                if (!DoHandler.Handle(args))
-                    toDo.Add(args[1]);
-            }
+                toDo.Add(DoHandler.Handle(args));
             else if (command == "done")
             {
                 if (args.Length == 2)

@@ -6,11 +6,12 @@
 Quest!
 
 COMMANDS:
-    do..........Creates a new task
-    done........Marks the task as complete
-    todo........Lists current active tasks
-    undo........Marks a complete task as active
-    version.....displays current version
-    help........displays information about commands and flags";
+    do.............Creates a new task
+    done...........Lists completed tasks
+    done <GUID>....Marks the task as complete
+    todo...........Lists current active tasks
+    undo...........Marks a complete task as active
+    version........Displays current version
+    help...........Displays information about commands and flags";
     }
 }
