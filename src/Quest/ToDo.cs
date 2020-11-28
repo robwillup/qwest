@@ -18,7 +18,7 @@ namespace Quest
             string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             if (!File.Exists(todoFilePath))
                 using (File.Create(todoFilePath)) { } ;
-            todoText = $"* {todoText} - ({guid})";
+            todoText = $"* {todoText} - ({guid}) - Created at: {DateTime.Now}";
             File.AppendAllLines(todoFilePath, new string[] { todoText });
         }
 
@@ -32,7 +32,7 @@ namespace Quest
             string line = lines.Find(t => t.Contains(todoText));            
             lines.Remove(line);
             File.WriteAllLines(todoPath, lines);            
-            File.AppendAllText(donePath, $"{line}\n");
+            File.AppendAllText(donePath, $"{line} - Completed at: {DateTime.Now}\n");
         }
 
         public void List()
