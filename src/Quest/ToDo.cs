@@ -35,7 +35,8 @@ namespace Quest
             string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             if(File.Exists(path))
                 Console.WriteLine(File.ReadAllText(path));
-            Console.WriteLine("No 'todo.md' file found in this directory.");
+            else
+                Console.WriteLine("No 'todo.md' file found in this directory.");
         }
 
         public void ListDone()
