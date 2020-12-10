@@ -13,8 +13,9 @@
         public static string GetDo(string[] args)
         {
             string doText = string.Empty;
-            int indexOfDo = ArgumentsHandler.GetIndexOfFlag(args, "do");            
-            doText = args[indexOfDo + 1];            
+            int indexOfDo = ArgumentsHandler.GetIndexOfFlag(args, "do");    
+            if (args.Length > 1)
+                doText = args[indexOfDo + 1];
             return doText;            
         }
 

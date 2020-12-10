@@ -24,8 +24,10 @@ namespace Quest
             }
             else if (args[0] == "todo")
                 toDo.List();
-            else if (args[0] == "undo")
+            else if (args[0] == "dont")
                 toDo.Delete(args[1]);
+            else if (args[0] == "undo")
+                UndoHandler.Undo(args[1]);
             else if (args[0] == "version")
                 Console.WriteLine("1.0.0");
             else if (args[0] == "help")
