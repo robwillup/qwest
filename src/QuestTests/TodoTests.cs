@@ -19,17 +19,19 @@ namespace QuestTests
         }
 
         [Fact]
-        public void TestComplete_PassIfTodoHasStrikethrough()
+        public void TestComplete_PassIfTodoIsInDoneFile()
         {
             ToDo toDo = new ToDo();
-            string todo = "do this";
-            string expected = "* ~~do this";
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            string todo = "do this :";
+            string expected = "* do this";
+            string todoPath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             toDo.Add(todo);
             toDo.Complete(todo);
-            var actual = File.ReadAllText(filePath);
-            File.Delete(filePath);
-            Assert.Contains(expected, actual);
+            string donePath = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
+            var actual = File.ReadAllText(donePath);
+            File.Delete(todoPath);
+            File.Delete(donePath);
+            Assert.Contains(expected, actual.Split(" :")[0]);
         }
     }
 }
