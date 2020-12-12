@@ -1,7 +1,25 @@
-﻿namespace Quest
+﻿using System;
+using static System.Console;
+using System.IO;
+
+namespace Quest
 {
     public static class DoHandler
     {
+        public static void Add(string todoText)
+        {
+            if (string.IsNullOrEmpty(todoText) || string.IsNullOrWhiteSpace(todoText))
+            {
+                WriteLine("The 'do' command must recieve at least one character.");
+                return;
+            }
+            var guid = Guid.NewGuid();
+            string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            if (!File.Exists(todoFilePath))
+                using (File.Create(todoFilePath)) { };
+            todoText = $"* {todoText} - ({guid}) - Created at: {DateTime.Now}";
+            File.AppendAllLines(todoFilePath, new string[] { todoText });
+        }
         public static string Handle(string[] args)
         {            
             string source = GetSource(args);

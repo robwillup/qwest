@@ -5,24 +5,9 @@ using System.Linq;
 
 namespace Quest
 {
-    public class ToDo
+    public static class ToDo
     {
-        public void Add(string todoText)
-        {
-            if (string.IsNullOrEmpty(todoText) || string.IsNullOrWhiteSpace(todoText))
-            {
-                Console.WriteLine("The 'do' command must recieve at least one character.");
-                return;
-            }
-            var guid = Guid.NewGuid();
-            string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
-            if (!File.Exists(todoFilePath))
-                using (File.Create(todoFilePath)) { } ;
-            todoText = $"* {todoText} - ({guid}) - Created at: {DateTime.Now}";
-            File.AppendAllLines(todoFilePath, new string[] { todoText });
-        }
-
-        public void Complete(string todoText)
+        public static void Complete(string todoText)
         {
             string donePath = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
             if (!File.Exists(donePath))
@@ -35,7 +20,7 @@ namespace Quest
             File.AppendAllText(donePath, $"{line} - Completed at: {DateTime.Now}\n");
         }
 
-        public void List()
+        public static void List()
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             if(File.Exists(path))
@@ -44,7 +29,7 @@ namespace Quest
                 Console.WriteLine("No 'todo.md' file found in this directory.");
         }
 
-        public void ListDone()
+        public static void ListDone()
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
             if (File.Exists(path))
@@ -53,7 +38,7 @@ namespace Quest
                 Console.WriteLine("No completed task in the default path (current directory).");
         }
 
-        public void Delete(string todo)
+        public static void Delete(string todo)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             List<string> lines = File.ReadAllLines(path).ToList();

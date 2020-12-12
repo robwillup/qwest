@@ -11,22 +11,21 @@ namespace Quest
             {
                 Help.SuggestHelp();
                 return false;
-            }
-            ToDo toDo = new ToDo();
+            }            
             string command = GetCommand(args);
             if (command == "do")
-                toDo.Add(DoHandler.Handle(args));
+                DoHandler.Add(DoHandler.Handle(args));
             else if (command == "done")
             {
                 if (args.Length == 2)
-                    toDo.Complete(args[1]);
+                    ToDo.Complete(args[1]);
                 else
-                    toDo.ListDone();
+                    ToDo.ListDone();
             }
             else if (args[0] == "todo")
-                toDo.List();
+                ToDo.List();
             else if (args[0] == "dont")
-                toDo.Delete(args[1]);
+                ToDo.Delete(args[1]);
             else if (args[0] == "undo")
                 UndoHandler.Undo(args[1]);
             else if (args[0] == "dont")
