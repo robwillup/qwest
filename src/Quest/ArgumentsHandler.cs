@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 
 namespace Quest
@@ -10,7 +8,10 @@ namespace Quest
         public static bool Handle(string[] args)
         {
             if (!AnyArgument(args))
+            {
+                Help.SuggestHelp();
                 return false;
+            }
             ToDo toDo = new ToDo();
             string command = GetCommand(args);
             if (command == "do")

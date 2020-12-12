@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace Quest
+﻿namespace Quest
 {
     class Program
     {   

@@ -1,4 +1,5 @@
-﻿namespace Quest
+﻿using static System.Console;
+namespace Quest
 {
     public static class Help
     {
@@ -10,7 +11,13 @@
 
         static void ShowCommandHelp() 
         {
-            System.Console.WriteLine(HelpMessages.CommandHelpMessage);
+            WriteLine(HelpMessages.CommandHelpMessage);
+        }
+
+        public static void SuggestHelp()
+        {
+            WriteLine("Try using 'help' to see available commands.");
+            WriteLine("\nExample:\n\tquest help");
         }
     }
 }
