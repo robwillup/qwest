@@ -1,4 +1,4 @@
-﻿using Quest;
+﻿using Quest.Commands;
 using System.IO;
 using Xunit;
 
@@ -8,11 +8,10 @@ namespace QuestTests
     {
         [Fact]
         public void TestAdd_PassIfTodoIsAdded()
-        {
-            ToDoHandler toDo = new ToDoHandler();
+        {            
             string expected = "do this";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
-            toDo.Add(expected);
+            DoHandler.Add(expected);
             var actual = File.ReadAllText(filePath);
             File.Delete(filePath);
             Assert.Contains(expected, actual);            
@@ -20,13 +19,12 @@ namespace QuestTests
 
         [Fact]
         public void TestComplete_PassIfTodoIsInDoneFile()
-        {
-            ToDoHandler toDo = new ToDoHandler();
+        {            
             string todo = "do this :";
             string expected = "* do this";
             string todoPath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
-            toDo.Add(todo);
-            toDo.Complete(todo);
+            DoHandler.Add(todo);
+            DoneHandler.Complete(todo);
             string donePath = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
             var actual = File.ReadAllText(donePath);
             File.Delete(todoPath);
