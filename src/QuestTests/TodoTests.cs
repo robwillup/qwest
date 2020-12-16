@@ -9,7 +9,7 @@ namespace QuestTests
         [Fact]
         public void TestAdd_PassIfTodoIsAdded()
         {
-            ToDo toDo = new ToDo();
+            ToDoHandler toDo = new ToDoHandler();
             string expected = "do this";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             toDo.Add(expected);
@@ -21,7 +21,7 @@ namespace QuestTests
         [Fact]
         public void TestComplete_PassIfTodoIsInDoneFile()
         {
-            ToDo toDo = new ToDo();
+            ToDoHandler toDo = new ToDoHandler();
             string todo = "do this :";
             string expected = "* do this";
             string todoPath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");

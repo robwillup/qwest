@@ -1,7 +1,9 @@
 ﻿using static System.Console;
-namespace Quest
+using Quest.Data;
+
+namespace Quest.Commands
 {
-    public static class Help
+    public static class HelpHandler
     {
         public static void HandleHelp(string[] args) 
         {

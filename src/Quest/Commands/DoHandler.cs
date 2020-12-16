@@ -2,7 +2,7 @@
 using static System.Console;
 using System.IO;
 
-namespace Quest
+namespace Quest.Commands
 {
     public static class DoHandler
     {
@@ -10,7 +10,7 @@ namespace Quest
         {
             if (string.IsNullOrEmpty(todoText) || string.IsNullOrWhiteSpace(todoText))
             {
-                WriteLine("The 'do' command must recieve at least one character.");
+                WriteLine("The 'do' command requires at least one argument.");
                 return;
             }
             var guid = Guid.NewGuid();

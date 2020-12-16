@@ -1,4 +1,4 @@
-﻿namespace Quest
+﻿namespace Quest.Data
 {
     static class HelpMessages
     {
