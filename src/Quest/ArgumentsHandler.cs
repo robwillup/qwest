@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Quest.Commands;
 
 namespace Quest
 {
     public static class ArgumentsHandler
     {
-        public static int Handle(string[] args)
+        public static async Task<int> Handle(string[] args)
         {
             if (!AnyArgument(args))
             {
                 HelpHandler.SuggestHelp();
                 return 1;
-            }            
+            }
+            await FileHandler.CreateTodoFile();
             string command = GetCommand(args);
-            if (command == "do")
+            if (command == "do")                
                 DoHandler.Add(DoHandler.Handle(args));
             else if (command == "done")
                 DoneHandler.HandleDone(args);
             else if (command == "todo")
-                ToDoHandler.List();            
+                ToDoHandler.List();
             else if (command == "undo")
                 UndoHandler.Undo(args);
             else if (command == "dont")

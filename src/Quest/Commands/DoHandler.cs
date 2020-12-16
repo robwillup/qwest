@@ -1,24 +1,25 @@
 ﻿using System;
 using static System.Console;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Quest.Commands
 {
     public static class DoHandler
     {
-        public static void Add(string todoText)
+        public static int Add(string todoText, string fileName = "todo.md")
         {
             if (string.IsNullOrEmpty(todoText) || string.IsNullOrWhiteSpace(todoText))
             {
                 WriteLine("The 'do' command requires at least one argument.");
-                return;
+                return 1;
             }
             var guid = Guid.NewGuid();
-            string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
-            if (!File.Exists(todoFilePath))
-                using (File.Create(todoFilePath)) { };
+            string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);            
             todoText = $"* {todoText} - ({guid}) - Created at: {DateTime.Now}";
-            File.AppendAllLines(todoFilePath, new string[] { todoText });
+            List<string> lines = new List<string>() { todoText};
+            File.AppendAllLines(todoFilePath, lines);
+            return 0;
         }
         public static string Handle(string[] args)
         {            

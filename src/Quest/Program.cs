@@ -1,13 +1,15 @@
-﻿namespace Quest
+﻿using System.Threading.Tasks;
+
+namespace Quest
 {
     class Program
     {   
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             // Check config file
             Setup.HandleConfiguration();
             // Work with arguments
-            ArgumentsHandler.Handle(args);            
+            await ArgumentsHandler.Handle(args);            
         }
     }
 }

@@ -16,12 +16,12 @@ namespace Quest.Commands
             return 0;
         }
 
-        public static void Complete(string todoText)
+        public static void Complete(string todoText, string todoFileName = "todo.md")
         {
             string donePath = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
             if (!File.Exists(donePath))
                 using (File.Create(donePath)) { };
-            string todoPath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            string todoPath = Path.Combine(Directory.GetCurrentDirectory(), todoFileName);
             List<string> lines = File.ReadAllLines(todoPath).ToList();
             string line = lines.Find(t => t.Contains(todoText));
             lines.Remove(line);
