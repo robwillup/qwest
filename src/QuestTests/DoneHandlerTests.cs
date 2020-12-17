@@ -31,5 +31,17 @@ namespace QuestTests
             int returnValue = DoneHandler.ListDone();
             Assert.Equal(1, returnValue);
         }
+
+        [Fact]
+        public async Task TestListDone_PassIfReturns0()
+        {
+            string todo = "to this";
+            string todoFile = "testListDone.md";
+            await FileHandler.CreateTodoFile(todoFile);
+            DoHandler.Add(todo, todoFile);
+            DoneHandler.Complete(todo, todoFile);
+            int returnValue = DoneHandler.ListDone();
+            Assert.Equal(0, returnValue);
+        }
     }
 }
