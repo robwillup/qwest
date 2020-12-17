@@ -29,13 +29,16 @@ namespace Quest.Commands
             File.AppendAllText(donePath, $"{line} - Completed at: {DateTime.Now}\n");
         }
 
-        public static void ListDone()
+        public static int ListDone()
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
-            if (File.Exists(path))
-                Console.WriteLine(File.ReadAllText(path));
-            else
+            if (!File.Exists(path))
+            {
                 Console.WriteLine("No completed tasks in the default path (current directory).");
+                return 1;
+            }                
+            Console.WriteLine(File.ReadAllText(path));
+            return 0;
         }
     }
 }
