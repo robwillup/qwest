@@ -24,5 +24,12 @@ namespace QuestTests
             File.Delete(donePath);
             Assert.Contains(expected, actual.Split(" :")[0]);
         }
+
+        [Fact]
+        public void TestListDone_PassIfReturns1()
+        {
+            int returnValue = DoneHandler.ListDone();
+            Assert.Equal(1, returnValue);
+        }
     }
 }
