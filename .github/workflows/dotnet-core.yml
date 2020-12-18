@@ -26,6 +26,4 @@ jobs:
     - name: Publish
       run: dotnet publish src/Quest/ -o artifact -f net5.0 -r linux-x64 -c Release --self-contained
     - name: Check artifact
-      run: |
-        ls
-        ls artifact
+      run: ./artifact/Quest --help
