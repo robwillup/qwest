@@ -7,7 +7,7 @@ namespace Quest
         static async Task Main(string[] args)
         {
             // Check config file
-            Setup.HandleConfiguration();
+            //Setup.HandleConfiguration();
             // Work with arguments
             await ArgumentsHandler.Handle(args);            
         }
