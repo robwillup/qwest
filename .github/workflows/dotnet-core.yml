@@ -7,16 +7,14 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  Linux_build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100-preview.6.20318.15
+        dotnet-version: 5.0.101
     - name: Install dependencies
       run: dotnet restore src/
     - name: Build
@@ -27,3 +25,21 @@ jobs:
       run: dotnet publish src/Quest/ -o artifact -f net5.0 -r linux-x64 -c Release --self-contained
     - name: Check artifact
       run: ./artifact/Quest --help
+  Windows_build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+    - name: Install dependencies
+      run: dotnet restore src
+    - name: Build
+      run: dotnet build src\\Quest --configuration Release --no-restore
+    - name: Test
+      run: dotnet test src\\QuestTests
+    - name: Publish
+      run: dotnet publish src\\Quest -o artifact -f net5.0 -r win-x64 -c Release --self-contained
+    - name: Check artifact
+      run: artifact\\Quest.exe --help
