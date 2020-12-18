@@ -25,6 +25,10 @@ jobs:
       run: dotnet publish src/Quest/ -o artifact -f net5.0 -r linux-x64 -c Release --self-contained
     - name: Check artifact
       run: ./artifact/Quest help
+    - name: Compress
+      run: tar -zcvf quest.tar.gz artifact/Quest
+    - name: Check tarball
+      run: ls
   Windows_build:
     runs-on: windows-latest
     steps:
@@ -43,3 +47,7 @@ jobs:
       run: dotnet publish src\\Quest -o artifact -f net5.0 -r win-x64 -c Release --self-contained
     - name: Check artifact
       run: artifact\\Quest.exe help
+    - name: Compress
+      run: compress-archive -path 'artifact\\Quest.exe' -destinationpath 'quest.zip'
+    - name: Check zip
+      run: dir
