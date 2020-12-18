@@ -24,7 +24,7 @@ jobs:
     - name: Publish
       run: dotnet publish src/Quest/ -o artifact -f net5.0 -r linux-x64 -c Release --self-contained
     - name: Check artifact
-      run: ./artifact/Quest --help
+      run: ./artifact/Quest help
   Windows_build:
     runs-on: windows-latest
     steps:
@@ -42,4 +42,4 @@ jobs:
     - name: Publish
       run: dotnet publish src\\Quest -o artifact -f net5.0 -r win-x64 -c Release --self-contained
     - name: Check artifact
-      run: artifact\\Quest.exe --help
+      run: artifact\\Quest.exe help
