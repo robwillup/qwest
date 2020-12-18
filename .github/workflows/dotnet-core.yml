@@ -24,7 +24,7 @@ jobs:
     - name: Test
       run: dotnet test src/QuestTests
     - name: Publish
-      run: dotnet publish -o artifact -f net5.0 -r win-x64 -c Release --self-contained
+      run: dotnet publish src/Quest/ -o artifact -f net5.0 -r win-x64 -c Release --self-contained
     - name: Check artifact
       run: |
         ls
