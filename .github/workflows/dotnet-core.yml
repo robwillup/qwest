@@ -23,3 +23,9 @@ jobs:
       run: dotnet build src/Quest/ --configuration Release --no-restore
     - name: Test
       run: dotnet test src/QuestTests
+    - name: Publish
+      run: dotnet publish -o artifact -f net5.0 -r win-x64 -c Release --self-contained
+    - name: Check artifact
+      run: |
+        ls
+        ls artifact
