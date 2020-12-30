@@ -18,6 +18,7 @@ namespace Quest.Commands
 
         public static void SuggestHelp()
         {
+	    WriteLine("Welcome to Quest!");
             WriteLine("Try using 'help' to see available commands.");
             WriteLine("\nExample:\n\tquest help");
         }
