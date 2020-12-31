@@ -8,8 +8,6 @@
   <img width=700 src="./assets/images/quest.jpg">
 </p>
 
-<!-- TOC -->autoauto- [Quest - A to-do app for devs](#quest---a-to-do-app-for-devs)auto    - [How does it work?](#how-does-it-work)auto        - [View commands and options:](#view-commands-and-options)auto        - [Create a new task:](#create-a-new-task)auto        - [List active tasks:](#list-active-tasks)auto        - [Complete a task:](#complete-a-task)auto        - [List completed tasks:](#list-completed-tasks)auto        - [Move a completed task back to active](#move-a-completed-task-back-to-active)auto        - [Delete an active task:](#delete-an-active-task)auto    - [License](#license)autoauto<!-- /TOC -->
-
 ## How does it work?
 
 ### View commands and options:
@@ -72,6 +70,9 @@ $ quest undo 2b2f
 ```bash
 $ quest dont 2b2f
 ```
+## How to Install
+
+Download the latest version from [here](https://github.com/robwillup/quest/releases/tag/v0.0.2).
 
 ## License
 
