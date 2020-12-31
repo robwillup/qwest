@@ -1,57 +1,78 @@
 # Quest - A to-do app for devs
 
-![](./assets/images/quest.jpg)
+`Quest` is an application for creating *tasks* straight from the command line. The tasks are saved to a Markdown file in the project's source code. This helps developers manage their work directly from their source code files. Also, the completed tasks show the project's history and evolution.
 
 ![.NET Core](https://github.com/RWillup/quest/workflows/.NET%20Core/badge.svg)
 
-`Quest` is an application for creating *tasks* straight from the command line. The tasks are saved to a Markdown file in a  project's repository. This helps developers manage their work directly from their source code files. Also, the completed tasks show the project's history and evolution.
+<p align="center">
+  <img width=700 src="./assets/images/quest.jpg">
+</p>
 
+<!-- TOC -->autoauto- [Quest - A to-do app for devs](#quest---a-to-do-app-for-devs)auto    - [How does it work?](#how-does-it-work)auto        - [View commands and options:](#view-commands-and-options)auto        - [Create a new task:](#create-a-new-task)auto        - [List active tasks:](#list-active-tasks)auto        - [Complete a task:](#complete-a-task)auto        - [List completed tasks:](#list-completed-tasks)auto        - [Move a completed task back to active](#move-a-completed-task-back-to-active)auto        - [Delete an active task:](#delete-an-active-task)auto    - [License](#license)autoauto<!-- /TOC -->
 
 ## How does it work?
 
-Quest groups tasks by `features`, which are directories in your source code. So to start adding `tasks` you first need to create a "feature".
+### View commands and options:
 
-### Create a feature
+```bash
+$ quest help
 
-You only need to run this command once per feature.
+Quest!
 
-```PowerShell
-quest feat create "Download Button" --path ./src/docs/ --desc "This is a download button in the About page..."
+COMMANDS:
+    do.............Creates a new task
+    done...........Lists completed tasks
+    done <GUID>....Marks the task as complete
+    todo...........Lists current active tasks
+    undo...........Marks a complete task as active
+    dont...........Deletes a task from ToDos
+    version........Displays current version
+    help...........Displays information about commands and flags
+
+Use 'quest help <COMMAND>' for more information.
 ```
 
-This command will create a file named `todo.md` in the following path:
+### Create a new task:
 
-      src/docs/.quest/DownloadButton/todo.md
-
-The `todo.md` file will contain the following
-
-```MD
-# Download Button
-
-This is a download button in the about page...
+```bash
+$ quest do "write new unit test for function XYZ"
 ```
 
-## Add tasks
+### List active tasks:
 
-Once you created a "feature" you can start adding tasks to it. Just run the following command:
+```bash
+$ quest todo
 
-```PowerShell
-quest do "Format file content" feat "DownloadButton"
+# To Dos
+
+* write new unit test - (2b2f3c4d-3e06-4465-88a3-6155a983583f) - Created at: 12/31/2020 12:00:02 PM
 ```
 
-**quest:** This is the CLI
+### Complete a task:
 
-**do:** This command creates new tasks in the `todo.md` file.
+```bassh
+$ quest done 2b2f
+```
 
-**feat:** This is the name of the feature related to the new task. It is also the name of the directory holding the `todo.md` file.
+### List completed tasks:
 
-The new *task* will be saved in your project's source code, in a path like this:
+```bash
+$ quest done
 
-      .quest/<feature_name>/todo.md
+* write new unit test - (2b2f3c4d-3e06-4465-88a3-6155a983583f) - Created at: 12/31/2020 12:00:02 PM - Completed at: 12/31/2020 12:01:59 PM
+```
+### Move a completed task back to active
 
-The example above would be:
+```bash
+$ quest undo 2b2f
+```
 
-      .src/docs/.quest/DownloadButton/todo.md
+### Delete an active task:
 
+```bash
+$ quest dont 2b2f
+```
 
+## License
 
+Quest is licensed under the terms of the MIT license.
