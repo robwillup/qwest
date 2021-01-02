@@ -15,7 +15,7 @@ namespace QuestTests
             string todo = "do this :";
             string expected = "* do this";
             string todoFile = "testComplete.md";
-            await FileHandler.CreateTodoFile(todoFile);
+            await FileHandler.CreateTodoFileAsync(todoFile);
             DoHandler.Add(todo, todoFile);
             DoneHandler.Complete(todo, todoFile);
             string donePath = Path.Combine(Directory.GetCurrentDirectory(), "done.md");
@@ -37,7 +37,7 @@ namespace QuestTests
         {
             string todo = "to this";
             string todoFile = "testListDone.md";
-            await FileHandler.CreateTodoFile(todoFile);
+            await FileHandler.CreateTodoFileAsync(todoFile);
             DoHandler.Add(todo, todoFile);
             DoneHandler.Complete(todo, todoFile);
             int returnValue = DoneHandler.ListDone();
