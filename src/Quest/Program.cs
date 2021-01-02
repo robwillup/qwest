@@ -4,12 +4,12 @@ namespace Quest
 {
     class Program
     {   
-        static async Task Main(string[] args)
+        static async Task<int> Main(string[] args)
         {
             // Check config file
-            //Setup.HandleConfiguration();
+            // Setup.HandleConfiguration();
             // Work with arguments
-            await ArgumentsHandler.Handle(args);            
+            return await ArgumentsHandler.Handle(args);            
         }
     }
 }
