@@ -5,7 +5,7 @@ namespace Quest
 {
     public static class FileHandler
     {
-        public static async Task<int> CreateTodoFile(string fileName = "todo.md")
+        public static async Task<int> CreateTodoFileAsync(string fileName = "todo.md")
         {
             string todoPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
             if (!File.Exists(todoPath)) 

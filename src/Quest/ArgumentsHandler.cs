@@ -13,7 +13,7 @@ namespace Quest
                 HelpHandler.SuggestHelp();
                 return 1;
             }
-            await FileHandler.CreateTodoFile();
+            await FileHandler.CreateTodoFileAsync();
             string command = GetCommand(args);
             return CommandSelector.Select(args, command);
         }
