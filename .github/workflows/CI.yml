@@ -2,11 +2,21 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
-    paths-ignore: README.md
+    branches: [ integration ]
+    paths-ignore: 
+    - README.md
+    - LICENSE.md
+    - .gitignore
+    - 'assets/**'
+    - 'CI.yml' 
   pull_request:
-    branches: [ master ]
-    paths-ignore: README.md
+    branches: [ integration ]
+    paths-ignore: 
+    - README.md
+    - LICENSE.md
+    - .gitignore
+    - 'assets/**'
+    - 'CI.yml' 
 
 jobs:
   Linux_build:
