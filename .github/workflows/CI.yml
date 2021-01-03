@@ -8,7 +8,7 @@ on:
     - LICENSE.md
     - .gitignore
     - 'assets/**'
-    - 'CI.yml' 
+    - '.github/**' 
   pull_request:
     branches: [ integration ]
     paths-ignore: 
@@ -16,7 +16,7 @@ on:
     - LICENSE.md
     - .gitignore
     - 'assets/**'
-    - 'CI.yml' 
+    - '.github/**' 
 
 jobs:
   Linux_build:
