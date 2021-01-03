@@ -17,6 +17,7 @@ on:
     - .gitignore
     - 'assets/**'
     - '.github/**' 
+  workflow_dispatch:
 
 jobs:
   Linux_build:
