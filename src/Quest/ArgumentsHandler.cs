@@ -22,7 +22,7 @@ namespace Quest
         public static string GetCommand(string[] args) => args[0];
         public static bool HasFlag(string[] args, string flag)
         {
-           foreach (string arg in args)
+            foreach (string arg in args)
             {
                 if (arg == flag)
                     return true;
