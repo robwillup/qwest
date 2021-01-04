@@ -7,7 +7,7 @@ namespace Quest.Commands
 {
     public static class DoHandler
     {
-        public static int Add(string todoText, string fileName = "todo.md")
+        public static int Add(string todoText, string fileName = "todo.md", string filePath = "")
         {
             if (string.IsNullOrEmpty(todoText) || string.IsNullOrWhiteSpace(todoText))
             {
@@ -15,12 +15,17 @@ namespace Quest.Commands
                 return 1;
             }
             var guid = Guid.NewGuid();
-            string todoFilePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);            
-            todoText = $"* {todoText} - ({guid}) - Created at: {DateTime.Now}";
+            if (string.IsNullOrEmpty(filePath))
+                filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            else if (!Path.HasExtension(filePath))
+                filePath = Path.Combine(filePath, fileName);
+
+                todoText = $"* {todoText} - ({guid}) - Created at: {DateTime.Now}";
             List<string> lines = new List<string>() { todoText};
-            File.AppendAllLines(todoFilePath, lines);
+            File.AppendAllLines(filePath, lines);
             return 0;
         }
+
         public static string Handle(string[] args)
         {            
             string source = GetSource(args);

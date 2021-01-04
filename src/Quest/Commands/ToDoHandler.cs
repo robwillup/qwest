@@ -7,9 +7,10 @@ namespace Quest.Commands
 {
     public static class ToDoHandler
     {
-        public static int List()
+        public static int List(string path = "")
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            if (string.IsNullOrEmpty(path))
+                path = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
             if (File.Exists(path))
             {
                 List<string> content = File.ReadAllLines(path).ToList();
