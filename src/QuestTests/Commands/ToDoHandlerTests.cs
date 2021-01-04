@@ -12,7 +12,8 @@ namespace QuestTests.Commands
         [Fact]
         public void TestList_PassIfNoFile()
         {
-            int actual = ToDoHandler.List();
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            int actual = ToDoHandler.List(path);
             Assert.Equal(1, actual);
         }
 
