@@ -28,8 +28,8 @@ namespace Quest.Commands
 
         public static string Handle(string[] args)
         {            
-            string source = GetSource(args);
-            string feature = GetFeature(args);
+            //string source = GetSource(args);
+            //string feature = GetFeature(args);
             string doText = GetDo(args);
             return doText;
         }
