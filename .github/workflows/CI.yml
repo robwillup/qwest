@@ -2,11 +2,22 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
-    paths-ignore: README.md
+    branches: [ integration ]
+    paths-ignore: 
+    - README.md
+    - LICENSE.md
+    - .gitignore
+    - 'assets/**'
+    - '.github/**' 
   pull_request:
-    branches: [ master ]
-    paths-ignore: README.md
+    branches: [ integration ]
+    paths-ignore: 
+    - README.md
+    - LICENSE.md
+    - .gitignore
+    - 'assets/**'
+    - '.github/**' 
+  workflow_dispatch:
 
 jobs:
   Linux_build:
@@ -27,8 +38,6 @@ jobs:
       run: dotnet publish src/Quest/ -o artifact -f net5.0 -r linux-x64 -c Release --self-contained
     - name: Check artifact
       run: ./artifact/Quest help
-    - name: Compress
-      run: tar -zcvf quest.tar.gz artifact/Quest
 
   Windows_build:
     runs-on: windows-latest
@@ -48,5 +57,22 @@ jobs:
       run: dotnet publish src\\Quest -o artifact -f net5.0 -r win-x64 -c Release --self-contained
     - name: Check artifact
       run: artifact\\Quest.exe help
-    - name: Compress
-      run: compress-archive -path 'artifact\\Quest.exe' -destinationpath 'quest.zip'
+
+  osX_build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+    - name: Install dependencies
+      run: dotnet restore src\\Quest
+    - name: Build
+      run: dotnet build src\\Quest --configuration Release --no-restore
+    - name: Test
+      run: dotnet test src\\QuestTests
+    - name: Publish
+      run: dotnet publish src\\Quest -o artifact -f net5.0 -r osx-x64 -c Release --self-contained
+    - name: Check artifact
+      run: artifact/Quest help
