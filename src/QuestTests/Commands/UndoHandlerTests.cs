@@ -13,7 +13,7 @@ namespace QuestTests.Commands
             int actual = UndoHandler.Undo(args);
             Assert.Equal(1, actual);
         }
-
+      
         [Fact]
         public void TestUndo_PassIfNoDoneMDFile()
         {
