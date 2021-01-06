@@ -12,7 +12,7 @@
 
 ### View commands and options:
 
-```bash
+```
 $ quest help
 
 Quest!
