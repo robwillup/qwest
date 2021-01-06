@@ -1,4 +1,5 @@
 ﻿using Quest.Commands;
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,15 @@ namespace QuestTests
         public async Task TestAdd_PassIfTodoIsAdded()
         {            
             string expected = "do this";
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "todo-test.md");
+
             using (FileStream fileStream = File.Create(filePath))
             {
                 fileStream.Write(new byte[0]);
             }
             byte[] content;
-            DoHandler.Add(expected);
+            DoHandler.Add(expected, filePath);
+
             using (FileStream SourceStream = File.Open(filePath, FileMode.Open))
             {
                 content = new byte[SourceStream.Length];

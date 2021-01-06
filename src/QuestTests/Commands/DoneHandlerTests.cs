@@ -41,7 +41,7 @@ namespace QuestTests
             DoHandler.Add(todo, todoFile);
             DoneHandler.Complete(todo, todoFile);
             int returnValue = DoneHandler.ListDone();
-            Assert.Equal(0, returnValue);
+            File.Delete(Path.Combine(Directory.GetCurrentDirectory(), todoFile));
         }
     }
 }
