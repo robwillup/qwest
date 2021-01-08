@@ -21,7 +21,7 @@ namespace QuestTests.Commands
         public async Task TestList_PassIfNoTasks()
         {
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "todo-test-list.md");
-            await FileHandler.CreateTodoFileAsync(filePath: path);
+            await FileHandler.CreateTodoFileAsync(path);
             int actual = ToDoHandler.List(path);
             File.Delete(path);
             Assert.Equal(1, actual);
@@ -31,7 +31,7 @@ namespace QuestTests.Commands
         public async Task TestList_PassIfThereAreTasks()
         {
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "todo-test-list-2.md");
-            await FileHandler.CreateTodoFileAsync(filePath: path);
+            await FileHandler.CreateTodoFileAsync(path);
             DoHandler.Add("test", filePath: path);
             int actual = ToDoHandler.List(path);
             File.Delete(path);
