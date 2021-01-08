@@ -8,15 +8,15 @@ namespace Quest
         public static int Select(string[] args, string command)
         {
             if (command == "do")
-                DoHandler.Add(DoHandler.Handle(args));
+                return DoHandler.Add(DoHandler.Handle(args));
             else if (command == "done")
                 DoneHandler.HandleDone(args);
             else if (command == "todo")
-                ToDoHandler.List();
+                return ToDoHandler.List();
             else if (command == "undo")
-                UndoHandler.Undo(args);
+                return UndoHandler.Undo(args);
             else if (command == "dont")
-                DontHandler.Remove(args);
+                return DontHandler.Remove(args);
             else if (args[0] == "version")
                 Console.WriteLine("1.0.0");
             else if (args[0] == "help")

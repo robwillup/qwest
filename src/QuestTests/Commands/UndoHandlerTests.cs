@@ -53,7 +53,7 @@ namespace QuestTests.Commands
             string[] args = new string[2] { "undo", "test" };
             string path = Path.Combine(Directory.GetCurrentDirectory(), "done-test.md");
             using (File.Create(path)) { };
-            string todoPath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            string todoPath = Path.Combine(Directory.GetCurrentDirectory(), "todo-undo.md");
             using (File.Create(todoPath)) { };
             DoHandler.Add("test", filePath: todoPath);
             DoneHandler.Complete("t", todoPath, path);

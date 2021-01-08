@@ -14,7 +14,7 @@ namespace QuestTests
         {
             string file = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.UserProfile), "todo.md");
-            await FileHandler.CreateTodoFileAsync("todo.md", file);
+            await FileHandler.CreateTodoFileAsync(file);
             Assert.True(File.Exists(file));
             File.Delete(file);
         }
