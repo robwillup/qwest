@@ -6,7 +6,7 @@ namespace Quest.Commands
 {
     public static class DontHandler
     {
-        public static int Remove(string[] args)
+        public static int Remove(string[] args, string todoPath = "")
         {
             if (args.Length < 2)
             {
@@ -14,7 +14,7 @@ namespace Quest.Commands
                 return 1;
             }
             string todo = args[1];
-            string todoPath = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
+            todoPath = string.IsNullOrEmpty(todoPath) ? Path.Combine(Directory.GetCurrentDirectory(), "todo.md") : todoPath;
             if (!File.Exists(todoPath))
                 return 1;
             List<string> todoContent = File.ReadAllLines(todoPath).ToList();
