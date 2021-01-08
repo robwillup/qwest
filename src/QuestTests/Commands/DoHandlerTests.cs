@@ -14,12 +14,14 @@ namespace QuestTests
         {            
             string expected = "do this";
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "todo-test.md");
+
             using (FileStream fileStream = File.Create(filePath))
             {
                 fileStream.Write(new byte[0]);
             }
             byte[] content;
             DoHandler.Add(expected, filePath);
+
             using (FileStream SourceStream = File.Open(filePath, FileMode.Open))
             {
                 content = new byte[SourceStream.Length];
