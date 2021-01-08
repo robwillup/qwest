@@ -12,7 +12,7 @@
 
 ### View commands and options:
 
-```bash
+```
 $ quest help
 
 Quest!
@@ -73,6 +73,12 @@ $ quest dont 2b2f
 ## How to Install
 
 Download the latest version from [here](https://github.com/robwillup/quest/releases/tag/v0.0.2).
+
+## Contributing
+
+Contributions are very welcome!
+
+Feel free to start a [discussion](https://github.com/robwillup/quest/discussions), open an [issue](https://github.com/robwillup/quest/issues) or open a [PR](https://github.com/robwillup/quest/pulls).
 
 ## License
 
