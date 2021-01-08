@@ -20,10 +20,11 @@ namespace QuestTests.Commands
         [Fact]
         public async Task TestRemove_PassIfNoTasks()
         {
-            await FileHandler.CreateTodoFileAsync("todo-testremove.md");
+            string file = "todo-testremove-notasks.md";
+            await FileHandler.CreateTodoFileAsync(file);
             string[] args = new string[2] { "dont", "quit" };
             int actual = DontHandler.Remove(args);
-            File.Delete("todo-testremove.md");
+            File.Delete(file);
             Assert.Equal(1, actual);
         }
 

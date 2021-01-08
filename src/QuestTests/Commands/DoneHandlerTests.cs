@@ -37,9 +37,10 @@ namespace QuestTests
         {
             string todo = "to this";
             string todoFile = "testListDone.md";
+            string doneFile = "done-testline.md";
             await FileHandler.CreateTodoFileAsync(todoFile);
             DoHandler.Add(todo, todoFile);
-            DoneHandler.Complete(todo, todoFile);
+            DoneHandler.Complete(todo, todoFile, doneFile);
             int returnValue = DoneHandler.ListDone();
             File.Delete(Path.Combine(Directory.GetCurrentDirectory(), todoFile));
         }
