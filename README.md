@@ -1,6 +1,6 @@
 # Quest - Work Management for Devs
 
-`Quest` is an application for creating *tasks* straight from the command line. The tasks are saved to a Markdown file in the project's source code. This helps developers manage their work directly from their source code files. Also, the completed tasks show the project's history and evolution.
+`Quest` is a CLI app for creating *tasks* straight from the command line. The tasks are saved to a Markdown file in the project's source code. This helps developers manage their work directly from their source code files. Also, the completed tasks show the project's history and evolution.
 
 ![.NET Core](https://github.com/RWillup/quest/workflows/.NET%20Core/badge.svg)
 
