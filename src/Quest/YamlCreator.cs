@@ -1,38 +1,56 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using YamlDotNet.RepresentationModel;
 
 namespace Quest
 {
+    public class Config
+    {
+        public string App { get; set; }
+        public DateTime Date { get; set; }
+        public Dev Dev { get; set; }
+        public List<App> Applications { get; set; }
+    }
+
+    public class Dev
+    {
+        public string Username { get; set; }
+    }
+
+    public class App
+    {
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public List<Feature> Features { get; set; }
+    }
+
+    public class Feature
+    {
+        public string Name { get; set; }
+    }
     public static class YamlCreator
     {
         public static void Create(string path)
         {
-            var stream = new YamlStream(
-                new YamlDocument(
-                    new YamlMappingNode(
-                        new YamlScalarNode("app"), new YamlScalarNode("Quest - The developer To Do app"),
-                        new YamlScalarNode("date"), new YamlScalarNode(DateTime.Today.ToShortDateString()),
-                        new YamlScalarNode("dev"), new YamlMappingNode(
-                            new YamlScalarNode("username"), new YamlScalarNode(Environment.UserName)
-                        ),
-                        new YamlScalarNode("applications"), new YamlSequenceNode(
-                            new YamlMappingNode(
-                                new YamlScalarNode("name"), new YamlScalarNode("quest_elixir"),
-                                new YamlScalarNode("path"), new YamlScalarNode(@"C:\Users\rwill\source\repos\QuestSources\quest_elixir"),
-                                new YamlScalarNode("features"), new YamlSequenceNode(
-                                    new YamlMappingNode(
-                                        new YamlScalarNode("name"), new YamlScalarNode("ReadArguments")
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            );
-            using (File.Create(path)) { };
-            using StreamWriter sw = new StreamWriter(path);
-            stream.Save(sw, assignAnchors: false);
-        }
+            var serializer = new YamlDotNet.Serialization.Serializer();
+            string configStr = serializer.Serialize(new Config() 
+            {
+                App = "Quest - Work Management for Developers",
+                Date = DateTime.Now,
+                Dev = new Dev() { Username = Environment.GetEnvironmentVariable("USERPROFILE")},
+                Applications = new List<App>() 
+                { 
+                    new App() 
+                    {
+                        Name = "quest_elixir",
+                        Path = @"C:\Users\rwill\source\repos\QuestSources\quest_elixir",
+                        Features = new List<Feature>()
+                        {
+                            new Feature() { Name = "ReadYaml" }
+                        }
+                    } }
+            });
+            File.WriteAllText(path, configStr);
+        }        
     }
 }
