@@ -10,8 +10,10 @@ namespace Quest
             return Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
         }
-        public static void HandleConfiguration()
-        {            
+        public static void HandleConfiguration(string[] args)
+        {
+            if (args.Length == 1 && args[0] == "version")
+                return;
             if (!Directory.Exists(Path.GetDirectoryName(GetConfigPath())))
             {
                 string answer = "";
