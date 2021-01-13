@@ -13,12 +13,12 @@ namespace Quest
                 Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
         }
 
-        public static void HandleConfiguration(string[] args)
+        public static int HandleConfiguration(string[] args)
         {
             if (args.Length == 1 && args[0] == "version")
-                return;
+                return 0;
             if (Directory.Exists(Path.GetDirectoryName(GetConfigPath())))
-                return;
+                return 0;
             
             string answer = "";
             do
@@ -30,13 +30,15 @@ namespace Quest
                 answer = answer.ToLower();
             } while (answer != "yes" && answer != "y" && answer != "n" && answer != "no");
             if (answer == "no" || answer == "n")
-                return;
-            else
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(GetConfigPath()));
-                using (File.Create(GetConfigPath())) { } ;
-            }
-            YamlCreator.Create(GetConfigPath());            
+                return 0;
+
+            string githubUsername;
+            Console.WriteLine("Please, what is your GitHub username?");
+            githubUsername = Console.ReadLine();
+            Directory.CreateDirectory(Path.GetDirectoryName(GetConfigPath()));
+            using (File.Create(GetConfigPath())) { } ;
+            YamlCreator.Create(GetConfigPath(), githubUsername);
+            return 0;
         }
 
         public static Config GetConfig()
