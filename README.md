@@ -24,6 +24,7 @@ COMMANDS:
     todo...........Lists current active tasks
     undo...........Marks a complete task as active
     dont...........Deletes a task from ToDos
+    config.........View and edit Quest settings
     version........Displays current version
     help...........Displays information about commands and flags
 
