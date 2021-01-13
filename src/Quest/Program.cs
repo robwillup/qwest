@@ -1,13 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using Quest;
 
-namespace Quest
-{
-    class Program
-    {   
-        static async Task<int> Main(string[] args)
-        {            
-            Setup.HandleConfiguration(args);
-            return await ArgumentsHandler.Handle(args);            
-        }
-    }
-}
+Setup.HandleConfiguration(args);
+return await ArgumentsHandler.Handle(args);            
