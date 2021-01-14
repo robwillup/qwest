@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Quest
 {
-    public static class YamlCreator
+    public static class YamlHandler
     {
         public static void Create(string path, string githubUsername)
         {
@@ -29,6 +29,13 @@ namespace Quest
                     } }
             });
             File.WriteAllText(path, configStr);
-        }        
+        }
+
+        public static void Update(string path, Config content)
+        {
+            var serializer = new YamlDotNet.Serialization.Serializer();
+            string configStr = serializer.Serialize(content);
+            File.WriteAllText(path, configStr);
+        }
     }
 }

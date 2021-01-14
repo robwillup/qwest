@@ -12,12 +12,32 @@ namespace Quest.Commands
                 ShowCommandHelp();
                 return;
             }
-            if (args[1] == "config")
+            else
             {
-                WriteLine("View and edit Quest settings");
-                WriteLine("Example:");
-                WriteLine("\tquest config --list");
-            }                
+                if (args.Length == 2)
+                {
+                    if (args[1] == "config")
+                    {
+                        WriteLine("View and edit Quest settings");
+                        WriteLine("Examples:");
+                        WriteLine("\tquest config list");
+                        WriteLine("\tquest config add --name my-app");
+                    }
+                }
+                else
+                {
+                    if (args[2] == "list")
+                    {
+                        WriteLine("Displays current configuration");
+                        return;
+                    }
+                    if (args[2] == "add")
+                    {
+                        WriteLine("Adds new configuration section");
+                        return;
+                    }
+                }
+            }             
         }
 
         static void ShowCommandHelp() 

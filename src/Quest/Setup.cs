@@ -37,7 +37,7 @@ namespace Quest
             githubUsername = Console.ReadLine();
             Directory.CreateDirectory(Path.GetDirectoryName(GetConfigPath()));
             using (File.Create(GetConfigPath())) { } ;
-            YamlCreator.Create(GetConfigPath(), githubUsername);
+            YamlHandler.Create(GetConfigPath(), githubUsername);
             return 0;
         }
 
@@ -46,6 +46,11 @@ namespace Quest
             string content = File.ReadAllText(GetConfigPath());
             var deserializer = new Deserializer();
             return deserializer.Deserialize<Config>(content);
+        }
+
+        public static string GetConfigString()
+        {
+            return File.ReadAllText(GetConfigPath());
         }
     }
 }
