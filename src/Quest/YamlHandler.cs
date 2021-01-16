@@ -5,22 +5,23 @@ using System.IO;
 
 namespace Quest
 {
-    public static class YamlCreator
+    public static class YamlHandler
     {
-        public static void Create(string path)
+        public static void Create(string path, string githubUsername)
         {
             var serializer = new YamlDotNet.Serialization.Serializer();
             string configStr = serializer.Serialize(new Config() 
             {
                 App = "Quest - Work Management for Developers",
                 Date = DateTime.Now,
-                Dev = new Dev() { Username = Environment.GetEnvironmentVariable("USERPROFILE")},
+                Dev = new Dev() { Username = githubUsername},
                 Applications = new List<App>() 
                 { 
                     new App() 
                     {
                         Name = "quest_elixir",
-                        Path = @"C:\Users\rwill\source\repos\QuestSources\quest_elixir",
+                        LocalPath = @"C:\Users\rwill\source\repos\QuestSources\quest_elixir",
+                        Remote = "https://github.com/robwillup/quest_elixir.git",
                         Features = new List<Feature>()
                         {
                             new Feature() { Name = "ReadYaml" }
@@ -28,6 +29,13 @@ namespace Quest
                     } }
             });
             File.WriteAllText(path, configStr);
-        }        
+        }
+
+        public static void Update(string path, Config content)
+        {
+            var serializer = new YamlDotNet.Serialization.Serializer();
+            string configStr = serializer.Serialize(content);
+            File.WriteAllText(path, configStr);
+        }
     }
 }
