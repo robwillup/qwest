@@ -36,6 +36,11 @@ namespace Quest.Commands
                         WriteLine("Adds new configuration section");
                         return;
                     }
+                    if (args[2] == "rm")
+                    {
+                        WriteLine("Removes a configuration section");
+                        return;
+                    }
                 }
             }             
         }

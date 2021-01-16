@@ -1,4 +1,5 @@
 ﻿using Quest.Models;
+using System.Linq;
 using static System.Console;
 
 namespace Quest.Commands
@@ -13,6 +14,8 @@ namespace Quest.Commands
                     List();
                 else if (args[1] == "add")
                     Add(args);
+                else if (args[1] == "rm")
+                    Delete(args);
             }
             else
             {
@@ -60,6 +63,17 @@ namespace Quest.Commands
             App app = new App() { Name = args[ni], LocalPath = args[lpi], Remote = args[ri] };
             var conf = Setup.GetConfig();
             conf.Applications.Add(app);
+            YamlHandler.Update(Setup.GetConfigPath(), conf);
+            return 0;
+        }
+
+        public static int Delete(string[] args)
+        {
+            if (!ArgumentsHandler.HasFlag(args, "--name"))
+                return 1;
+            string name = args[ArgumentsHandler.GetIndexOfFlag(args, "--name") + 1];
+            var conf = Setup.GetConfig();
+            conf.Applications.Remove(conf.Applications.FirstOrDefault(e => e.Name == name));
             YamlHandler.Update(Setup.GetConfigPath(), conf);
             return 0;
         }
