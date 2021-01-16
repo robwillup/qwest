@@ -24,5 +24,16 @@ namespace QuestTests.Commands
             Assert.Contains(config.Applications, predicate);
             ConfigHandler.Delete(args);
         }
+
+        [Fact]
+        public void TestDelete_PassIfDeleted()
+        {
+            string[] args = new string[] { "--name", "test", "--local-path", "here", "--remote", "there" };
+            ConfigHandler.Add(args);
+            ConfigHandler.Delete(args);
+            Config config = Setup.GetConfig();
+            var predicate = new System.Predicate<App>(a => a.Name == args[1]);
+            Assert.DoesNotContain(config.Applications, predicate);            
+        }
     }
 }
