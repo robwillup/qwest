@@ -71,6 +71,25 @@ $ quest undo 2b2f
 ```bash
 $ quest dont 2b2f
 ```
+
+### View settings
+
+```bash
+$ quest config list
+```
+
+### Add configuration section
+
+```bash
+$ quest config add --name "my-app" --local-path "src/app" --remote "github.com/username/repo"
+```
+
+### Remove configuration section
+
+```bash
+$ quest config rm --name "my-app"
+```
+
 ## How to Install
 
 Download the latest version from [here](https://github.com/robwillup/quest/releases/tag/v0.0.2).
