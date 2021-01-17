@@ -1,4 +1,5 @@
-﻿using Quest.Models;
+﻿using Quest.IO;
+using Quest.Models;
 using System;
 using System.IO;
 using YamlDotNet.Serialization;
@@ -15,42 +16,37 @@ namespace Quest
 
         public static int HandleConfiguration(string[] args)
         {
-            if (args.Length == 1 && args[0] == "version")
+            if (!ShouldCreateConfigFile(args))
                 return 0;
-            if (Directory.Exists(Path.GetDirectoryName(GetConfigPath())))
-                return 0;
-            
-            string answer = "";
-            do
-            {
-                Console.WriteLine("Quest's global config not found.");
-                Console.WriteLine("Would you like to create it now?");
-                Console.WriteLine("[Y] Yes\n[N] No");
-                answer = Console.ReadLine();
-                answer = answer.ToLower();
-            } while (answer != "yes" && answer != "y" && answer != "n" && answer != "no");
-            if (answer == "no" || answer == "n")
-                return 0;
+            if(!ConfigCreationDialog.GetUserConfirmation())                
+                return 0;            
+            return CreateConfig();
+        }
 
-            string githubUsername;
-            Console.WriteLine("Please, what is your GitHub username?");
-            githubUsername = Console.ReadLine();
+        public static bool ShouldCreateConfigFile(string[] args)
+        {
+            if (args.Length == 1 && args[0] == "version" || args[0] == "help")
+                return false;
+            if (Directory.Exists(Path.GetDirectoryName(GetConfigPath())))
+                return false;
+            return true;
+        }
+
+        public static int CreateConfig()
+        {
             Directory.CreateDirectory(Path.GetDirectoryName(GetConfigPath()));
-            using (File.Create(GetConfigPath())) { } ;
-            YamlHandler.Create(GetConfigPath(), githubUsername);
+            using (File.Create(GetConfigPath())) { };
+            YamlHandler.Create(GetConfigPath(), ConfigCreationDialog.GetUsername());
             return 0;
         }
 
         public static Config GetConfig()
         {
             string content = File.ReadAllText(GetConfigPath());
-            var deserializer = new Deserializer();
+            Deserializer deserializer = new Deserializer();
             return deserializer.Deserialize<Config>(content);
         }
 
-        public static string GetConfigString()
-        {
-            return File.ReadAllText(GetConfigPath());
-        }
+        public static string GetConfigString() => File.ReadAllText(GetConfigPath());
     }
 }
