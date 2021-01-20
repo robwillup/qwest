@@ -15,7 +15,7 @@ namespace Quest
             }
             await FileHandler.CreateTodoFileAsync();
             string command = GetCommand(args);
-            return CommandSelector.Select(args, command);
+            return CommandSelector.Run(args, command);
         }
 
         public static bool AnyArgument(string[] args) => args.Length > 0;

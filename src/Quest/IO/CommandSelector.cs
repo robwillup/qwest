@@ -6,7 +6,7 @@ namespace Quest
 {
     public static class CommandSelector
     {
-        public static int Select(string[] args, string command)
+        public static int Run(string[] args, string command)
         {
             if (command == "do")
                 return DoHandler.Add(DoHandler.Handle(args));
