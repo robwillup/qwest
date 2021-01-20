@@ -8,12 +8,6 @@ namespace Quest
 {
     public static class Setup
     {
-        public static string GetConfigPath()
-        {
-            return Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
-        }
-
         public static int HandleConfiguration(string[] args)
         {
             if (!ShouldCreateConfigFile(args))
@@ -32,12 +26,18 @@ namespace Quest
             return true;
         }
 
-        public static int CreateConfig()
+        private static int CreateConfig()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(GetConfigPath()));
             using (File.Create(GetConfigPath())) { };
             YamlHandler.Create(GetConfigPath(), ConfigCreationDialog.GetUsername());
             return 0;
+        }
+
+        public static string GetConfigPath()
+        {
+            return Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
         }
 
         public static Config GetConfig()

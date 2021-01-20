@@ -8,9 +8,9 @@ namespace Quest.IO
         {
             string answer;
             do
-            {
-                WriteLine("Would you like to create it now?");
+            {                
                 WriteLine("Quest's global config not found.");
+                WriteLine("Would you like to create it now?");
                 WriteLine("[Y] Yes\n[N] No");
                 answer = ReadLine();
                 answer = answer.ToLower();
