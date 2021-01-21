@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Quest.Commands;
 using Quest.Data;
 using Quest.IO;
 
@@ -11,10 +10,7 @@ namespace Quest
         public static async Task<int> Handle(string[] args)
         {
             if (!AnyArgument(args))
-            {
-                Help.WriteHelpMessage(HelpMessageTypes.Suggestion);
-                return 1;
-            }
+                return Help.WriteHelpMessage(HelpMessageTypes.Suggestion);
             await FileHandler.CreateTodoFileAsync();
             string command = GetCommand(args);
             return CommandSelector.Run(args, command);

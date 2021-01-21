@@ -5,7 +5,7 @@ namespace Quest.IO
 {
     public static class Help
     {
-        public static void WriteHelpMessage(HelpMessageTypes messageType)
+        public static int WriteHelpMessage(HelpMessageTypes messageType)
         {
             switch (messageType)
             {
@@ -16,6 +16,7 @@ namespace Quest.IO
                     WriteLine(HelpMessages.CommandHelpMessage);
                     break;
             }
+            return 0;
         }
     }
 }
