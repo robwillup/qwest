@@ -1,5 +1,6 @@
 ﻿using static System.Console;
 using Quest.Data;
+using Quest.IO;
 
 namespace Quest.Commands
 {
@@ -9,7 +10,7 @@ namespace Quest.Commands
         {
             if (args.Length == 1)
             {
-                ShowCommandHelp();
+                Help.WriteHelpMessage(HelpMessageTypes.Default);
                 return;
             }
             else
@@ -43,18 +44,6 @@ namespace Quest.Commands
                     }
                 }
             }             
-        }
-
-        static void ShowCommandHelp() 
-        {
-            WriteLine(HelpMessages.CommandHelpMessage);
-        }
-
-        public static void SuggestHelp()
-        {
-	        WriteLine("Welcome to Quest!");
-            WriteLine("Try using 'help' to see available commands.");
-            WriteLine("\nExample:\n\tquest help");
         }
     }
 }
