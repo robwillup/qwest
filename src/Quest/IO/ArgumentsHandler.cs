@@ -7,7 +7,7 @@ namespace Quest
 {
     public static class ArgumentsHandler
     {
-        public static async Task<int> Handle(string[] args)
+        public static async Task<int> HandleAsync(string[] args)
         {
             if (!AnyArgument(args))
                 return Help.WriteHelpMessage(HelpMessageTypes.Suggestion);
