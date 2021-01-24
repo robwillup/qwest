@@ -11,8 +11,7 @@ namespace Quest
         {
             var serializer = new YamlDotNet.Serialization.Serializer();
             string configStr = serializer.Serialize(new Config() 
-            {
-                App = "Quest - Work Management for Developers",
+            {                
                 Date = DateTime.Now,
                 Dev = new Dev() { Username = githubUsername},
                 Applications = new List<App>()

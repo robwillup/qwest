@@ -14,7 +14,6 @@ namespace Quest
             {                
                 using TextReader reader = new StreamReader(CreateContentStream("# To Dos\n\n"));
                 await File.WriteAllTextAsync(file, reader.ReadToEnd());
-
             }
             return 0;
         }

@@ -2,67 +2,52 @@
 using static System.Console;
 using System.IO;
 using System.Collections.Generic;
+using Quest.Models;
+using System.Linq;
 
 namespace Quest.Commands
 {
     public static class DoHandler
     {
-        public static int Add(string todoText, string filePath = "")
+        public static int Add(QuestTask todo)
         {
-            if (string.IsNullOrEmpty(todoText) || string.IsNullOrWhiteSpace(todoText))
-            {
-                WriteLine("The 'do' command requires at least one argument.");
-                return 1;
-            }
-            var guid = Guid.NewGuid();
-            filePath = string.IsNullOrEmpty(filePath) ? Path.Combine(Directory.GetCurrentDirectory(), "todo.md") : filePath;
-            todoText = $"* {todoText} - ({guid}) - Created at: {DateTime.Now}";
+            Config config = Setup.GetConfig();
+            string appPath = config.Applications.FirstOrDefault(e => e.Name == todo.AppName).LocalPath;
+            // create local .quest dir
+            Directory.CreateDirectory(Path.Combine(appPath, ".quest"));
+            string todoPath = Path.Combine(appPath, ".quest", todo.FeatureName, "todo.md");
+            string todoText = $"* {todo.Name} - ({todo.Id}) - Created at: {DateTime.Now}";
             List<string> lines = new List<string>() { todoText};
-            File.AppendAllLines(filePath, lines);
+            string dir = Path.GetDirectoryName(todoPath);
+            Directory.CreateDirectory(dir);
+            Console.WriteLine(dir);
+            Console.WriteLine(todoPath);
+            File.AppendAllLines(todoPath, lines);
             return 0;
         }
 
-        public static string Handle(string[] args)
-        {            
-            //string source = GetSource(args);
-            //string feature = GetFeature(args);
-            string doText = GetDo(args);
-            return doText;
-        }
-
-        public static string GetDo(string[] args)
+        public static QuestTask Handle(string[] args)
         {
-            string doText = string.Empty;
-            int indexOfDo = ArgumentsHandler.GetIndexOfFlag(args, "do");    
-            if (args.Length > 1)
-                doText = args[indexOfDo + 1];
-            return doText;            
-        }
+            if (args.Length < 6)
+                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+            if (!ArgumentsHandler.HasFlag(args, "--app") || !ArgumentsHandler.HasFlag(args, "--feature"))
+                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
 
-        public static string GetSource(string[] args)
-        {
-            string source = string.Empty;
-            int indexOfSource = 0;
-            if (ArgumentsHandler.HasFlag(args, "--source"))
-                indexOfSource = ArgumentsHandler.GetIndexOfFlag(args, "--source");
-            else if (ArgumentsHandler.HasFlag(args, "-s"))
-                indexOfSource = ArgumentsHandler.GetIndexOfFlag(args, "-s");
-            if (indexOfSource != 0)
-                source = args[indexOfSource + 1];
-            return source;
-        }
+            int doIndex = ArgumentsHandler.GetIndexOfFlag(args, "do") + 1;
+            int appIndex = ArgumentsHandler.GetIndexOfFlag(args, "--app") + 1;
+            int featureIndex = ArgumentsHandler.GetIndexOfFlag(args, "--feature") + 1;
 
-        public static string GetFeature(string[] args)
-        {
-            string feature = string.Empty;
-            int indexOfFeature = 0;
-            if (ArgumentsHandler.HasFlag(args, "--feature"))
-                indexOfFeature = ArgumentsHandler.GetIndexOfFlag(args, "--feature");
-            else if (ArgumentsHandler.HasFlag(args, "-f"))
-                indexOfFeature = ArgumentsHandler.GetIndexOfFlag(args, "-f");
-            if (indexOfFeature != 0)
-                feature = args[indexOfFeature + 1];
-            return feature;
+            if (string.IsNullOrEmpty(args[doIndex]) || string.IsNullOrEmpty(args[appIndex]) || string.IsNullOrEmpty(args[featureIndex]))
+                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+            if (string.IsNullOrWhiteSpace(args[doIndex]) || string.IsNullOrWhiteSpace(args[appIndex]) || string.IsNullOrWhiteSpace(args[featureIndex]))
+                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+
+            return new QuestTask()
+            {
+                Name = args[doIndex],
+                AppName = args[appIndex],
+                FeatureName = args[featureIndex]
+            };
         }
     }
 }
