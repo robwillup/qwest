@@ -34,7 +34,7 @@ Use 'quest help <COMMAND>' for more information.
 ### Create a new task:
 
 ```bash
-$ quest do "write new unit test for function XYZ"
+$ quest do "write new unit test for function XYZ" --app "my-app" --feature "new-feature"
 ```
 
 ### List active tasks:
