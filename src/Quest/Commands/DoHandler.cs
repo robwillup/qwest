@@ -20,8 +20,8 @@ namespace Quest.Commands
             List<string> lines = new List<string>() { todoText};
             string dir = Path.GetDirectoryName(todoPath);
             Directory.CreateDirectory(dir);
-            Console.WriteLine(dir);
-            Console.WriteLine(todoPath);
+            WriteLine(dir);
+            WriteLine(todoPath);
             File.AppendAllLines(todoPath, lines);
             return 0;
         }

@@ -27,19 +27,5 @@ namespace QuestTests.Commands
             File.Delete(file);
             Assert.Equal(1, actual);
         }
-
-        [Fact]
-        public async Task TestRemove_PassIfRemovesTask()
-        {
-            string file = "todo-testremove.md";
-            await FileHandler.CreateTodoFileAsync(file);
-            DoHandler.Add("test", file);
-            int tasksBefore = File.ReadAllLines(file).ToList().Count;
-            string[] args = new string[2] { "dont", "test" };
-            _ = DontHandler.Remove(args, file);
-            int tasksAfter = File.ReadAllLines(file).ToList().Count;
-            File.Delete(file);
-            Assert.NotEqual(tasksBefore, tasksAfter);
-        }
     }
 }
