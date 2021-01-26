@@ -18,9 +18,12 @@ namespace Quest
         }
 
         public static bool ShouldCreateConfigFile(string[] args)
-        {
-            if (args.Length == 1 && args[0] == "version" || args[0] == "help")
-                return false;
+        {            
+            if (args.Length > 0)
+            {
+                if (args[0] == "version" || args[0] == "help")
+                    return false;
+            }
             if (Directory.Exists(Path.GetDirectoryName(GetConfigPath())))
                 return false;
             return true;

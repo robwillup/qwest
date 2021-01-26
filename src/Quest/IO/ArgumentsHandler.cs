@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Quest.Data;
 using Quest.IO;
 
@@ -7,11 +6,10 @@ namespace Quest
 {
     public static class ArgumentsHandler
     {
-        public static async Task<int> HandleAsync(string[] args)
+        public static int Handle(string[] args)
         {
             if (!AnyArgument(args))
-                return Help.WriteHelpMessage(HelpMessageTypes.Suggestion);
-            await FileHandler.CreateTodoFileAsync();
+                return Help.WriteHelpMessage(HelpMessageTypes.Suggestion);            
             string command = GetCommand(args);
             return CommandSelector.Run(args, command);
         }
