@@ -13,7 +13,7 @@ namespace Quest
             if (!ShouldCreateConfigFile(args))
                 return 0;
             if(!ConfigCreationDialog.GetUserConfirmation())                
-                return 0;            
+                return 1;            
             return CreateConfig();
         }
 

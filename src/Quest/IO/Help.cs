@@ -1,4 +1,4 @@
-﻿using Quest.Data;
+﻿using Quest.Data.Help;
 using static System.Console;
 
 namespace Quest.IO
@@ -11,6 +11,9 @@ namespace Quest.IO
             {
                 case HelpMessageTypes.Suggestion:
                     WriteLine(HelpMessages.HelpSuggestion);
+                    break;
+                case HelpMessageTypes.Do:
+                    WriteLine(HelpMessages.Do);
                     break;
                 default:
                     WriteLine(HelpMessages.CommandHelpMessage);

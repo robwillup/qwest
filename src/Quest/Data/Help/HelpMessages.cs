@@ -1,4 +1,4 @@
-﻿namespace Quest.Data
+﻿namespace Quest.Data.Help
 {
     static class HelpMessages
     {
@@ -24,6 +24,30 @@ Try using 'help' to see available commands.
 
 Example:
     quest help
+";
+
+        public static string Do { get; set; } = @"
+Adds a new task to the 'todo.md' file.
+
+Arguments:
+    --app
+        This is the name of the application the new task refers to. 
+        It is defined in the '.quest/config.yml' file.
+
+    --feature
+        This is the name of the feature the new task refers to.
+        It is defined in the '.quest/config.yml' file.
+
+Example:
+    quest do <TASK_TEXT> --app <APP_NAME> --feature <FEATURE_NAME>
+";
+
+        public static string Config { get; set; } = @"
+View and edit Quest settings
+
+Examples:
+    quest config list
+    quest config add --name my-app
 ";
     }
 }

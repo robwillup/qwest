@@ -1,6 +1,6 @@
 ﻿using static System.Console;
-using Quest.Data;
 using Quest.IO;
+using Quest.Data.Help;
 
 namespace Quest.Commands
 {
@@ -18,12 +18,9 @@ namespace Quest.Commands
                 if (args.Length == 2)
                 {
                     if (args[1] == "config")
-                    {
-                        WriteLine("View and edit Quest settings");
-                        WriteLine("Examples:");
-                        WriteLine("\tquest config list");
-                        WriteLine("\tquest config add --name my-app");
-                    }
+                        Help.WriteHelpMessage(HelpMessageTypes.Configuration);
+                    else if (args[1] == "do")
+                        Help.WriteHelpMessage(HelpMessageTypes.Do);
                 }
                 else
                 {
