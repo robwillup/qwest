@@ -21,6 +21,8 @@ namespace Quest.Commands
                         Help.WriteHelpMessage(HelpMessageTypes.Configuration);
                     else if (args[1] == "do")
                         Help.WriteHelpMessage(HelpMessageTypes.Do);
+                    else if (args[1] == "done")
+                        Help.WriteHelpMessage(HelpMessageTypes.Done);
                 }
                 else
                 {
