@@ -5,6 +5,7 @@
         Default,
         Suggestion,
         Do,
+        Done,
         Configuration
     }
 }

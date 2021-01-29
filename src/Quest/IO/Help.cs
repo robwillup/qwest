@@ -15,6 +15,9 @@ namespace Quest.IO
                 case HelpMessageTypes.Do:
                     WriteLine(HelpMessages.Do);
                     break;
+                case HelpMessageTypes.Done:
+                    WriteLine(HelpMessages.Done);
+                    break;
                 default:
                     WriteLine(HelpMessages.CommandHelpMessage);
                     break;
