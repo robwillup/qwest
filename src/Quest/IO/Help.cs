@@ -24,6 +24,9 @@ namespace Quest.IO
                 case HelpMessageTypes.Undo:
                     WriteLine(HelpMessages.Undo);
                     break;
+                case HelpMessageTypes.Dont:
+                    WriteLine(HelpMessages.Dont);
+                    break;
                 default:
                     WriteLine(HelpMessages.CommandHelpMessage);
                     break;
