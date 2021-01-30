@@ -43,7 +43,9 @@ Example:
 ";
 
         public static string Done { get; set; } = @"
-Moves a task from the 'todo.md' to the 'done.md' file.
+
+When used without a task string, this commands lists the content of the done.md file
+When used with a task string, this comment moves a task from the 'todo.md' to the 'done.md' file.
 
 Arguments:
     --app
@@ -55,7 +57,25 @@ Arguments:
         It is defined in the '.quest/config.yml' file.
 
 Example:
+    quest done --app <APP_NAME> --feature<FEATURE_NAME>
     quest done <UNIQUE_PART_OF_TASK_STRING> --app <APP_NAME> --feature <FEATURE_NAME>
+";
+
+        public static string Todo { get; set; } = @"
+
+This commands lists the content of the todo.md file
+
+Arguments:
+    --app
+        This is the name of the application the task refers to. 
+        It is defined in the '.quest/config.yml' file.
+
+    --feature
+        This is the name of the feature the task refers to.
+        It is defined in the '.quest/config.yml' file.
+
+Example:
+    quest todo --app <APP_NAME> --feature<FEATURE_NAME>
 ";
 
         public static string Config { get; set; } = @"

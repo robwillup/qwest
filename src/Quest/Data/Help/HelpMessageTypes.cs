@@ -6,6 +6,7 @@
         Suggestion,
         Do,
         Done,
+        Todo,
         Configuration
     }
 }

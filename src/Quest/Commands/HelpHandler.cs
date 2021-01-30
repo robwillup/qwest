@@ -27,17 +27,22 @@ namespace Quest.Commands
                 return HelpMessageTypes.Do;
             else if (args[1] == "done")
                 return HelpMessageTypes.Done;
+            else if (args[1] == "todo")
+                return HelpMessageTypes.Todo;
             return HelpMessageTypes.Default;
         }
 
         public static void SelectSubcommandHelp(string[] args)
         {
-            if (args[2] == "list")
-                WriteLine("Displays current configuration");
-            if (args[2] == "add")
-                WriteLine("Adds new configuration section");
-            if (args[2] == "rm")
-                WriteLine("Removes a configuration section");
+            if (args[1] == "config")
+            {
+                if (args[2] == "list")
+                    WriteLine("Displays current configuration");
+                if (args[2] == "add")
+                    WriteLine("Adds new configuration section");
+                if (args[2] == "rm")
+                    WriteLine("Removes a configuration section");
+            }
         }
     }
 }
