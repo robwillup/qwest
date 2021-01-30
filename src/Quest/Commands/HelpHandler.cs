@@ -29,6 +29,8 @@ namespace Quest.Commands
                 return HelpMessageTypes.Done;
             else if (args[1] == "todo")
                 return HelpMessageTypes.Todo;
+            else if (args[1] == "undo")
+                return HelpMessageTypes.Undo;
             return HelpMessageTypes.Default;
         }
 
