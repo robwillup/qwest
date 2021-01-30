@@ -78,6 +78,40 @@ Example:
     quest todo --app <APP_NAME> --feature<FEATURE_NAME>
 ";
 
+        public static string Undo { get; set; } = @"
+
+This commands moves a task from 'done.md' to 'todo.md'.
+
+Arguments:
+    --app
+        This is the name of the application the task refers to. 
+        It is defined in the '.quest/config.yml' file.
+
+    --feature
+        This is the name of the feature the task refers to.
+        It is defined in the '.quest/config.yml' file.
+
+Example:
+    quest undo <UNIQUE_PART_OF_TASK_STRING> --app <APP_NAME> --feature<FEATURE_NAME>
+";
+
+        public static string Dont { get; set; } = @"
+
+This commands deletes a task from the 'todo.md' file.
+
+Arguments:
+    --app
+        This is the name of the application the task refers to. 
+        It is defined in the '.quest/config.yml' file.
+
+    --feature
+        This is the name of the feature the task refers to.
+        It is defined in the '.quest/config.yml' file.
+
+Example:
+    quest undo <UNIQUE_PART_OF_TASK_STRING> --app <APP_NAME> --feature<FEATURE_NAME>
+";
+
         public static string Config { get; set; } = @"
 View and edit Quest settings
 

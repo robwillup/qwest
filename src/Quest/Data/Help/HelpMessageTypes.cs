@@ -7,6 +7,8 @@
         Do,
         Done,
         Todo,
+        Undo,
+        Dont,
         Configuration
     }
 }
