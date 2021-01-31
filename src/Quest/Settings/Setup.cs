@@ -18,29 +18,33 @@ namespace Quest
         }
 
         public static bool ShouldCreateConfigFile(string[] args)
-        {            
+        {
             if (args.Length > 0)
             {
                 if (args[0] == "version" || args[0] == "help")
                     return false;
             }
-            if (Directory.Exists(Path.GetDirectoryName(GetConfigPath())))
+            if (Directory.Exists(Path.GetDirectoryName(GetConfigPath()))) 
+                    return false;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("QUEST_PATH", EnvironmentVariableTarget.User)))
                 return false;
             return true;
         }
 
         private static int CreateConfig()
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(GetConfigPath()));
-            using (File.Create(GetConfigPath())) { };
-            YamlHandler.Create(GetConfigPath(), ConfigCreationDialog.GetUsername());
+            string path = GetConfigPath();
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            using (File.Create(path)) { };
+            YamlHandler.Create(path, ConfigCreationDialog.GetUsername());
             return 0;
         }
 
         public static string GetConfigPath()
         {
-            return Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
+            string path = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
+            return path;
         }
 
         public static Config GetConfig()
