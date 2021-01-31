@@ -1,6 +1,6 @@
 name: CI
 
-on:
+on:    
   push:
     branches: [ integration ]
     paths-ignore: 
@@ -20,59 +20,47 @@ on:
   workflow_dispatch:
 
 jobs:
-  Linux:
-    runs-on: ubuntu-latest
+  build:
+    name: Build
+    strategy:
+      matrix:
+        kind: ['linux', 'windows', 'macOS']
+        include:
+          - kind: linux
+            os: ubuntu-latest
+            target: linux-x64
+          - kind: windows
+            os: windows-latest
+            target: win-x64
+          - king: macOS
+            os: macos-latest
+            target: osx-x64
+    runs-on: ${{ matrix.os }}     
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.101
-    - name: Install dependencies
-      run: dotnet restore src/
-    - name: Build
-      run: dotnet build src/Quest/ --configuration Release --no-restore
-    - name: Test
-      run: dotnet test src/QuestTests
-    - name: Publish
-      run: dotnet publish src/Quest/ -o artifact -f net5.0 -r linux-x64 -c Release --self-contained
-    - name: Check artifact
-      run: ./artifact/Quest version
-
-  Windows:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.101
-    - name: Install dependencies
-      run: dotnet restore src\\Quest
-    - name: Build
-      run: dotnet build src\\Quest --configuration Release --no-restore
-    - name: Test
-      run: dotnet test src\\QuestTests
-    - name: Publish
-      run: dotnet publish src\\Quest -o artifact -f net5.0 -r win-x64 -c Release --self-contained
-    - name: Check artifact
-      run: artifact\\Quest.exe version
-
-  macOS:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.101
-    - name: Install dependencies
-      run: dotnet restore src\\Quest
-    - name: Build
-      run: dotnet build src\\Quest --configuration Release --no-restore
-    - name: Test
-      run: dotnet test src\\QuestTests
-    - name: Publish
-      run: dotnet publish src\\Quest -o artifact -f net5.0 -r osx-x64 -c Release --self-contained
-    - name: Check artifact
-      run: artifact/Quest version
+      - name: Checkout
+        uses: actions/checkout@v2
+                
+      - name: Setup .NET Core      
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.102
+          
+      - name: Install dependencies
+        run: dotnet restore src/
+        
+      - name: Build
+        run: dotnet build src/Quest/ --configuration Release --no-restore
+        
+      - name: Test
+        run: dotnet test src/QuestTests
+        
+      - name: Publish
+        run: dotnet publish src/Quest/ -o artifact -f net5.0 -r "${{ matrix.latest }}" -c Release --self-contained
+        
+      - name: Check artifact
+        run: |
+          if [ "${{ matrix.target }}" == "win-x64" ]; then
+            # Run in with PowerShell .\\
+            .\artifact\Quest.exe version
+          else
+            ./artifact/Quest version
