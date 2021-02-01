@@ -63,3 +63,4 @@ jobs:
             .\artifact\Quest.exe version
           else
             ./artifact/Quest version
+          fi
