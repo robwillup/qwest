@@ -55,7 +55,7 @@ jobs:
         run: dotnet test src/QuestTests
         
       - name: Publish
-        run: dotnet publish src/Quest/ -o artifact -f net5.0 -r "${{ matrix.latest }}" -c Release --self-contained
+        run: dotnet publish src/Quest/ -o artifact -f net5.0 -r "${{ matrix.target }}" -c Release --self-contained
         
       - name: Check artifact
         run: |
