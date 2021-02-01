@@ -59,8 +59,7 @@ jobs:
         
       - name: Check artifact
         run: |
-          if [ "${{ matrix.target }}" == "win-x64" ]; then
-            # Run in with PowerShell .\\
+          if [ ${{ matrix.target }} == win-x64 ]; then            
             .\artifact\Quest.exe version
           else
             ./artifact/Quest version
