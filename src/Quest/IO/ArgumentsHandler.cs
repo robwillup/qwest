@@ -8,10 +8,18 @@ namespace Quest
     {
         public static int Handle(string[] args)
         {
-            if (!AnyArgument(args))
-                return Help.WriteHelpMessage(HelpMessageTypes.Suggestion);            
-            string command = GetCommand(args);
-            return CommandSelector.Run(args, command);
+            try
+            {
+                if (!AnyArgument(args))
+                    return Help.WriteHelpMessage(HelpMessageTypes.Suggestion);
+                string command = GetCommand(args);
+                return CommandSelector.Run(args, command);
+            }
+            catch (System.Exception ex)
+            {
+                ErrorHandler.PrintMessage(ex.Message);
+                return 1;
+            }
         }
 
         public static bool AnyArgument(string[] args) => args.Length > 0;

@@ -19,15 +19,12 @@ namespace Quest
 
         public static bool ShouldCreateConfigFile(string[] args)
         {
-            if (args.Length > 0)
-            {
-                if (args[0] == "version" || args[0] == "help")
+            if (args.Length < 1)
+                return false;
+            if (args[0] == "version" || args[0] == "help")                
                     return false;
-            }
             if (Directory.Exists(Path.GetDirectoryName(GetConfigPath()))) 
                     return false;
-            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("QUEST_PATH", EnvironmentVariableTarget.User)))
-                return false;
             return true;
         }
 
