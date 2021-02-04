@@ -14,15 +14,14 @@ namespace Quest.Commands
             try
             {
                 Config config = Setup.GetConfig();
-                string appPath = config.Applications.FirstOrDefault(e => e.Name == todo.AppName).LocalPath;
-                Directory.CreateDirectory(Path.Combine(appPath, ".quest"));
-                string todoPath = Path.Combine(appPath, ".quest", todo.FeatureName, "todo.md");
+                string appQuestPath = Path.Combine(
+                    config.Applications.FirstOrDefault(e => e.Name == todo.AppName).LocalPath, ".quest");
+                FileHandler.CreateQuestDirInSourcePath(appQuestPath);
+                string featurePath = Path.Combine(appQuestPath, todo.FeatureName);
+                FileHandler.CreateFeatureDirInSourcePath(featurePath);
+                string todoPath = Path.Combine(featurePath, "todo.md");
                 string todoText = $"* {todo.Name} - ({todo.Id}) - Created at: {DateTime.Now}";
-                List<string> lines = new List<string>() { todoText };
-                string dir = Path.GetDirectoryName(todoPath);
-                Directory.CreateDirectory(dir);
-                WriteLine(dir);
-                WriteLine(todoPath);
+                List<string> lines = new List<string>() { todoText };                
                 File.AppendAllLines(todoPath, lines);
                 return 0;
             }
