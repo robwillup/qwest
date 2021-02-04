@@ -49,12 +49,24 @@ namespace Quest.Commands
                 if (string.IsNullOrWhiteSpace(args[doIndex]) || string.IsNullOrWhiteSpace(args[appIndex]) || string.IsNullOrWhiteSpace(args[featureIndex]))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
 
-                return new QuestTask()
+                QuestTask questTask = new QuestTask()
                 {
                     Name = args[doIndex],
                     AppName = args[appIndex],
                     FeatureName = args[featureIndex]
                 };
+
+                var conf = Setup.GetConfig();
+                bool? hasFeature = conf.Applications.FirstOrDefault(a => a.Name == questTask.AppName)
+                    .Features?.Any(f => f.Name == questTask.FeatureName);
+                if (hasFeature == null || hasFeature == false)
+                {
+                    conf.Applications.FirstOrDefault(a => a.Name == questTask.AppName)
+                        .Features = new List<Feature>() { new Feature() { Name = questTask.FeatureName } };
+                    YamlHandler.Update(Setup.GetConfigPath(), conf);
+                }               
+
+                return questTask;
             }
             catch (Exception)
             {                
