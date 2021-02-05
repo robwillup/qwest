@@ -19,7 +19,7 @@ namespace Quest.IO
                     WriteLine("\tFeatures:");
                     foreach (Feature feature in app.Features)
                     {
-                        WriteLine($"\t\tFeature name: {feature.Name}");
+                        WriteLine($"\t\tName: {feature.Name}");
                     }
                 }
                 WriteLine();
