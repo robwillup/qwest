@@ -30,6 +30,15 @@ namespace Quest.IO
                 case HelpMessageTypes.Configuration:
                     WriteLine(HelpMessages.Config);
                     break;
+                case HelpMessageTypes.ConfigAdd:
+                    WriteLine(HelpMessages.ConfigAdd);
+                    break;
+                case HelpMessageTypes.ConfigList:
+                    WriteLine(HelpMessages.ConfigList);
+                    break;
+                case HelpMessageTypes.ConfigRemove:
+                    WriteLine(HelpMessages.ConfigRemove);
+                    break;
                 default:
                     WriteLine(HelpMessages.CommandHelpMessage);
                     break;

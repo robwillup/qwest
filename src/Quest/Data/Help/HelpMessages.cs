@@ -119,5 +119,26 @@ Examples:
     quest config list
     quest config add --name my-app
 ";
+
+        public static string ConfigAdd { get; set; } = @"
+Adds new configuration section
+
+Examples:
+    quest config add --name my-app
+";
+
+        public static string ConfigList { get; set; } = @"
+Displays current configuration
+
+Examples:
+    quest config list
+";
+
+        public static string ConfigRemove { get; set; } = @"
+Removes a configuration section
+
+Examples:
+    quest config rm --app my-app
+";
     }
 }

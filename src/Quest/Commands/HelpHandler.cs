@@ -1,5 +1,4 @@
-﻿using static System.Console;
-using Quest.IO;
+﻿using Quest.IO;
 using Quest.Data.Help;
 
 namespace Quest.Commands
@@ -15,7 +14,7 @@ namespace Quest.Commands
                 if (args.Length == 2)
                     Help.WriteHelpMessage(SelectCommandHelp(args));
                 else
-                    SelectSubcommandHelp(args);
+                    Help.WriteHelpMessage(SelectSubcommandHelp(args));
             }             
         }
 
@@ -36,17 +35,18 @@ namespace Quest.Commands
             return HelpMessageTypes.Default;
         }
 
-        public static void SelectSubcommandHelp(string[] args)
+        public static HelpMessageTypes SelectSubcommandHelp(string[] args)
         {
             if (args[1] == "config")
             {
                 if (args[2] == "list")
-                    WriteLine("Displays current configuration");
+                    return HelpMessageTypes.ConfigList;                
                 if (args[2] == "add")
-                    WriteLine("Adds new configuration section");
+                    return HelpMessageTypes.ConfigAdd;                    
                 if (args[2] == "rm")
-                    WriteLine("Removes a configuration section");
+                    return HelpMessageTypes.ConfigRemove;
             }
+            return HelpMessageTypes.Default;
         }
     }
 }
