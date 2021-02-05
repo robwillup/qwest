@@ -1,7 +1,7 @@
-﻿using Quest.Models;
+﻿using Quest.IO;
+using Quest.Models;
 using System;
 using System.Linq;
-using static System.Console;
 
 namespace Quest.Commands
 {
@@ -36,24 +36,7 @@ namespace Quest.Commands
 
         public static int List()
         {
-            var config = Setup.GetConfig();
-            WriteLine($"Developer: {config.Dev.Username}");
-            WriteLine("Applications:");
-            foreach (App app in config.Applications)
-            {                
-                WriteLine($"\tApp name: {app.Name}");
-                WriteLine($"\tLocal path: {app.LocalPath}");
-                WriteLine($"\tRemote: {app.Remote}");
-                if (app.Features != null)
-                {
-                    WriteLine("\tFeatures:");
-                    foreach (Feature feature in app.Features)
-                    {                        
-                        WriteLine($"\t\tFeature name: {feature.Name}");                        
-                    }
-                }
-                WriteLine();
-            }
+            ConfigDisplayer.DisplayConfig(Setup.GetConfig());
             return 0;
         }
 

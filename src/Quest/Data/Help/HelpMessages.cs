@@ -124,7 +124,7 @@ Examples:
 Adds new configuration section
 
 Examples:
-    quest config add --name my-app
+    quest config add --name my-app --local-path home/ --remote https://github.com/username/my-app
 ";
 
         public static string ConfigList { get; set; } = @"
