@@ -1,5 +1,4 @@
 ﻿using System;
-using static System.Console;
 using System.IO;
 using System.Collections.Generic;
 using Quest.Models;
