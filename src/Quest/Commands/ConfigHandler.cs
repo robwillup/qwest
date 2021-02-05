@@ -78,10 +78,10 @@ namespace Quest.Commands
         public static int Delete(string[] args)
         {
             if (!ArgumentsHandler.HasFlag(args, "--name"))
-                return 1;
+                throw new ArgumentException("Missing required argument: '--name'");
             string name = args[ArgumentsHandler.GetIndexOfFlag(args, "--name") + 1];
-            var conf = Setup.GetConfig();
-            conf.Applications.Remove(conf.Applications.FirstOrDefault(e => e.Name == name));
+            var conf = Setup.GetConfig();            
+            conf.Applications.Remove(conf.Applications.FirstOrDefault(e => e.Name == name));            
             YamlHandler.Update(Setup.GetConfigPath(), conf);
             return 0;
         }
