@@ -9,6 +9,9 @@
         Todo,
         Undo,
         Dont,
-        Configuration
+        Configuration,
+        ConfigAdd,
+        ConfigList,
+        ConfigRemove
     }
 }

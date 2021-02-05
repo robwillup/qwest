@@ -14,15 +14,14 @@ namespace Quest.Commands
             try
             {
                 Config config = Setup.GetConfig();
-                string appPath = config.Applications.FirstOrDefault(e => e.Name == todo.AppName).LocalPath;
-                Directory.CreateDirectory(Path.Combine(appPath, ".quest"));
-                string todoPath = Path.Combine(appPath, ".quest", todo.FeatureName, "todo.md");
+                string appQuestPath = Path.Combine(
+                    config.Applications.FirstOrDefault(e => e.Name == todo.AppName).LocalPath, ".quest");
+                FileHandler.CreateQuestDirInSourcePath(appQuestPath);
+                string featurePath = Path.Combine(appQuestPath, todo.FeatureName);
+                FileHandler.CreateFeatureDirInSourcePath(featurePath);
+                string todoPath = Path.Combine(featurePath, "todo.md");
                 string todoText = $"* {todo.Name} - ({todo.Id}) - Created at: {DateTime.Now}";
-                List<string> lines = new List<string>() { todoText };
-                string dir = Path.GetDirectoryName(todoPath);
-                Directory.CreateDirectory(dir);
-                WriteLine(dir);
-                WriteLine(todoPath);
+                List<string> lines = new List<string>() { todoText };                
                 File.AppendAllLines(todoPath, lines);
                 return 0;
             }
@@ -50,12 +49,26 @@ namespace Quest.Commands
                 if (string.IsNullOrWhiteSpace(args[doIndex]) || string.IsNullOrWhiteSpace(args[appIndex]) || string.IsNullOrWhiteSpace(args[featureIndex]))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
 
-                return new QuestTask()
+                QuestTask questTask = new QuestTask()
                 {
                     Name = args[doIndex],
                     AppName = args[appIndex],
                     FeatureName = args[featureIndex]
                 };
+
+                var conf = Setup.GetConfig();
+                if (conf.Applications == null || conf.Applications.Count == 0)
+                    throw new Exception("Please, run 'quest help config' to learn how to create an application for Quest.");
+                bool? hasFeature = conf.Applications?.FirstOrDefault(a => a.Name == questTask.AppName)
+                    .Features?.Any(f => f.Name == questTask.FeatureName);
+                if (hasFeature == null || hasFeature == false)
+                {
+                    conf.Applications.FirstOrDefault(a => a.Name == questTask.AppName)
+                        .Features = new List<Feature>() { new Feature() { Name = questTask.FeatureName } };
+                    YamlHandler.Update(Setup.GetConfigPath(), conf);
+                }               
+
+                return questTask;
             }
             catch (Exception)
             {                

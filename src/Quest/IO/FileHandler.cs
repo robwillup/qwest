@@ -6,6 +6,21 @@ namespace Quest
 {
     public static class FileHandler
     {
+        public static int CreateQuestDirInSourcePath(string path)
+        {
+            if (Directory.Exists(path))
+                return 0;
+            Directory.CreateDirectory(path);
+            return 0;
+        }
+
+        public static int CreateFeatureDirInSourcePath(string path)
+        {
+            if (Directory.Exists(path))
+                return 0;
+            Directory.CreateDirectory(path);
+            return 0;
+        }
         public static async Task<int> CreateTodoFileAsync(string file = "")
         {   
             if (string.IsNullOrEmpty(file))

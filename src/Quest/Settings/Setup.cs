@@ -46,9 +46,16 @@ namespace Quest
 
         public static Config GetConfig()
         {
-            string content = File.ReadAllText(GetConfigPath());
-            Deserializer deserializer = new Deserializer();
-            return deserializer.Deserialize<Config>(content);
+            try
+            {
+                string content = File.ReadAllText(GetConfigPath());
+                Deserializer deserializer = new Deserializer();
+                return deserializer.Deserialize<Config>(content);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
