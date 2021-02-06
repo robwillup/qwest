@@ -58,6 +58,9 @@ namespace Quest.Commands
                 var conf = Setup.GetConfig();
                 if (conf.Applications == null || conf.Applications.Count == 0)
                     throw new Exception("Please, run 'quest help config add' to learn how to create an application for Quest.");
+                if (!conf.Applications.Any(a => a.Name == questTask.AppName))
+                    throw new ArgumentException($"App '{questTask.AppName}' not found.\n Please, run 'quest help config add' to learn how to add a new app.");
+
                 bool? hasFeature = conf.Applications?.FirstOrDefault(a => a.Name == questTask.AppName)
                     .Features?.Any(f => f.Name == questTask.FeatureName);
                 if (hasFeature == null || hasFeature == false)

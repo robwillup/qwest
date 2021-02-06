@@ -10,11 +10,17 @@ namespace Quest.Commands
     {
         public static int List(App app)
         {
-            string path = Path.Combine(app.LocalPath, ".quest");            
-            if (app.Features != null && app.Features.Count() > 0)
-                path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
-            
-            string[] files = Directory.GetFiles(path, "todo.md", SearchOption.AllDirectories);            
+            List<string> files = new List<string>();
+            if (app == null)
+                files = GetAllToDos();
+            else
+            {
+                string path = Path.Combine(app.LocalPath, ".quest");
+                if (app.Features != null && app.Features.Count() > 0)
+                    path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
+
+                files = Directory.GetFiles(path, "todo.md", SearchOption.AllDirectories).ToList();
+            }
             foreach (string file in files)
             {
                 List<string> content = File.ReadAllLines(file).ToList();
@@ -32,16 +38,15 @@ namespace Quest.Commands
         {
             try
             {
-                if (args.Length < 3)
-                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-                if (!ArgumentsHandler.HasFlag(args, "--app"))
-                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-                if (ArgumentsHandler.HasFlag(args, "--feature") && !ArgumentsHandler.HasFlag(args, "--app"))
-                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-
-                int appIndex = ArgumentsHandler.GetIndexOfFlag(args, "--app") + 1;
-
+                int appIndex = 0;
                 int featureIndex = 0;
+
+                if (args.Length == 1)
+                    return null;
+                if (ArgumentsHandler.HasFlag(args, "--app"))
+                    appIndex = ArgumentsHandler.GetIndexOfFlag(args, "--app") + 1;
+                if (ArgumentsHandler.HasFlag(args, "--feature") && !ArgumentsHandler.HasFlag(args, "--app"))
+                    throw new ArgumentException("When using '--feature', the '--app' flag is required. \n Run 'quest help [command]' for more information.");                
                 if (ArgumentsHandler.HasFlag(args, "--feature"))
                    featureIndex = ArgumentsHandler.GetIndexOfFlag(args, "--feature") + 1;
 
@@ -80,6 +85,22 @@ namespace Quest.Commands
             {
                 throw;
             }
+        }
+
+        private static List<string> GetAllToDos()
+        {
+            Config config = Setup.GetConfig();
+            if (config.Applications == null || config.Applications.Count == 0)
+                return null;
+            List<string> files = new List<string>();
+            List<App> allApps = config.Applications;
+            foreach (App app in allApps)
+            {
+                var todoFiles = Directory.GetFiles(Path.Combine(app.LocalPath, ".quest"), "todo.md", SearchOption.AllDirectories);
+                foreach (string file in todoFiles)
+                    files.Add(file);
+            }
+            return files;
         }
     }
 }
