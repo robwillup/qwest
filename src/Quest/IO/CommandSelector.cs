@@ -10,7 +10,7 @@ namespace Quest
             try
             {
                 if (command == "do")
-                    return DoHandler.Add(DoHandler.Handle(args));
+                    return DoHandler.Handle(args);
                 else if (command == "done")
                     DoneHandler.HandleDone(args);
                 else if (command == "todo")

@@ -68,6 +68,22 @@ namespace Quest
             };
 
             Config conf = Setup.GetConfig();
+
+            if (conf.Applications == null || conf.Applications.Count == 0)
+                throw new Exception("Please, run 'quest help config add' to learn how to create an application for Quest.");
+            if (!conf.Applications.Any(a => a.Name == app.Name))
+                throw new ArgumentException($"App '{app.Name}' not found.\n Please, run 'quest help config add' to learn how to add a new app.");
+
+            bool? hasFeature = conf.Applications?.FirstOrDefault(a => a.Name == app.Name)
+                                    .Features?.Any(f => f.Name == app.Features.First().Name);
+
+            if (hasFeature == null || hasFeature == false)
+            {
+                conf.Applications.FirstOrDefault(a => a.Name == app.Name)
+                    .Features = new List<Feature>() { new Feature() { Name = app.Features.First().Name } };
+                YamlHandler.Update(Setup.GetConfigPath(), conf);
+            }
+
             app.LocalPath = conf.Applications.FirstOrDefault(a => a.Name == app.Name).LocalPath;
             return app;
         }
