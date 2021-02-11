@@ -50,7 +50,7 @@ $ quest todo
 ### Complete a task:
 
 ```bassh
-$ quest done 2b2f
+$ quest done 2b2f --app my-app --feature my-feature
 ```
 
 ### List completed tasks:
@@ -63,13 +63,13 @@ $ quest done
 ### Move a completed task back to active
 
 ```bash
-$ quest undo 2b2f
+$ quest undo 2b2f --app my-app --feature my-feature
 ```
 
 ### Delete an active task:
 
 ```bash
-$ quest dont 2b2f
+$ quest dont 2b2f --app my-app --feature my-feature
 ```
 
 ### View settings
