@@ -16,9 +16,9 @@ namespace Quest
                 else if (command == "todo")
                     return ToDoHandler.List(ToDoHandler.Handle(args));                    
                 else if (command == "undo")
-                    return UndoHandler.Undo(args);
+                    return UndoHandler.Handle(args);
                 else if (command == "dont")
-                    return DontHandler.Remove(args);
+                    return DontHandler.HandleDont(args);
                 else if (command == "version")
                     Console.WriteLine("1.0.0");
                 else if (command == "help")
