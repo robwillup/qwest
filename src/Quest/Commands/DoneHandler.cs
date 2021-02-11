@@ -12,8 +12,8 @@ namespace Quest.Commands
         {
             if (args.Length == 6)
             {
-                string doneText = GetDoneTextFromCommandLineArguments(args);
-                App app = GetAppFromCommandLineArguments(args);
+                string doneText = ArgumentsHandler.GetTaskTextFromCommandLineArguments(args, "done");
+                App app = ArgumentsHandler.GetAppFromCommandLineArguments(args);
                 return Complete(doneText, app);
             }
             else
@@ -33,40 +33,6 @@ namespace Quest.Commands
             File.WriteAllLines(todoPath, lines);
             File.AppendAllText(donePath, $"{line} - Completed at: {DateTime.Now}\n");
             return 0;
-        }
-
-        public static App GetAppFromCommandLineArguments(string[] args)
-        {            
-            if (!ArgumentsHandler.HasFlag(args, "--app") || !ArgumentsHandler.HasFlag(args, "--feature"))
-                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-                        
-            int appIndex = ArgumentsHandler.GetIndexOfFlag(args, "--app") + 1;
-            int featureIndex = ArgumentsHandler.GetIndexOfFlag(args, "--feature") + 1;
-
-            if (string.IsNullOrEmpty(args[appIndex]) || string.IsNullOrEmpty(args[featureIndex]))
-                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-            if (string.IsNullOrWhiteSpace(args[appIndex]) || string.IsNullOrWhiteSpace(args[featureIndex]))
-                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-
-            App app = new App()
-            {
-                Name = args[appIndex],
-                Features = new List<Feature>() { new Feature() { Name = args[featureIndex] } }
-            };
-
-            Config conf = Setup.GetConfig();
-            app.LocalPath = conf.Applications.FirstOrDefault(a => a.Name == app.Name).LocalPath;
-            return app;
-        }
-
-        public static string GetDoneTextFromCommandLineArguments(string[] args)
-        {
-            int doneIndex = ArgumentsHandler.GetIndexOfFlag(args, "done") + 1;
-            if (string.IsNullOrEmpty(args[doneIndex]))
-                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-            if (string.IsNullOrWhiteSpace(args[doneIndex]))
-                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-            return args[doneIndex];
         }
 
         public static int ListDone(App app)
