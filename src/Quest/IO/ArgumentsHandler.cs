@@ -20,7 +20,7 @@ namespace Quest
             }
             catch (System.Exception ex)
             {
-                ErrorHandler.PrintMessage(ex.ToString());
+                ErrorHandler.PrintMessage(ex.Message);
                 return 1;
             }
         }
