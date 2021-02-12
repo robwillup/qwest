@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using Quest.Models;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,16 +23,23 @@ namespace Quest
             Directory.CreateDirectory(path);
             return 0;
         }
-        public static async Task<int> CreateTodoFileAsync(string file = "")
-        {   
-            if (string.IsNullOrEmpty(file))
-                file = Path.Combine(Directory.GetCurrentDirectory(), "todo.md");
-            if (!File.Exists(file))
+
+        public static async Task<string> CreateQuestFilesAsync(App app, bool doneFile = false)
+        {
+            string file = "todo.md";
+            string content = "# To Dos\n\n";
+            if (doneFile) 
+            {
+                file = "done.md";
+                content = "# Completed\n\n";
+            }            
+            string filePath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, file);
+            if (!File.Exists(filePath))
             {                
-                using TextReader reader = new StreamReader(CreateContentStream("# To Dos\n\n"));
-                await File.WriteAllTextAsync(file, reader.ReadToEnd());
+                using TextReader reader = new StreamReader(CreateContentStream(content));
+                await File.WriteAllTextAsync(filePath, reader.ReadToEnd());
             }
-            return 0;
+            return filePath;
         }
 
         public static Stream CreateContentStream(string content)

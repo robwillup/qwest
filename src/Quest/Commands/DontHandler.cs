@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Quest.Commands
 {
     public static class DontHandler
     {
-        public static bool Handle(string[] args)
+        public static async Task<bool> HandleAsync(string[] args)
         {
             try
             {
@@ -19,8 +20,7 @@ namespace Quest.Commands
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
                 string dontText = args[dontTextIndex];                
                 App app = AppParser.GetAppFromCommandLineArguments(args);
-                string todoPath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, "todo.md");
-                return Remove(dontText, todoPath);
+                return Remove(dontText, await FileHandler.CreateQuestFilesAsync(app));
             }
             catch (Exception)
             {
