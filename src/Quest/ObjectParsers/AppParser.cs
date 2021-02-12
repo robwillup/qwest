@@ -35,8 +35,8 @@ namespace Quest.ObjectParsers
 
         public static App GetAppFromCommandLineArguments(string[] args)
         {
-            int appI = CommandLineArguments.GetIndexOfFlag(args, "--app") + 1;
-            int featI = CommandLineArguments.GetIndexOfFlag(args, "--feature") + 1;
+            int appI = CommandLineArguments.GetIndexOfFlag(args, CommandLineArguments.GetAliasOrArgument(args, "--app", "-a")) + 1;
+            int featI = CommandLineArguments.GetIndexOfFlag(args, CommandLineArguments.GetAliasOrArgument(args, "--feature", "-f")) + 1;
 
             if (!CommandLineArguments.IsArgumentValid(args, appI, featI))
                 throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
