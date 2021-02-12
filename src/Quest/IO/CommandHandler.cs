@@ -5,18 +5,18 @@ namespace Quest
 {
     public static class CommandHandler
     {
-        public static int Run(string[] args, string command)
+        public static bool Run(string[] args, string command)
         {
             try
             {
                 if (command == "do")
-                    return DoHandler.Handle(args);
+                    return DoHandler.Handle(args) == 0;
                 else if (command == "done")
                     DoneHandler.Handle(args);
                 else if (command == "todo")
-                    return ToDoHandler.List(ToDoHandler.Handle(args));                    
+                    return ToDoHandler.List(ToDoHandler.Handle(args)) == 0;
                 else if (command == "undo")
-                    return UndoHandler.Handle(args);
+                    return UndoHandler.Handle(args) == 0;
                 else if (command == "dont")
                     return DontHandler.Handle(args);
                 else if (command == "version")
@@ -27,7 +27,7 @@ namespace Quest
                     ConfigHandler.Handle(args);
                 else
                     Console.WriteLine($"Command \"{args[0]}\" is undefined.");
-                return 0;
+                return true;
             }
             catch (Exception)
             {
