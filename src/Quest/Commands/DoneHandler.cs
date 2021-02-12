@@ -5,23 +5,23 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Quest.Commands
 {
     public static class DoneHandler
     {
-        public static bool Handle(string[] args)
+        public static async Task<bool> HandleAsync(string[] args)
         {
             if (args.Length == 1)
                 return ListDone(HandleListDone(args));
-
             int doneTextIndex = CommandLineArguments.GetIndexOfFlag(args, "done") + 1;
             if (!CommandLineArguments.IsArgumentValid(args, doneTextIndex))
                 throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
             string doneText = args[doneTextIndex];
             App app = AppParser.GetAppFromCommandLineArguments(args);
-            string donePath = FileHandler.CreateDoneFile(app);
-            string todoPath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, "todo.md");
+            string donePath = await FileHandler.CreateQuestFilesAsync(app, doneFile: true);
+            string todoPath = await FileHandler.CreateQuestFilesAsync(app);
             return Complete(doneText, donePath, todoPath);
         }
 

@@ -10,7 +10,7 @@ namespace QuestTests.IOTests
         {
             string[] args = { "version" };
             string command = "version";
-            int actual = CommandHandler.Run(args, command);
+            int actual = CommandHandler.RunAsync(args, command);
             Assert.Equal(0, actual);
         }
     }

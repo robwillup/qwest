@@ -1,24 +1,25 @@
 ﻿using Quest.Commands;
 using System;
+using System.Threading.Tasks;
 
 namespace Quest
 {
     public static class CommandHandler
     {
-        public static bool Run(string[] args, string command)
+        public static async Task<bool> RunAsync(string[] args, string command)
         {
             try
             {
                 if (command == "do")
-                    return DoHandler.Handle(args) == 0;
+                    return await DoHandler.HandleAsync(args);
                 else if (command == "done")
-                    return DoneHandler.Handle(args);
+                    return await DoneHandler.HandleAsync(args);
                 else if (command == "todo")
                     return ToDoHandler.List(ToDoHandler.Handle(args)) == 0;
                 else if (command == "undo")
                     return UndoHandler.Handle(args);
                 else if (command == "dont")
-                    return DontHandler.HandleAsync(args);
+                    return await DontHandler.HandleAsync(args);
                 else if (command == "version")
                     Console.WriteLine("1.0.0");
                 else if (command == "help")
