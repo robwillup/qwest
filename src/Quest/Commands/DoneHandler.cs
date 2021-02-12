@@ -5,42 +5,37 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Quest.Commands
 {
     public static class DoneHandler
     {
-        public static int HandleDone(string[] args)
+        public static async Task<bool> HandleAsync(string[] args)
         {
-            if (args.Length == 6)
-            {
-                int doneTextIndex = CommandLineArguments.GetIndexOfFlag(args, "done") + 1;
-                if (!CommandLineArguments.IsArgumentValid(args, doneTextIndex))
-                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-                string doneText = args[doneTextIndex];                
-                App app = AppParser.GetAppFromCommandLineArguments(args);
-                return Complete(doneText, app);
-            }
-            else
-                ListDone(HandleListDone(args));
-            return 0;
+            if (args.Length == 1)
+                return ListDone(HandleListDone(args));
+            int doneTextIndex = CommandLineArguments.GetIndexOfFlag(args, "done") + 1;
+            if (!CommandLineArguments.IsArgumentValid(args, doneTextIndex))
+                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+            string doneText = args[doneTextIndex];
+            App app = AppParser.GetAppFromCommandLineArguments(args);
+            string donePath = await FileHandler.CreateQuestFilesAsync(app, doneFile: true);
+            string todoPath = await FileHandler.CreateQuestFilesAsync(app);
+            return Complete(doneText, donePath, todoPath);
         }
 
-        public static int Complete(string todoText, App app)
-        {
-            string donePath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, "done.md");
-            if (!File.Exists(donePath))
-                using (File.Create(donePath)) { };
-            string todoPath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, "todo.md");
+        public static bool Complete(string todoText, string donePath, string todoPath)
+        {            
             List<string> lines = File.ReadAllLines(todoPath).ToList();
             string line = lines.Find(t => t.Contains(todoText));
             lines.Remove(line);
             File.WriteAllLines(todoPath, lines);
             File.AppendAllText(donePath, $"{line} - Completed at: {DateTime.Now}\n");
-            return 0;
+            return true;
         }
 
-        public static int ListDone(App app)
+        public static bool ListDone(App app)
         {
             List<string> files = new List<string>();
             if (app == null)
@@ -63,7 +58,7 @@ namespace Quest.Commands
                     Console.WriteLine(line);
             }
 
-            return 0;
+            return true;
         }
 
         public static App HandleListDone(string[] args)

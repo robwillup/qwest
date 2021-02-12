@@ -25,6 +25,15 @@ namespace Quest.IO
                     return false;
             }
             return true;
-        }        
+        }
+        
+        public static string GetAliasOrArgument(string[] args, string arg, string alias)
+        {
+            if (args.Contains(arg))
+                return arg;
+            if (args.Contains(alias))
+                return alias;
+            throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+        }
     }
 }

@@ -2,15 +2,15 @@
 using System.IO;
 using System.Collections.Generic;
 using Quest.Models;
-using System.Linq;
 using Quest.IO;
 using Quest.ObjectParsers;
+using System.Threading.Tasks;
 
 namespace Quest.Commands
 {
     public static class DoHandler
     {
-        public static int Handle(string[] args)
+        public static async Task<bool> HandleAsync(string[] args)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace Quest.Commands
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
                 string doText = args[doTextIndex];
                 App app = AppParser.GetAppFromCommandLineArguments(args);
-                return Add(doText, app);
+                return Add(doText, await FileHandler.CreateQuestFilesAsync(app));
             }
             catch (Exception)
             {                
@@ -27,17 +27,14 @@ namespace Quest.Commands
             }
         }
 
-        public static int Add(string doText, App app)
+        public static bool Add(string doText, string todoPath)
         {
             try
             {
-                Config config = Setup.GetConfig();
-                string todoDirPath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name);                                                                
                 string todoText = $"* {doText} - ({Guid.NewGuid()}) - Created at: {DateTime.Now}";
-                List<string> lines = new List<string>() { todoText };
-                DirectoryInfo dir = Directory.CreateDirectory(todoDirPath);                                
-                File.AppendAllLines(Path.Combine(todoDirPath, "todo.md"), lines);
-                return 0;
+                List<string> lines = new List<string>() { todoText };                
+                File.AppendAllLines(todoPath, lines);
+                return true;
             }
             catch (Exception)
             {
