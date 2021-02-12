@@ -12,13 +12,13 @@ namespace Quest
                 if (command == "do")
                     return DoHandler.Handle(args);
                 else if (command == "done")
-                    DoneHandler.HandleDone(args);
+                    DoneHandler.Handle(args);
                 else if (command == "todo")
                     return ToDoHandler.List(ToDoHandler.Handle(args));                    
                 else if (command == "undo")
                     return UndoHandler.Handle(args);
                 else if (command == "dont")
-                    return DontHandler.HandleDont(args);
+                    return DontHandler.Handle(args);
                 else if (command == "version")
                     Console.WriteLine("1.0.0");
                 else if (command == "help")

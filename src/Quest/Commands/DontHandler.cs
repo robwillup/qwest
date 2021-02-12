@@ -11,7 +11,7 @@ namespace Quest.Commands
 {
     public static class DontHandler
     {
-        public static int HandleDont(string[] args)
+        public static int Handle(string[] args)
         {
             try
             {

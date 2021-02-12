@@ -10,7 +10,7 @@ namespace Quest.Commands
 {
     public static class DoneHandler
     {
-        public static int HandleDone(string[] args)
+        public static int Handle(string[] args)
         {
             if (args.Length == 6)
             {
