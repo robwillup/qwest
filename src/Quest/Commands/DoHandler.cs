@@ -3,6 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using Quest.Models;
 using System.Linq;
+using Quest.IO;
+using Quest.ObjectParsers;
 
 namespace Quest.Commands
 {
@@ -12,8 +14,11 @@ namespace Quest.Commands
         {
             try
             {
-                string doText = ArgumentsHandler.GetTaskTextFromCommandLineArguments(args, "do");
-                App app = ArgumentsHandler.GetAppFromCommandLineArguments(args);
+                int doTextIndex = CommandLineArguments.GetIndexOfFlag(args, "do") + 1;
+                if (CommandLineArguments.IsArgumentValid(args, doTextIndex))
+                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+                string doText = args[doTextIndex];
+                App app = AppParser.GetAppFromCommandLineArguments(args);
                 return Add(doText, app);
             }
             catch (Exception)

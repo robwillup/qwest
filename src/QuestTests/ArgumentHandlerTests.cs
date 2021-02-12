@@ -8,14 +8,14 @@ namespace QuestTests
         [Fact]
         public void TestAnyArgument_PassIfReturnsTrue()
         {            
-            bool actual = ArgumentsHandler.AnyArgument(new string[1] { "one" });
+            bool actual = CommandLineHandler.AnyArgument(new string[1] { "one" });
             Assert.True(actual);
         }
 
         [Fact]
         public void TestAnyArgument_PassIfReturnsFalse()
         {
-            bool actual = ArgumentsHandler.AnyArgument(new string[0]);
+            bool actual = CommandLineHandler.AnyArgument(new string[0]);
             Assert.False(actual);
         }
 
@@ -24,7 +24,7 @@ namespace QuestTests
         {
             string[] args = new string[3] { "do", "todo", "done" };
             string expected = "do";
-            string actual = ArgumentsHandler.GetCommand(args);
+            string actual = CommandLineHandler.GetCommand(args);
             Assert.Equal(expected, actual);
         }
 
@@ -33,7 +33,7 @@ namespace QuestTests
         {
             string flag = "--test";
             string[] args = new string[3] { "do", "this", "--test" };
-            bool result = ArgumentsHandler.HasFlag(args, flag);
+            bool result = CommandLineHandler.HasFlag(args, flag);
             Assert.True(result);
         }
 
@@ -42,7 +42,7 @@ namespace QuestTests
         {
             string flag = "--feat";
             string[] args = new string[3] { "do", "this", "--test" };
-            bool result = ArgumentsHandler.HasFlag(args, flag);
+            bool result = CommandLineHandler.HasFlag(args, flag);
             Assert.False(result);
         }
 
@@ -52,7 +52,7 @@ namespace QuestTests
             int expected = 2;
             string flag = "--feat";
             string[] args = new string[3] { "do", "this", "--feat" };
-            int index = ArgumentsHandler.GetIndexOfFlag(args, flag);
+            int index = CommandLineHandler.GetIndexOfFlag(args, flag);
             Assert.Equal(expected, index);
         }
     }

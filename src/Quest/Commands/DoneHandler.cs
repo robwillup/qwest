@@ -1,4 +1,6 @@
-﻿using Quest.Models;
+﻿using Quest.IO;
+using Quest.Models;
+using Quest.ObjectParsers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,8 +14,11 @@ namespace Quest.Commands
         {
             if (args.Length == 6)
             {
-                string doneText = ArgumentsHandler.GetTaskTextFromCommandLineArguments(args, "done");
-                App app = ArgumentsHandler.GetAppFromCommandLineArguments(args);
+                int doneTextIndex = CommandLineArguments.GetIndexOfFlag(args, "done") + 1;
+                if (CommandLineArguments.IsArgumentValid(args, doneTextIndex))
+                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+                string doneText = args[doneTextIndex];                
+                App app = AppParser.GetAppFromCommandLineArguments(args);
                 return Complete(doneText, app);
             }
             else
@@ -70,16 +75,16 @@ namespace Quest.Commands
 
                 if (args.Length == 1)
                     return null;
-                if (ArgumentsHandler.HasFlag(args, "--app"))
-                    appIndex = ArgumentsHandler.GetIndexOfFlag(args, "--app") + 1;
-                if (ArgumentsHandler.HasFlag(args, "--feature") && !ArgumentsHandler.HasFlag(args, "--app"))
+                if (CommandLineArguments.HasFlag(args, "--app"))
+                    appIndex = CommandLineArguments.GetIndexOfFlag(args, "--app") + 1;
+                if (CommandLineArguments.HasFlag(args, "--feature") && !CommandLineArguments.HasFlag(args, "--app"))
                     throw new ArgumentException("When using '--feature', the '--app' flag is required. \n Run 'quest help [command]' for more information.");
-                if (ArgumentsHandler.HasFlag(args, "--feature"))
-                    featureIndex = ArgumentsHandler.GetIndexOfFlag(args, "--feature") + 1;
+                if (CommandLineArguments.HasFlag(args, "--feature"))
+                    featureIndex = CommandLineArguments.GetIndexOfFlag(args, "--feature") + 1;
 
                 if (string.IsNullOrEmpty(args[appIndex]) || string.IsNullOrWhiteSpace(args[appIndex]))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-                else if (ArgumentsHandler.HasFlag(args, "--feature") && string.IsNullOrWhiteSpace(args[featureIndex]) || string.IsNullOrEmpty(args[featureIndex]))
+                else if (CommandLineArguments.HasFlag(args, "--feature") && string.IsNullOrWhiteSpace(args[featureIndex]) || string.IsNullOrEmpty(args[featureIndex]))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
 
                 var conf = Setup.GetConfig();
