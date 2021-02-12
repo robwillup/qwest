@@ -34,6 +34,9 @@ namespace Quest
                 content = "# Completed\n\n";
             }            
             string filePath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, file);
+            DirectoryInfo dir = Directory.GetParent(filePath);
+            if (!dir.Exists)
+                dir.Create();
             if (!File.Exists(filePath))
             {                
                 using TextReader reader = new StreamReader(CreateContentStream(content));
