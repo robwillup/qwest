@@ -15,7 +15,7 @@ namespace Quest.Commands
             try
             {
                 int doTextIndex = CommandLineArguments.GetIndexOfFlag(args, "do") + 1;
-                if (CommandLineArguments.IsArgumentValid(args, doTextIndex))
+                if (!CommandLineArguments.IsArgumentValid(args, doTextIndex))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
                 string doText = args[doTextIndex];
                 App app = AppParser.GetAppFromCommandLineArguments(args);

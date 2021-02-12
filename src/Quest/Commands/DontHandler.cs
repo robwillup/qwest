@@ -16,7 +16,7 @@ namespace Quest.Commands
             try
             {
                 int dontTextIndex = CommandLineArguments.GetIndexOfFlag(args, "dont") + 1;
-                if (CommandLineArguments.IsArgumentValid(args, dontTextIndex))
+                if (!CommandLineArguments.IsArgumentValid(args, dontTextIndex))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
                 string dontText = args[dontTextIndex];                
                 App app = AppParser.GetAppFromCommandLineArguments(args);

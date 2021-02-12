@@ -13,7 +13,7 @@ namespace Quest.Commands
         public static int Handle(string[] args)
         {
             int undoTextIndex = CommandLineArguments.GetIndexOfFlag(args, "undo") + 1;
-            if (CommandLineArguments.IsArgumentValid(args, undoTextIndex))
+            if (!CommandLineArguments.IsArgumentValid(args, undoTextIndex))
                 throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
             string undoText = args[undoTextIndex];
             App app = AppParser.GetAppFromCommandLineArguments(args);

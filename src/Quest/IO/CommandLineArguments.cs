@@ -16,7 +16,7 @@ namespace Quest.IO
         }
 
         public static bool IsArgumentValid(string[] args, params int[] argumentIndexes)
-        {
+        {            
             foreach (int index in argumentIndexes)
             {
                 if (string.IsNullOrEmpty(args[index]))
