@@ -1,4 +1,7 @@
-﻿using Quest.Models;
+﻿using Quest.IO;
+using Quest.Models;
+using Quest.ObjectParsers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,8 +12,11 @@ namespace Quest.Commands
     {
         public static int Handle(string[] args)
         {
-            string undoText = ArgumentsHandler.GetTaskTextFromCommandLineArguments(args, "undo");
-            App app = ArgumentsHandler.GetAppFromCommandLineArguments(args);
+            int undoTextIndex = CommandLineArguments.GetIndexOfFlag(args, "undo") + 1;
+            if (!CommandLineArguments.IsArgumentValid(args, undoTextIndex))
+                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+            string undoText = args[undoTextIndex];
+            App app = AppParser.GetAppFromCommandLineArguments(args);
             return Undo(undoText, app);
         }
         public static int Undo(string undoText, App app) 

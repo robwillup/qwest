@@ -1,4 +1,6 @@
-﻿using Quest.Models;
+﻿using Quest.IO;
+using Quest.Models;
+using Quest.ObjectParsers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,8 +15,11 @@ namespace Quest.Commands
         {
             try
             {
-                string dontText = ArgumentsHandler.GetTaskTextFromCommandLineArguments(args, "dont");
-                App app = ArgumentsHandler.GetAppFromCommandLineArguments(args);
+                int dontTextIndex = CommandLineArguments.GetIndexOfFlag(args, "dont") + 1;
+                if (!CommandLineArguments.IsArgumentValid(args, dontTextIndex))
+                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+                string dontText = args[dontTextIndex];                
+                App app = AppParser.GetAppFromCommandLineArguments(args);
                 return Remove(dontText, app);
             }
             catch (Exception)

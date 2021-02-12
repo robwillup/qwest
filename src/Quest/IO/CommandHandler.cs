@@ -3,7 +3,7 @@ using System;
 
 namespace Quest
 {
-    public static class CommandSelector
+    public static class CommandHandler
     {
         public static int Run(string[] args, string command)
         {
