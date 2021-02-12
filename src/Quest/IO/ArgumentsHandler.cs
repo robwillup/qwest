@@ -18,7 +18,7 @@ namespace Quest
                 string command = GetCommand(args);
                 return CommandSelector.Run(args, command);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 ErrorHandler.PrintMessage(ex.Message);
                 return 1;
@@ -36,6 +36,7 @@ namespace Quest
             }           
             return false;
         }
+
         public static int GetIndexOfFlag(string[] args, string flag) => args.ToList().IndexOf(flag);
 
         public static string GetTaskTextFromCommandLineArguments(string[] args, string command)
