@@ -1,5 +1,6 @@
 using Quest.IO;
 using Quest.Models;
+using Quest.ObjectParsers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,48 +40,10 @@ namespace Quest.Commands
         {
             try
             {
-                int appIndex = 0;
-                int featureIndex = 0;
-
                 if (args.Length == 1)
                     return null;
-                if (CommandLineArguments.HasFlag(args, "--app"))
-                    appIndex = CommandLineArguments.GetIndexOfFlag(args, "--app") + 1;
-                if (CommandLineArguments.HasFlag(args, "--feature") && !CommandLineArguments.HasFlag(args, "--app"))
-                    throw new ArgumentException("When using '--feature', the '--app' flag is required. \n Run 'quest help [command]' for more information.");                
-                if (CommandLineArguments.HasFlag(args, "--feature"))
-                   featureIndex = CommandLineArguments.GetIndexOfFlag(args, "--feature") + 1;
 
-                if (string.IsNullOrEmpty(args[appIndex]) || string.IsNullOrWhiteSpace(args[appIndex]))
-                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-                else if (CommandLineArguments.HasFlag(args, "--feature") && string.IsNullOrWhiteSpace(args[featureIndex]) || string.IsNullOrEmpty(args[featureIndex]))
-                    throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
-
-                var conf = Setup.GetConfig();
-                if (conf.Applications == null || conf.Applications.Count == 0)
-                    throw new Exception("Could not find any applications to list tasks. Please, run 'quest config list' to learn how to create an application for Quest.");
-
-                App app = new App()
-                {
-                    Name = args[appIndex],
-                    LocalPath = conf.Applications.FirstOrDefault(a => a.Name == args[appIndex]).LocalPath
-                };
-
-                if (featureIndex != 0)
-                {
-                    bool? hasFeature = conf.Applications?.FirstOrDefault(a => a.Name == args[appIndex])
-                                           .Features?.Any(f => f.Name == args[featureIndex]);
-
-                    if (hasFeature == null || hasFeature == false)
-                    {
-                        Console.WriteLine(@$"Feature ""{args[featureIndex]}"" was not found in application ""{args[appIndex]}""");
-                        Console.WriteLine("Getting all features...");                        
-                        return app;
-                    }
-                    app.Features = new List<Feature>() { new Feature() { Name = args[featureIndex] } };
-                    return app;
-                }
-                return app;
+                return AppParser.GetAppFromCommandLineArguments(args);                                                
             }
             catch (Exception)
             {
