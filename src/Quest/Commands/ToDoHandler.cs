@@ -10,7 +10,7 @@ namespace Quest.Commands
 {
     public static class ToDoHandler
     {
-        public static App Handle(string[] args)
+        public static string Handle(string[] args)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace Quest.Commands
                     if (app.Features != null && app.Features.Count() > 0)
                         path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
                 }
-                return AppParser.GetAppFromCommandLineArguments(args);
+                return path;
             }
             catch (Exception)
             {
