@@ -1,26 +1,42 @@
-using Quest.IO;
 using Quest.Models;
 using Quest.ObjectParsers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using static System.Console;
 
 namespace Quest.Commands
 {
     public static class ToDoHandler
     {
-        public static int List(App app)
+        public static string Handle(string[] args)
+        {
+            try
+            {
+                string path = "";
+                if (args.Length > 1) 
+                {                    
+                    App app = AppParser.GetAppFromCommandLineArguments(args);
+                    path = Path.Combine(app.LocalPath, ".quest");
+                    if (app.Features != null && app.Features.Count() > 0)
+                        path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
+                }
+                return path;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static int List(string path)
         {
             List<string> files = new List<string>();
-            if (app == null)
+            if (string.IsNullOrEmpty(path))
                 files = GetAllToDos();
             else
-            {
-                string path = Path.Combine(app.LocalPath, ".quest");
-                if (app.Features != null && app.Features.Count() > 0)
-                    path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
-
+            {   
                 files = Directory.GetFiles(path, "todo.md", SearchOption.AllDirectories).ToList();
             }
             foreach (string file in files)
@@ -28,27 +44,12 @@ namespace Quest.Commands
                 List<string> content = File.ReadAllLines(file).ToList();
                 if (!content.Any(l => l.Contains("*")))
                     continue;
-                Console.WriteLine($"Feature: {new DirectoryInfo(file).Parent.Name}");
+                WriteLine($"Feature: {new DirectoryInfo(file).Parent.Name}");
                 foreach (string line in content)
-                    Console.WriteLine(line);
+                    WriteLine(line);
+                WriteLine();
             }
-
             return 0;
-        }
-
-        public static App Handle(string[] args)
-        {
-            try
-            {
-                if (args.Length == 1)
-                    return null;
-
-                return AppParser.GetAppFromCommandLineArguments(args);                                                
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
         private static List<string> GetAllToDos()
