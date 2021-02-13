@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using static System.Console;
 
 namespace Quest.Commands
 {
@@ -20,7 +21,7 @@ namespace Quest.Commands
                     path = Path.Combine(app.LocalPath, ".quest");
                     if (app.Features != null && app.Features.Count() > 0)
                         path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
-                }                    
+                }
                 return AppParser.GetAppFromCommandLineArguments(args);
             }
             catch (Exception)
@@ -43,9 +44,10 @@ namespace Quest.Commands
                 List<string> content = File.ReadAllLines(file).ToList();
                 if (!content.Any(l => l.Contains("*")))
                     continue;
-                Console.WriteLine($"Feature: {new DirectoryInfo(file).Parent.Name}");
+                WriteLine($"Feature: {new DirectoryInfo(file).Parent.Name}");
                 foreach (string line in content)
-                    Console.WriteLine(line);
+                    WriteLine(line);
+                WriteLine();
             }
             return 0;
         }
