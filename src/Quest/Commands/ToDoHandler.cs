@@ -1,4 +1,3 @@
-using Quest.IO;
 using Quest.Models;
 using Quest.ObjectParsers;
 using System;
@@ -10,17 +9,33 @@ namespace Quest.Commands
 {
     public static class ToDoHandler
     {
-        public static int List(App app)
+        public static App Handle(string[] args)
+        {
+            try
+            {
+                string path = "";
+                if (args.Length > 1) 
+                {                    
+                    App app = AppParser.GetAppFromCommandLineArguments(args);
+                    path = Path.Combine(app.LocalPath, ".quest");
+                    if (app.Features != null && app.Features.Count() > 0)
+                        path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
+                }                    
+                return AppParser.GetAppFromCommandLineArguments(args);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static int List(string path)
         {
             List<string> files = new List<string>();
-            if (app == null)
+            if (string.IsNullOrEmpty(path))
                 files = GetAllToDos();
             else
-            {
-                string path = Path.Combine(app.LocalPath, ".quest");
-                if (app.Features != null && app.Features.Count() > 0)
-                    path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
-
+            {   
                 files = Directory.GetFiles(path, "todo.md", SearchOption.AllDirectories).ToList();
             }
             foreach (string file in files)
@@ -32,23 +47,7 @@ namespace Quest.Commands
                 foreach (string line in content)
                     Console.WriteLine(line);
             }
-
             return 0;
-        }
-
-        public static App Handle(string[] args)
-        {
-            try
-            {
-                if (args.Length == 1)
-                    return null;
-
-                return AppParser.GetAppFromCommandLineArguments(args);                                                
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
         private static List<string> GetAllToDos()
