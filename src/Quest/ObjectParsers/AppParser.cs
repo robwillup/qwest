@@ -18,7 +18,13 @@ namespace Quest.ObjectParsers
             return true;
         }
 
-        private static string CreateFeaturePath(App app)
+        public static string CreateAppPath(App app)
+        {
+            Config conf = Setup.GetConfig();            
+            return conf.Applications.FirstOrDefault(a => a.Name == app.Name).LocalPath;
+        }
+
+        private static string CreateAppFeaturePath(App app)
         {
             Config conf = Setup.GetConfig();
             bool? hasFeature = conf.Applications?.FirstOrDefault(a => a.Name == app.Name)
@@ -33,7 +39,23 @@ namespace Quest.ObjectParsers
             return conf.Applications.FirstOrDefault(a => a.Name == app.Name).LocalPath;
         }
 
-        public static App GetAppFromCommandLineArguments(string[] args)
+        public static  App GetAppFromCommandLineArguments(string[] args)
+        {
+            int appI = CommandLineArguments.GetIndexOfFlag(args, CommandLineArguments.GetAliasOrArgument(args, "--app", "-a")) + 1;            
+
+            if (!CommandLineArguments.IsArgumentValid(args, appI))
+                throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
+
+            App app = new App() { Name = args[appI] };
+
+            if (!IsAppInConfig(app))
+                throw new ArgumentException($"App '{app.Name}' not found.\n Please, run 'quest help config add' to learn how to add a new app.");
+
+            app.LocalPath = CreateAppPath(app);
+            return app;
+        }
+
+        public static App GetAppWithFeatureFromCommandLineArguments(string[] args)
         {
             int appI = CommandLineArguments.GetIndexOfFlag(args, CommandLineArguments.GetAliasOrArgument(args, "--app", "-a")) + 1;
             int featI = CommandLineArguments.GetIndexOfFlag(args, CommandLineArguments.GetAliasOrArgument(args, "--feature", "-f")) + 1;
@@ -46,7 +68,7 @@ namespace Quest.ObjectParsers
             if (!IsAppInConfig(app))
                 throw new ArgumentException($"App '{app.Name}' not found.\n Please, run 'quest help config add' to learn how to add a new app.");
 
-            app.LocalPath = CreateFeaturePath(app);
+            app.LocalPath = CreateAppFeaturePath(app);
             return app;
         }
     }

@@ -18,7 +18,7 @@ namespace Quest.Commands
                 if (!CommandLineArguments.IsArgumentValid(args, undoTextIndex))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
                 string undoText = args[undoTextIndex];
-                App app = AppParser.GetAppFromCommandLineArguments(args);
+                App app = AppParser.GetAppWithFeatureFromCommandLineArguments(args);
                 string donePath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, "done.md");
                 string todoPath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, "todo.md");
                 return Undo(undoText, donePath, todoPath);

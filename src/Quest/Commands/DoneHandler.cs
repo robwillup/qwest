@@ -19,7 +19,7 @@ namespace Quest.Commands
             if (!CommandLineArguments.IsArgumentValid(args, doneTextIndex))
                 throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
             string doneText = args[doneTextIndex];
-            App app = AppParser.GetAppFromCommandLineArguments(args);
+            App app = AppParser.GetAppWithFeatureFromCommandLineArguments(args);
             string donePath = await FileHandler.CreateQuestFilesAsync(app, doneFile: true);
             string todoPath = await FileHandler.CreateQuestFilesAsync(app);
             return Complete(doneText, donePath, todoPath);
