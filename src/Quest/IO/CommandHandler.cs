@@ -23,7 +23,7 @@ namespace Quest
             else if (command == "help")
                 Help.HandleHelp(args);
             else if (command == "config")
-                ConfigHandler.Handle(args);
+                Config.Handle(args);
             else
                 Console.WriteLine($"Command \"{args[0]}\" is undefined.");
             return true;
