@@ -9,19 +9,19 @@ namespace Quest
         public static async Task<bool> RunAsync(string[] args, string command)
         {
             if (command == "do")
-                return await DoHandler.HandleAsync(args);
+                return await Do.HandleAsync(args);
             else if (command == "done")
-                return await DoneHandler.HandleAsync(args);
+                return await Done.HandleAsync(args);
             else if (command == "todo")
-                return ToDoHandler.List(ToDoHandler.Handle(args)) == 0;
+                return ToDo.List(ToDo.Handle(args)) == 0;
             else if (command == "undo")
-                return UndoHandler.Handle(args);
+                return Undo.Handle(args);
             else if (command == "dont")
-                return await DontHandler.HandleAsync(args);
+                return await Dont.HandleAsync(args);
             else if (command == "version")
                 Console.WriteLine("1.0.0");
             else if (command == "help")
-                HelpHandler.HandleHelp(args);
+                Help.HandleHelp(args);
             else if (command == "config")
                 ConfigHandler.Handle(args);
             else

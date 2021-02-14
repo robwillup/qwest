@@ -23,7 +23,7 @@ namespace Quest.Commands
                 else
                 {
                     string[] helpArgs = new string[2] { "help", "config" };
-                    HelpHandler.HandleHelp(helpArgs);
+                    Help.HandleHelp(helpArgs);
                     return 1;
                 }
                 return 0;
