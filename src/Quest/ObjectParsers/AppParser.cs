@@ -20,7 +20,7 @@ namespace Quest.ObjectParsers
 
         public static string CreateAppPath(App app)
         {
-            Config conf = Setup.GetConfig();            
+            Config conf = Setup.GetConfig();
             return conf.Applications.FirstOrDefault(a => a.Name == app.Name).LocalPath;
         }
 
