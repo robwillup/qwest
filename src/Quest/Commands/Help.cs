@@ -3,18 +3,18 @@ using Quest.Data.Help;
 
 namespace Quest.Commands
 {
-    public static class HelpHandler
+    public static class Help
     {
         public static void HandleHelp(string[] args) 
         {
             if (args.Length == 1)
-                Help.WriteHelpMessage(HelpMessageTypes.Default);
+                IO.Help.WriteHelpMessage(HelpMessageTypes.Default);
             else
             {
                 if (args.Length == 2)
-                    Help.WriteHelpMessage(SelectCommandHelp(args));
+                    IO.Help.WriteHelpMessage(SelectCommandHelp(args));
                 else
-                    Help.WriteHelpMessage(SelectSubcommandHelp(args));
+                    IO.Help.WriteHelpMessage(SelectSubcommandHelp(args));
             }             
         }
 

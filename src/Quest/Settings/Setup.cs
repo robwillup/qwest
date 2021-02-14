@@ -39,15 +39,17 @@ namespace Quest
 
         public static string GetConfigPath()
         {
-            string path = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
+            string path = Environment.GetEnvironmentVariable("QUEST_PATH");
+            if (string.IsNullOrEmpty(path))
+                path = Path.Combine(
+                       Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
             return path;
         }
 
         public static Config GetConfig()
         {
             try
-            {
+            {                
                 string content = File.ReadAllText(GetConfigPath());
                 Deserializer deserializer = new Deserializer();
                 return deserializer.Deserialize<Config>(content);

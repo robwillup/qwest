@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Quest.Commands
 {
-    public static class UndoHandler
+    public static class Undo
     {
         public static bool Handle(string[] args)
         {
@@ -18,10 +18,10 @@ namespace Quest.Commands
                 if (!CommandLineArguments.IsArgumentValid(args, undoTextIndex))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
                 string undoText = args[undoTextIndex];
-                App app = AppParser.GetAppFromCommandLineArguments(args);
+                App app = AppParser.GetAppWithFeatureFromCommandLineArguments(args);
                 string donePath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, "done.md");
                 string todoPath = Path.Combine(app.LocalPath, ".quest", app.Features.First().Name, "todo.md");
-                return Undo(undoText, donePath, todoPath);
+                return ReturnToActive(undoText, donePath, todoPath);
             }
             catch (Exception)
             {
@@ -29,7 +29,7 @@ namespace Quest.Commands
             }
         }
 
-        public static bool Undo(string undoText, string donePath, string todoPath) 
+        public static bool ReturnToActive(string undoText, string donePath, string todoPath) 
         {
             List<string> doneContent = File.ReadAllLines(donePath).ToList();
             if (doneContent == null || doneContent.Count == 0)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Quest.Commands
 {
-    public static class DontHandler
+    public static class Dont
     {
         public static async Task<bool> HandleAsync(string[] args)
         {
@@ -19,7 +19,7 @@ namespace Quest.Commands
                 if (!CommandLineArguments.IsArgumentValid(args, dontTextIndex))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
                 string dontText = args[dontTextIndex];                
-                App app = AppParser.GetAppFromCommandLineArguments(args);
+                App app = AppParser.GetAppWithFeatureFromCommandLineArguments(args);
                 return Remove(dontText, await FileHandler.CreateQuestFilesAsync(app));
             }
             catch (Exception)

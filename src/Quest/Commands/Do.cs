@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quest.Commands
 {
-    public static class DoHandler
+    public static class Do
     {
         public static async Task<bool> HandleAsync(string[] args)
         {
@@ -18,7 +18,7 @@ namespace Quest.Commands
                 if (!CommandLineArguments.IsArgumentValid(args, doTextIndex))
                     throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
                 string doText = args[doTextIndex];
-                App app = AppParser.GetAppFromCommandLineArguments(args);
+                App app = AppParser.GetAppWithFeatureFromCommandLineArguments(args);
                 return Add(doText, await FileHandler.CreateQuestFilesAsync(app));
             }
             catch (Exception)
@@ -27,7 +27,7 @@ namespace Quest.Commands
             }
         }
 
-        public static bool Add(string doText, string todoPath)
+        private static bool Add(string doText, string todoPath)
         {
             try
             {

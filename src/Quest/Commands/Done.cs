@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Quest.Commands
 {
-    public static class DoneHandler
+    public static class Done
     {
         public static async Task<bool> HandleAsync(string[] args)
         {
@@ -19,7 +19,7 @@ namespace Quest.Commands
             if (!CommandLineArguments.IsArgumentValid(args, doneTextIndex))
                 throw new ArgumentException("Missing one or more required arguments. \n Run 'quest help [command]' for more information.");
             string doneText = args[doneTextIndex];
-            App app = AppParser.GetAppFromCommandLineArguments(args);
+            App app = AppParser.GetAppWithFeatureFromCommandLineArguments(args);
             string donePath = await FileHandler.CreateQuestFilesAsync(app, doneFile: true);
             string todoPath = await FileHandler.CreateQuestFilesAsync(app);
             return Complete(doneText, donePath, todoPath);
@@ -116,7 +116,7 @@ namespace Quest.Commands
 
         public static List<string> GetAllDones()
         {
-            Config config = Setup.GetConfig();
+            Models.Config config = Setup.GetConfig();
             if (config.Applications == null || config.Applications.Count == 0)
                 return null;
             List<string> files = new List<string>();

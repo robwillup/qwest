@@ -8,7 +8,7 @@ using static System.Console;
 
 namespace Quest.Commands
 {
-    public static class ToDoHandler
+    public static class ToDo
     {
         public static string Handle(string[] args)
         {
@@ -54,7 +54,7 @@ namespace Quest.Commands
 
         private static List<string> GetAllToDos()
         {
-            Config config = Setup.GetConfig();
+            Models.Config config = Setup.GetConfig();
             if (config.Applications == null || config.Applications.Count == 0)
                 return null;
             List<string> files = new List<string>();

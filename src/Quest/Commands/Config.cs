@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Quest.Commands
 {
-    public static class ConfigHandler
+    public static class Config
     {
         public static int Handle(string[] args)
         {
@@ -23,7 +23,7 @@ namespace Quest.Commands
                 else
                 {
                     string[] helpArgs = new string[2] { "help", "config" };
-                    HelpHandler.HandleHelp(helpArgs);
+                    Help.HandleHelp(helpArgs);
                     return 1;
                 }
                 return 0;
@@ -63,7 +63,7 @@ namespace Quest.Commands
             if (!CommandLineArguments.HasFlag(args, "--name"))
                 throw new ArgumentException("Missing required argument: '--name'");
             string name = args[CommandLineArguments.GetIndexOfFlag(args, "--name") + 1];
-            var conf = Setup.GetConfig();            
+            var conf = Setup.GetConfig();
             conf.Applications.Remove(conf.Applications.FirstOrDefault(e => e.Name == name));            
             YamlHandler.Update(Setup.GetConfigPath(), conf);
             return 0;
