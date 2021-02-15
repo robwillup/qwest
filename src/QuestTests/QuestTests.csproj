@@ -23,4 +23,10 @@
     <ProjectReference Include="..\Quest\Quest.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="config.yml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
