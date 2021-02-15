@@ -9,7 +9,7 @@ namespace Quest
     public static class Setup
     {
         public static int HandleConfiguration(string[] args)
-        {
+        {            
             if (!ShouldCreateConfigFile(args))
                 return 0;
             if(!ConfigCreationDialog.GetUserConfirmation())                
@@ -18,14 +18,12 @@ namespace Quest
         }
 
         public static bool ShouldCreateConfigFile(string[] args)
-        {
+        {            
             if (args.Length < 1)
                 return false;
             if (args[0] == "version" || args[0] == "help")                
                 return false;
-            if (Directory.Exists(Path.GetDirectoryName(GetConfigPath()))) 
-                return false;
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("QUEST_PATH")))
+            if (File.Exists(GetConfigPath()))
                 return false;
             return true;
         }
@@ -33,6 +31,7 @@ namespace Quest
         private static int CreateConfig()
         {
             string path = GetConfigPath();
+            Console.WriteLine(path);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             using (File.Create(path)) { };
             YamlHandler.Create(path, ConfigCreationDialog.GetUsername());
@@ -41,10 +40,12 @@ namespace Quest
 
         public static string GetConfigPath()
         {
-            string path = Environment.GetEnvironmentVariable("QUEST_PATH");
+            string path = Environment.GetEnvironmentVariable("QUEST_PATH");            
             if (string.IsNullOrEmpty(path))
                 path = Path.Combine(
                        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".quest", "config.yml");
+            else
+                path = Path.Combine(path, "config.yml");
             return path;
         }
 

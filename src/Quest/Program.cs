@@ -15,6 +15,6 @@ try
 }
 catch (Exception ex)
 {
-    WriteLine(ex.Message);
+    WriteLine(ex.ToString());
     return 1;
 }

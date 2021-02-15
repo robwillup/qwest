@@ -38,7 +38,7 @@ namespace Quest.Commands
             else
             {   
                 files = Directory.GetFiles(path, "todo.md", SearchOption.AllDirectories).ToList();
-            }
+            }            
             foreach (string file in files)
             {
                 List<string> content = File.ReadAllLines(file).ToList();
@@ -56,7 +56,7 @@ namespace Quest.Commands
         {
             Models.Config config = Setup.GetConfig();
             if (config.Applications == null || config.Applications.Count == 0)
-                return null;
+                return new List<string>();
             List<string> files = new List<string>();
             List<App> allApps = config.Applications;
             foreach (App app in allApps)
