@@ -2,7 +2,7 @@
   "profiles": {
     "Quest": {
       "commandName": "Project",
-      "commandLineArgs": "do"
+      "commandLineArgs": "todo"
     }
   }
 }
