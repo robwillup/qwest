@@ -22,9 +22,11 @@ namespace Quest
             if (args.Length < 1)
                 return false;
             if (args[0] == "version" || args[0] == "help")                
-                    return false;
+                return false;
             if (Directory.Exists(Path.GetDirectoryName(GetConfigPath()))) 
-                    return false;
+                return false;
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("QUEST_PATH")))
+                return false;
             return true;
         }
 
