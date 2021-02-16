@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <None Update="config.yml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
