@@ -45,7 +45,7 @@ namespace QuestTests
         {
             string task = "TestHandleAsync_PassIfException";
             string[] args = { "do", task, "-a", "unit-test" };
-            await Assert.ThrowsAsync<ArgumentException>(async () => await Do.HandleAsync(args));
+            _ = await Assert.ThrowsAsync<ArgumentException>(async () => await Do.HandleAsync(args));
         }
     }
 }
