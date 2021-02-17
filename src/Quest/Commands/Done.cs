@@ -25,7 +25,7 @@ namespace Quest.Commands
             return Complete(doneText, donePath, todoPath);
         }
 
-        public static bool Complete(string todoText, string donePath, string todoPath)
+        private static bool Complete(string todoText, string donePath, string todoPath)
         {            
             List<string> lines = File.ReadAllLines(todoPath).ToList();
             string line = lines.Find(t => t.Contains(todoText));
@@ -35,11 +35,11 @@ namespace Quest.Commands
             return true;
         }
 
-        public static bool ListDone(App app)
+        private static bool ListDone(App app)
         {
             List<string> files = new List<string>();
             if (app == null)
-                files = GetAllDones();
+                files = GetAllDoneFiles();
             else
             {
                 string path = Path.Combine(app.LocalPath, ".quest");
@@ -61,7 +61,7 @@ namespace Quest.Commands
             return true;
         }
 
-        public static App HandleListDone(string[] args)
+        private static App HandleListDone(string[] args)
         {
             try
             {
@@ -114,12 +114,13 @@ namespace Quest.Commands
             }
         }
 
-        public static List<string> GetAllDones()
+        private static List<string> GetAllDoneFiles()
         {
+            List<string> files = new List<string>();
             Models.Config config = Setup.GetConfig();
             if (config.Applications == null || config.Applications.Count == 0)
-                return null;
-            List<string> files = new List<string>();
+                return files;
+            
             List<App> allApps = config.Applications;
             foreach (App app in allApps)
             {

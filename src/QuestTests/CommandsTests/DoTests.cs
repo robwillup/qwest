@@ -39,5 +39,13 @@ namespace QuestTests
             string content = await sr.ReadToEndAsync();            
             Assert.Contains(task, content);
         }
+
+        [Fact]
+        public async Task TestHandleAsync_PassIfException()
+        {
+            string task = "TestHandleAsync_PassIfException";
+            string[] args = { "do", task, "-a", "unit-test" };
+            await Assert.ThrowsAsync<ArgumentException>(async () => await Do.HandleAsync(args));
+        }
     }
 }
