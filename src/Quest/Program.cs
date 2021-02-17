@@ -5,9 +5,8 @@ using static System.Console;
 
 try
 {
-    int code = Setup.HandleConfiguration(args);
-    if (code != 0)
-        return code;
+    if (!Setup.HandleConfiguration(args))
+        return 1;
     string command = CommandLineHandler.ParseArguments(args);
     if (await CommandHandler.RunAsync(args, command))
         return 0;
@@ -15,6 +14,6 @@ try
 }
 catch (Exception ex)
 {
-    WriteLine(ex.ToString());
+    WriteLine(ex.Message);
     return 1;
 }

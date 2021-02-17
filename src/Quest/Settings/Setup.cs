@@ -8,12 +8,12 @@ namespace Quest
 {
     public static class Setup
     {
-        public static int HandleConfiguration(string[] args)
+        public static bool HandleConfiguration(string[] args)
         {            
             if (!ShouldCreateConfigFile(args))
-                return 0;
+                return true;
             if(!ConfigCreationDialog.GetUserConfirmation())                
-                return 1;            
+                return false;            
             return CreateConfig();
         }
 
@@ -28,14 +28,14 @@ namespace Quest
             return true;
         }
 
-        private static int CreateConfig()
+        private static bool CreateConfig()
         {
             string path = GetConfigPath();
             Console.WriteLine(path);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             using (File.Create(path)) { };
             YamlHandler.Create(path, ConfigCreationDialog.GetUsername());
-            return 0;
+            return true;
         }
 
         public static string GetConfigPath()
