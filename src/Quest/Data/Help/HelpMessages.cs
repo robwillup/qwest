@@ -118,6 +118,7 @@ View and edit Quest settings
 Examples:
     quest config list
     quest config add --name my-app
+    quest config rm --name my-app
 ";
 
         public static string ConfigAdd { get; set; } = @"

@@ -5,9 +5,13 @@ namespace Quest.IO
 {
     static class CommandLineArguments
     {
-        public static bool AnyArgument(string[] args) => args.Length > 0;
-        public static string GetCommand(string[] args) => args[0];
+        public static bool AnyArgument(string[] args) => args.Length > 0;        
         public static bool HasFlag(string[] args, string flag) => args.Contains(flag);
+
+        public static string GetCommand(string[] args) 
+        {
+            return args[0] == "done" && (args.Length == 1 || args.Length == 5) ? "list-done" : args[0];
+        }
         public static int GetIndexOfFlag(string[] args, string flag)
         {
             if (!HasFlag(args, flag))

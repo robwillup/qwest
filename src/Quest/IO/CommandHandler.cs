@@ -10,6 +10,8 @@ namespace Quest
         {
             if (command == "do")
                 return await Do.HandleAsync(args);
+            else if (command == "list-done")
+                return ListDone.Handle(args);
             else if (command == "done")
                 return await Done.HandleAsync(args);
             else if (command == "todo")
