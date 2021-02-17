@@ -20,7 +20,7 @@ namespace Quest.Commands
         private static bool List(List<string> files)
         {
             foreach (string file in files)
-            {                             
+            {
                 List<string> content = File.ReadAllLines(file).ToList();
                 if (!content.Any(l => l.Contains("*")))
                     continue;

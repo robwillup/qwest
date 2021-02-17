@@ -10,9 +10,7 @@ namespace Quest.IO
 
         public static string GetCommand(string[] args) 
         {
-            if (args[0] == "done" && args.Length == 1 || args.Length == 5)
-                return "list-done";
-            return args[0]; 
+            return args[0] == "done" && (args.Length == 1 || args.Length == 5) ? "list-done" : args[0];
         }
         public static int GetIndexOfFlag(string[] args, string flag)
         {

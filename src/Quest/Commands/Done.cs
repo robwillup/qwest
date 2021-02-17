@@ -26,7 +26,9 @@ namespace Quest.Commands
         private static bool Complete(string todoText, string donePath, string todoPath)
         {            
             List<string> lines = File.ReadAllLines(todoPath).ToList();
-            string line = lines.Find(t => t.Contains(todoText));
+            string line = lines.Find(t => t.Contains(todoText));            
+            if (string.IsNullOrEmpty(line))
+                return true;
             lines.Remove(line);
             File.WriteAllLines(todoPath, lines);
             File.AppendAllText(donePath, $"{line} - Completed at: {DateTime.Now}\n");
