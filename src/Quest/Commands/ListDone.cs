@@ -12,7 +12,7 @@ namespace Quest.Commands
         public static bool Handle(string[] args)
         {
             if (args.Length == 1)
-                return List(GetDoneFiles(null));
+                return List(GetDoneFiles());
             App app = AppParser.GetAppWithFeatureFromCommandLineArguments(args);
             return List(GetDoneFiles(app));
         }
@@ -20,7 +20,7 @@ namespace Quest.Commands
         private static bool List(List<string> files)
         {
             foreach (string file in files)
-            {
+            {                             
                 List<string> content = File.ReadAllLines(file).ToList();
                 if (!content.Any(l => l.Contains("*")))
                     continue;
@@ -31,25 +31,26 @@ namespace Quest.Commands
             return true;
         }
 
+        private static List<string> GetDoneFiles()
+        {
+            List<string> files = new List<string>();
+            Models.Config config = Setup.GetConfig();
+            if (config.Applications != null || config.Applications.Count > 0)
+            {
+                List<App> allApps = config.Applications;
+                foreach (App a in allApps)
+                {
+                    var todoFiles = Directory.GetFiles(Path.Combine(a.LocalPath, ".quest"), "done.md", SearchOption.AllDirectories);
+                    foreach (string file in todoFiles)
+                        files.Add(file);
+                }
+            }
+            return files;
+        }
+
         private static List<string> GetDoneFiles(App app)
         {
             List<string> files = new List<string>();
-
-            if (app == null)
-            {
-                Models.Config config = Setup.GetConfig();
-                if (config.Applications != null || config.Applications.Count > 0)
-                {
-                    List<App> allApps = config.Applications;
-                    foreach (App a in allApps)
-                    {
-                        var todoFiles = Directory.GetFiles(Path.Combine(a.LocalPath, ".quest"), "done.md", SearchOption.AllDirectories);
-                        foreach (string file in todoFiles)
-                            files.Add(file);
-                    }
-                }
-                return files;
-            }
             string path = Path.Combine(app.LocalPath, ".quest");
             if (app.Features != null && app.Features.Count() > 0)
                 path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
