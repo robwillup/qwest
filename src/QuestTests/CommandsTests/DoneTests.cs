@@ -33,5 +33,19 @@ namespace QuestTests.CommandsTests
             bool success = await Done.HandleAsync(doneArgs);
             Assert.True(success);
         }
+
+        [Fact]
+        public async Task TestHandleAsync_PassIfTaskIsMovedToDone()
+        {
+            string[] todoArgs = { "do", "TestHandleAsync_PassIfTaskIsMovedToDone", "-a", "unit-test", "-f", "doneCmd" };
+            _ = await Do.HandleAsync(todoArgs);
+            string[] doneArgs = { "done", "TestHandleAsync_PassIfTaskIsMovedToDone", "-a", "unit-test", "-f", "doneCmd" };            
+            bool success = await Done.HandleAsync(doneArgs);
+            FileInfo todoFile = new FileInfo(todoPath);
+            var sr = todoFile.OpenRead();
+            //
+            string content = File.ReadAllText(todoPath);
+            Assert.DoesNotContain("TestHandleAsync_PassIfTaskIsMovedToDone", content);
+        }
     }
 }
