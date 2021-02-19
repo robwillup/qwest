@@ -5,6 +5,9 @@ using Quest.Models;
 using Quest.IO;
 using Quest.ObjectParsers;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Linq;
 
 namespace Quest.Commands
 {
@@ -31,9 +34,10 @@ namespace Quest.Commands
         {
             try
             {
-                string todoText = $"* {doText} - ({Guid.NewGuid()}) - Created at: {DateTime.Now}";
-                List<string> lines = new List<string>() { todoText };                
-                File.AppendAllLines(todoPath, lines);
+                string todoText = $"* {doText} - ({Guid.NewGuid()}) - Created at: {DateTime.Now}\n";
+                FileInfo fi = new FileInfo(todoPath);
+                using var sw = fi.Open(FileMode.Append, FileAccess.Write);
+                sw.Write(Encoding.ASCII.GetBytes(todoText));                
                 return true;
             }
             catch (Exception)

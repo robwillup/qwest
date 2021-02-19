@@ -23,7 +23,9 @@ namespace Quest
         {
             var serializer = new YamlDotNet.Serialization.Serializer();
             string configStr = serializer.Serialize(content);
-            File.WriteAllText(path, configStr);
+            FileInfo fi = new FileInfo(path);
+            using var sw = fi.CreateText();
+            sw.Write(configStr);            
         }
     }
 }

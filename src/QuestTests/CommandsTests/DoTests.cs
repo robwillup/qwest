@@ -11,7 +11,7 @@ namespace QuestTests
         private readonly string todoPath;
         public DoTests()
         {
-            todoPath = Path.Combine(Environment.CurrentDirectory, ".quest", "doCmd", "todo.md");
+            todoPath = Path.Combine(Environment.CurrentDirectory, ".quest", "do-tests", "todo.md");
             Environment.SetEnvironmentVariable("QUEST_PATH", Environment.CurrentDirectory);
         }
 
@@ -23,7 +23,7 @@ namespace QuestTests
         [Fact]
         public async Task TestHandleAsync_PassIfReturnsTrue()
         {            
-            string[] args = { "do", "TestHandleAsync_PassIfReturnsTrue", "-a", "unit-test", "-f", "doCmd" };
+            string[] args = { "do", "TestHandleAsync_PassIfReturnsTrue", "-a", "unit-test", "-f", "do-tests" };
             bool success = await Do.HandleAsync(args);            
             Assert.True(success);
         }
@@ -32,7 +32,7 @@ namespace QuestTests
         public async Task TestHandleAsync_PassIfTaskIsCreated()
         {
             string task = "TestHandleAsync_PassIfTaskIsCreated";
-            string[] args = { "do", task, "-a", "unit-test", "-f", "doCmd" };
+            string[] args = { "do", task, "-a", "unit-test", "-f", "do-tests" };
             _ = await Do.HandleAsync(args);
             FileInfo file = new FileInfo(todoPath);
             using StreamReader sr = new StreamReader(file.OpenRead());

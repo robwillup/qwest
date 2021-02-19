@@ -6,3 +6,5 @@ Applications:
   LocalPath: .
   Remote: .
   Features:
+  - Name: do-tests
+  - Name: done-tests
