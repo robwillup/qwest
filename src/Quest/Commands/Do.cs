@@ -37,8 +37,7 @@ namespace Quest.Commands
                 string todoText = $"* {doText} - ({Guid.NewGuid()}) - Created at: {DateTime.Now}\n";
                 FileInfo fi = new FileInfo(todoPath);
                 using var sw = fi.Open(FileMode.Append, FileAccess.Write);
-                sw.Write(Encoding.ASCII.GetBytes(todoText));
-                //File.AppendAllLines(todoPath, lines);
+                sw.Write(Encoding.ASCII.GetBytes(todoText));                
                 return true;
             }
             catch (Exception)

@@ -25,8 +25,7 @@ namespace Quest
             string configStr = serializer.Serialize(content);
             FileInfo fi = new FileInfo(path);
             using var sw = fi.CreateText();
-            sw.Write(configStr);
-            //File.WriteAllText(path, configStr);
+            sw.Write(configStr);            
         }
     }
 }
