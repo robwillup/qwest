@@ -28,7 +28,7 @@ namespace Quest.Commands
             }
         }
 
-        public static bool Remove(string dontText, string todoPath)
+        private static bool Remove(string dontText, string todoPath)
         {
             try
             {
