@@ -19,7 +19,17 @@ COMMANDS:
 Use 'quest help <COMMAND>' for more information.";
 
         public static string HelpSuggestion { get; set; } = @"
-Welcome to Quest!
+      _______    
+     /       \
+    |   ___   |   __     __   ______   _________   __________
+    |  /   \  |  |  |   |  | |   ___| |   ______| |___    ___|
+    |  |   |  |  |  |   |  | |  |__    \  \____       |  |
+    |  |   |  |  |  |   |  | |   __|    \___   \      |  |
+    |  \___/  |  |  |   |  | |  |           \   |     |  |
+    |         |  |   \_/   | |  |___   _____/   |     |  |
+     \____  _/    \_______/  |______| |________/      |__|
+          \_\
+
 Try using 'help' to see available commands.
 
 Example:

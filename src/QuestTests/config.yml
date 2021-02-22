@@ -9,3 +9,5 @@ Applications:
   - Name: do-tests
   - Name: done-tests
   - Name: dont-tests
+  - Name: listtasks-tests
+  - Name: undo-tests
