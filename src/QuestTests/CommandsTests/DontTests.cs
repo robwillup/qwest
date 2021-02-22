@@ -21,6 +21,16 @@ namespace QuestTests.CommandsTests
             string[] todoArgs = { "do", "TestHandleAsync_PassWhenReturnsTrue", "-a", "unit-test", "-f", "dont-tests" };
             _ = await Do.HandleAsync(todoArgs);
             string[] dontArgs = { "dont", "TestHandleAsync_PassWhenReturnsTrue", "-a", "unit-test", "-f", "dont-tests" };
+            bool success = await Dont.HandleAsync(dontArgs);
+            Assert.True(success);
+        }
+
+        [Fact]
+        public async Task TestHandleAsync_PassWhenTodoIsDeleted()
+        {
+            string[] todoArgs = { "do", "TestHandleAsync_PassWhenReturnsTrue", "-a", "unit-test", "-f", "dont-tests" };
+            _ = await Do.HandleAsync(todoArgs);
+            string[] dontArgs = { "dont", "TestHandleAsync_PassWhenReturnsTrue", "-a", "unit-test", "-f", "dont-tests" };
             _ = await Dont.HandleAsync(dontArgs);
             FileInfo todoFile = new FileInfo(todoPath);
             using StreamReader sr = todoFile.OpenText();
