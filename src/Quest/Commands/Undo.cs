@@ -29,7 +29,7 @@ namespace Quest.Commands
             }
         }
 
-        public static bool ReturnToActive(string undoText, string donePath, string todoPath) 
+        private static bool ReturnToActive(string undoText, string donePath, string todoPath) 
         {
             List<string> doneContent = File.ReadAllLines(donePath).ToList();
             if (doneContent == null || doneContent.Count == 0)

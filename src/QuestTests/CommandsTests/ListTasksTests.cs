@@ -1,17 +1,14 @@
 ﻿using Quest.Commands;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace QuestTests.CommandsTests
 {
     public class ListTasksTests
-    {
-        private readonly string donePath;
+    {        
         public ListTasksTests()
-        {
-            donePath = Path.Combine(Environment.CurrentDirectory, ".quest", "listtasks-tests", "todo.md");
+        {            
             Environment.SetEnvironmentVariable("QUEST_PATH", Environment.CurrentDirectory);            
         }
 

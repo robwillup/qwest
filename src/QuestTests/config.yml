@@ -10,3 +10,4 @@ Applications:
   - Name: done-tests
   - Name: dont-tests
   - Name: listtasks-tests
+  - Name: undo-tests
