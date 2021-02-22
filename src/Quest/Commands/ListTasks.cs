@@ -7,14 +7,15 @@ using System.Linq;
 
 namespace Quest.Commands
 {
-    public static class ListDone
+    public static class ListTasks
     {
-        public static bool Handle(string[] args)
+        public static bool Handle(string[] args, bool done = false)
         {
+            string fileType = done ? "done.md" : "todo.md";
             if (args.Length == 1)
-                return List(GetDoneFiles());
+                return List(GetTaskFiles(fileType));
             App app = AppParser.GetAppWithFeatureFromCommandLineArguments(args);
-            return List(GetDoneFiles(app));
+            return List(GetTaskFiles(app, fileType));
         }
 
         private static bool List(List<string> files)
@@ -31,8 +32,8 @@ namespace Quest.Commands
             return true;
         }
 
-        private static List<string> GetDoneFiles()
-        {
+        private static List<string> GetTaskFiles(string fileType)
+        {            
             List<string> files = new List<string>();
             Models.Config config = Setup.GetConfig();
             if (config.Applications != null || config.Applications.Count > 0)
@@ -40,7 +41,7 @@ namespace Quest.Commands
                 List<App> allApps = config.Applications;
                 foreach (App a in allApps)
                 {
-                    var todoFiles = Directory.GetFiles(Path.Combine(a.LocalPath, ".quest"), "done.md", SearchOption.AllDirectories);
+                    var todoFiles = Directory.GetFiles(Path.Combine(a.LocalPath, ".quest"), fileType, SearchOption.AllDirectories);
                     foreach (string file in todoFiles)
                         files.Add(file);
                 }
@@ -48,13 +49,13 @@ namespace Quest.Commands
             return files;
         }
 
-        private static List<string> GetDoneFiles(App app)
-        {
+        private static List<string> GetTaskFiles(App app, string fileType)
+        {         
             List<string> files = new List<string>();
             string path = Path.Combine(app.LocalPath, ".quest");
             if (app.Features != null && app.Features.Count() > 0)
                 path = Path.Combine(path, app.Features.FirstOrDefault(e => true).Name);
-            files = Directory.GetFiles(path, "done.md", SearchOption.AllDirectories).ToList();
+            files = Directory.GetFiles(path, fileType, SearchOption.AllDirectories).ToList();
             return files;
         }
     }

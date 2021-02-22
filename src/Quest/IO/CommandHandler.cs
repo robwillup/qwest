@@ -11,11 +11,11 @@ namespace Quest
             if (command == "do")
                 return await Do.HandleAsync(args);
             else if (command == "list-done")
-                return ListDone.Handle(args);
+                return ListTasks.Handle(args, true);
             else if (command == "done")
                 return await Done.HandleAsync(args);
             else if (command == "todo")
-                return ToDo.List(ToDo.Handle(args)) == 0;
+                return ListTasks.Handle(args);
             else if (command == "undo")
                 return Undo.Handle(args);
             else if (command == "dont")
