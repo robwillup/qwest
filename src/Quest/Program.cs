@@ -8,6 +8,8 @@ try
     if (!Setup.HandleConfiguration(args))
         return 1;
     string command = CommandLineHandler.ParseArguments(args);
+    if (command == null)
+        return 0;
     if (await CommandHandler.RunAsync(args, command))
         return 0;
     return 1;

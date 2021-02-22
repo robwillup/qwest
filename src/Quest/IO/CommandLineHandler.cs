@@ -1,5 +1,5 @@
-﻿using System;
-using Quest.Data.Help;
+﻿using Quest.Data.Help;
+using System;
 
 namespace Quest.IO
 {
@@ -18,10 +18,9 @@ namespace Quest.IO
                 Help.WriteHelpMessage(HelpMessageTypes.Suggestion);
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ErrorHandler.PrintMessage(ex.Message);
-                return null;
+                throw;
             }
         }        
     }
