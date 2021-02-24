@@ -1,4 +1,5 @@
 ﻿using Quest.Commands;
+using Quest.Commands.Config;
 using System;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace Quest
             else if (command == "help")
                 Help.HandleHelp(args);
             else if (command == "config")
-                Config.Handle(args);
+                ConfigHandler.Handle(args);
             else
                 Console.WriteLine($"Command \"{args[0]}\" is undefined.");
             return true;

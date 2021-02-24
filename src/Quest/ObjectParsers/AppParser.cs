@@ -10,7 +10,7 @@ namespace Quest.ObjectParsers
     {
         public static bool IsAppInConfig(App app)
         {
-            Config conf = Setup.GetConfig();
+            Configuration conf = Setup.GetConfig();
             if (conf.Applications == null || conf.Applications.Count == 0)
                 return false;
             if (!conf.Applications.Any(a => a.Name == app.Name))
@@ -20,13 +20,13 @@ namespace Quest.ObjectParsers
 
         public static string CreateAppPath(App app)
         {
-            Config conf = Setup.GetConfig();
+            Configuration conf = Setup.GetConfig();
             return conf.Applications.FirstOrDefault(a => a.Name == app.Name).LocalPath;
         }
 
         private static string CreateAppFeaturePath(App app)
         {
-            Config conf = Setup.GetConfig();
+            Configuration conf = Setup.GetConfig();
             bool? hasFeature = conf.Applications?.FirstOrDefault(a => a.Name == app.Name)
                                     .Features?.Any(f => f.Name == app.Features.First().Name);
 

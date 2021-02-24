@@ -15,7 +15,7 @@ namespace Quest.IO
             }
             catch (ArgumentNullException)
             {
-                Help.WriteHelpMessage(HelpMessageTypes.Suggestion);
+                HelpDisplayer.WriteHelpMessage(HelpMessageTypes.Suggestion);
                 return null;
             }
             catch (Exception)

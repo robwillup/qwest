@@ -49,7 +49,7 @@ namespace Quest
             return path;
         }
 
-        public static Config GetConfig()
+        public static Configuration GetConfig()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Quest
                 using var sr = fi.OpenText();
                 string content = sr.ReadToEnd();                
                 Deserializer deserializer = new Deserializer();
-                return deserializer.Deserialize<Config>(content);
+                return deserializer.Deserialize<Configuration>(content);
             }
             catch (Exception)
             {

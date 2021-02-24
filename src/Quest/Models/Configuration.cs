@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Quest.Models
 {
-    public class Config
+    public class Configuration
     {        
         public DateTime Date { get; set; }
         public Dev Dev { get; set; }

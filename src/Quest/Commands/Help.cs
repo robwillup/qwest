@@ -1,4 +1,5 @@
 ﻿using Quest.Data.Help;
+using Quest.IO;
 
 namespace Quest.Commands
 {
@@ -7,13 +8,13 @@ namespace Quest.Commands
         public static void HandleHelp(string[] args) 
         {
             if (args.Length == 1)
-                IO.Help.WriteHelpMessage(HelpMessageTypes.Default);
+                HelpDisplayer.WriteHelpMessage(HelpMessageTypes.Default);
             else
             {
                 if (args.Length == 2)
-                    IO.Help.WriteHelpMessage(SelectCommandHelp(args));
+                    HelpDisplayer.WriteHelpMessage(SelectCommandHelp(args));
                 else
-                    IO.Help.WriteHelpMessage(SelectSubcommandHelp(args));
+                    HelpDisplayer.WriteHelpMessage(SelectSubcommandHelp(args));
             }             
         }
 

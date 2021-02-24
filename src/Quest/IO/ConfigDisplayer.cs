@@ -5,7 +5,7 @@ namespace Quest.IO
 {
     public static class ConfigDisplayer
     {
-        public static void DisplayConfig(Config config)
+        public static void DisplayConfig(Configuration config)
         {
             WriteLine($"Developer: {config.Dev.Username}");
             WriteLine("Applications:");
