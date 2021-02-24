@@ -34,13 +34,13 @@ namespace Quest.Commands
             }
         }
 
-        public static int List()
+        private static int List()
         {
             ConfigDisplayer.DisplayConfig(Setup.GetConfig());
             return 0;
         }
 
-        public static int Add(string[] args)
+        private static int Add(string[] args)
         {            
             if (!CommandLineArguments.HasFlag(args, "--name"))
                 throw new ArgumentException("Missing required argument: '--name'");
@@ -58,7 +58,7 @@ namespace Quest.Commands
             return 0;
         }
 
-        public static int Delete(string[] args)
+        private static int Delete(string[] args)
         {
             if (!CommandLineArguments.HasFlag(args, "--name"))
                 throw new ArgumentException("Missing required argument: '--name'");
