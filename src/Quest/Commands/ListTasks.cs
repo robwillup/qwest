@@ -35,7 +35,7 @@ namespace Quest.Commands
         private static List<string> GetTaskFiles(string fileType)
         {            
             List<string> files = new List<string>();
-            Models.Config config = Setup.GetConfig();
+            Models.Configuration config = Setup.GetConfig();
             if (config.Applications != null || config.Applications.Count > 0)
             {
                 List<App> allApps = config.Applications;

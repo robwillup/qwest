@@ -1,11 +1,11 @@
 ﻿using Quest.Data.Help;
 using static System.Console;
 
-namespace Quest.IO
+namespace Quest.IO.StdOut
 {
-    public static class Help
+    public static class HelpDisplayer
     {
-        public static int WriteHelpMessage(HelpMessageTypes messageType)
+        public static bool WriteHelpMessage(HelpMessageTypes messageType)
         {
             switch (messageType)
             {
@@ -43,7 +43,7 @@ namespace Quest.IO
                     WriteLine(HelpMessages.CommandHelpMessage);
                     break;
             }
-            return 0;
+            return true;
         }
     }
 }

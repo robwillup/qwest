@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Quest.IO
+namespace Quest.IO.CLIArguments
 {
     static class CommandLineArguments
     {

@@ -1,11 +1,11 @@
 ﻿using static System.Console;
 using Quest.Models;
 
-namespace Quest.IO
+namespace Quest.IO.StdOut
 {
     public static class ConfigDisplayer
     {
-        public static void DisplayConfig(Config config)
+        public static void DisplayConfig(Configuration config)
         {
             WriteLine($"Developer: {config.Dev.Username}");
             WriteLine("Applications:");

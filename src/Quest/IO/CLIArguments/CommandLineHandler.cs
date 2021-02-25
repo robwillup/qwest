@@ -1,7 +1,8 @@
 ﻿using Quest.Data.Help;
+using Quest.IO.StdOut;
 using System;
 
-namespace Quest.IO
+namespace Quest.IO.CLIArguments
 {
     public static class CommandLineHandler
     {
@@ -15,7 +16,7 @@ namespace Quest.IO
             }
             catch (ArgumentNullException)
             {
-                Help.WriteHelpMessage(HelpMessageTypes.Suggestion);
+                HelpDisplayer.WriteHelpMessage(HelpMessageTypes.Suggestion);
                 return null;
             }
             catch (Exception)

@@ -10,7 +10,7 @@ namespace Quest
         public static void Create(string path, string githubUsername)
         {
             var serializer = new YamlDotNet.Serialization.Serializer();
-            string configStr = serializer.Serialize(new Config() 
+            string configStr = serializer.Serialize(new Configuration() 
             {                
                 Date = DateTime.Now,
                 Dev = new Dev() { Username = githubUsername},
@@ -19,7 +19,7 @@ namespace Quest
             File.WriteAllText(path, configStr);
         }
 
-        public static void Update(string path, Config content)
+        public static void Update(string path, Configuration content)
         {
             var serializer = new YamlDotNet.Serialization.Serializer();
             string configStr = serializer.Serialize(content);

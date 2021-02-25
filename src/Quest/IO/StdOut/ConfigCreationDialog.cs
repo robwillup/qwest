@@ -1,6 +1,6 @@
 ﻿using static System.Console;
 
-namespace Quest.IO
+namespace Quest.IO.StdOut
 {
     public static class ConfigCreationDialog
     {
