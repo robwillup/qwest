@@ -1,7 +1,7 @@
 ﻿using static System.Console;
 using Quest.Models;
 
-namespace Quest.IO
+namespace Quest.IO.StdOut
 {
     public static class ConfigDisplayer
     {

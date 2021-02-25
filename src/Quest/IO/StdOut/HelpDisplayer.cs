@@ -1,7 +1,7 @@
 ﻿using Quest.Data.Help;
 using static System.Console;
 
-namespace Quest.IO
+namespace Quest.IO.StdOut
 {
     public static class HelpDisplayer
     {

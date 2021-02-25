@@ -1,4 +1,4 @@
-﻿using Quest.IO;
+﻿using Quest.IO.CLIArguments;
 using System;
 using System.Linq;
 

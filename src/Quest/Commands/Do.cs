@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using Quest.Models;
-using Quest.IO;
+using Quest.IO.CLIArguments;
 using Quest.ObjectParsers;
+using Quest.IO.Files;
 using System.Threading.Tasks;
 using System.Text;
 

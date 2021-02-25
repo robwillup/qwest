@@ -1,5 +1,5 @@
 ﻿using Quest;
-using Quest.IO;
+using Quest.IO.CLIArguments;
 using System;
 using static System.Console;
 

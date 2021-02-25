@@ -1,7 +1,8 @@
 ﻿using Quest.Data.Help;
+using Quest.IO.StdOut;
 using System;
 
-namespace Quest.IO
+namespace Quest.IO.CLIArguments
 {
     public static class CommandLineHandler
     {

@@ -3,7 +3,7 @@ using Quest.Commands.Config;
 using System;
 using System.Threading.Tasks;
 
-namespace Quest
+namespace Quest.IO.CLIArguments
 {
     public static class CommandHandler
     {

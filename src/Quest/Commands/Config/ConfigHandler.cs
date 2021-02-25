@@ -1,5 +1,5 @@
 ﻿using Quest.Data.Help;
-using Quest.IO;
+using Quest.IO.StdOut;
 using System;
 
 namespace Quest.Commands.Config
