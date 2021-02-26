@@ -22,7 +22,7 @@ namespace Quest.IO.CLIArguments
             else if (command == "dont")
                 return await Dont.HandleAsync(args);
             else if (command == "version")
-                Console.WriteLine("1.0.0");
+                Console.WriteLine("v0.0.3");
             else if (command == "help")
                 Help.HandleHelp(args);
             else if (command == "config")
