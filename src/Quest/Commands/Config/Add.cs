@@ -4,9 +4,9 @@ using System;
 
 namespace Quest.Commands.Config
 {
-    public static class Add
+    internal static class Add
     {
-        public static int AddApp(string[] args)
+        internal static int AddApp(string[] args)
         {
             if (!CommandLineArguments.HasFlag(args, "--name"))
                 throw new ArgumentException("Missing required argument: '--name'");

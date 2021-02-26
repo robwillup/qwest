@@ -2,9 +2,9 @@
 
 namespace Quest.Commands.Config
 {
-    public static class List
+    internal static class List
     {
-        public static Configuration ListConfig()
+        internal static Configuration ListConfig()
         {
             return Setup.GetConfig();            
         }
