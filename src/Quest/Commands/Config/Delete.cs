@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Quest.Commands.Config
 {
-    public static class Delete
+    internal static class Delete
     {
-        public static int DeleteApp(string[] args)
+        internal static int DeleteApp(string[] args)
         {
             if (!CommandLineArguments.HasFlag(args, "--name"))
                 throw new ArgumentException("Missing required argument: '--name'");
